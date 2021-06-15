@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 var path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
+
 
 app.use(express.static(path.resolve(__dirname, 'build')));
 
