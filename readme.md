@@ -13,5 +13,5 @@ Download della repo ed avvio tramite il comando node index.js
 * **La Rizza Giorgio** 
 * **Musso Gabriele** 
 
-La lista dei [profili](https://github.com/your/project/contributors) di chi ha partecipato.
+La lista dei [profili](https://github.com/Montemusso/Uberazzi-Server/contributors) di chi ha partecipato.
 
