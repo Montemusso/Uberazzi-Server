@@ -4,6 +4,7 @@ const port = process.env.PORT;
 var path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
+const dbquery = require ('./query.js')
 
 
 app.use(express.static(path.resolve(__dirname, 'build')));
@@ -20,7 +21,7 @@ app.route('/home')
 
 app.route('/registrazione')
     .get(function (req, res, next) {
-        res.send('lista delle mail/user già usati');
+        res.json(dbquery.getEmail(req.query.email));
         //query per verificare se l'utente è disponibile
       })
     .post(function (req, res, next) {
