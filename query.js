@@ -9,12 +9,11 @@ async function getEmail(mail){
     //query effettiva da inviare
     'SELECT Email FROM `Utente` WHERE `Email` = ?',[mail],
     function(err, results, fields) {
-        console.log(results); // results contains rows returned by server
-        console.log(fields); // fields contains extra meta data about results, if available
-        // If you execute same statement again, it will be picked from a LRU cache which will save query preparation time and give better performance
-    };
+        console.log(results); // result contiene il risultato della query
+        console.log(fields); // Se ci sono, include ulteriori metadati
+        };
     )
-  return rows;
+  return results;
 }
 
 module.exports = {
