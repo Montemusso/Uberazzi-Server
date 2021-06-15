@@ -1,6 +1,5 @@
 //import delle componenti per la connessione al db
 const db = require('./db');
-const config = require('./config');
 
 //funzione tipo per effettuare le richieste verso il db
 //in questo caso chiede la mail con la quale si sta iscrivendo l'utente per verificare se esiste nel db
