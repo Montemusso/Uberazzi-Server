@@ -21,7 +21,7 @@ app.route('/home')
 
 app.route('/registrazione')
     .get(function (req, res, next) {
-        res.json(dbquery.getEmail(req.query.email));
+        res.json(await dbquery.getEmail(req.query.email));
         //query per verificare se l'utente è disponibile
       })
     .post(function (req, res, next) {
