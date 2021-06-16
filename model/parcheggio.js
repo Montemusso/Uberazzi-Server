@@ -5,19 +5,19 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true
         },
         Note:{
-            
+            type: Sequelize.STRING
         },
         Indirizzo:{
-
+            type: Sequelize.STRING
         },
         CAP:{
-
+            type: Sequelize.INTEGER
         },
         NumeroPosti:{
-
+            type: Sequelize.INTEGER
         },
         PostiOccupati:{
-            
+            type: Sequelize.INTEGER
         }
     });
 }
