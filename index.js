@@ -13,7 +13,6 @@ var multer  = require('multer');
 //cors
 const cors = require("cors"); //https://www.npmjs.com/package/cors
 
-
 //configurazione dei moduli e delle variabili di ambiente
 
 //Configurazione per la porta del server
