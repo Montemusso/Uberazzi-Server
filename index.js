@@ -70,7 +70,7 @@ app.route('/profilo')
 //Prenotazioni di vedere le prenotazioni effettuate e di modificarle
 app.route('/prenota')
     .get(function (req, res, next) {
-        res.send('Prenota il tuo veicolo');
+        res.json('Prenota il tuo veicolo');
         //query per verifica dei mezzi disponibili
       })
     .post(function (req, res, next) {
@@ -79,7 +79,7 @@ app.route('/prenota')
     
 app.route('/prenotazioni')
     .get(function (req, res, next) {
-        res.send('Lista delle prenotazioni');
+        res.json('Lista delle prenotazioni');
         //query per prendere la lista delle prenotazioni filtrato per idutente
         //la risposta la mando in json 
       })
@@ -91,7 +91,7 @@ app.route('/prenotazioni')
 //Da proteggere assolutamente
 app.route('/amministrazione')
     .get(function (req, res, next) {
-        res.send('Lista degli utenti');
+        res.json('Lista degli utenti');
         //query per prendere tutti gli utenti registrati
       })
     .post(function (req, res, next) {
@@ -103,38 +103,43 @@ app.route('/amministrazione')
 app.route('/posteggi')
     .get(function (req, res, next) {
         if(req.query.idposteggio){
-            res.send('Lista dei veicoli nel posteggio: '+ req.query.idposteggio);
+            res.json('Lista dei veicoli nel posteggio: '+ req.query.idposteggio);
         //query per prendere i veicoli per posteggio
     }
         else{
-            res.send('indicare idposteggio per vedere i veicoli');
+            res.json('indicare idposteggio per vedere i veicoli');
         }
       })
     .post(function (req, res, next) {
-      upload(req, res, function (err) {
-        if (err instanceof multer.MulterError) {
-            return res.status(500).json(err)
-          }
-        else if (err) {
-            return res.status(500).json(err)
-          }
-      return res.status(200).send(req.file)
-      //query per aggiugnere il nome della foto, il path e veicolo nel db
-      //il nome del file si trova in req.file.filename
-      //il path invece in req.file.path
-        })
-      });
+      if(req.query.idveicolo){
+        upload(req, res, function (err) {
+          if (err instanceof multer.MulterError) {
+              return res.status(500).json(err)
+            }
+          else if (err) {
+              return res.status(500).json(err)
+            }
+        return res.status(200).send(req.file)
+        //query per aggiugnere il nome della foto, il path e veicolo nel db
+        //il nome del file si trova in req.file.filename
+        //il path invece in req.file.path
+          })
+      }
+      else{
+        res.json('indicare idveicolo per inviare le foto');
+      };
+    });
 
 //Corse divise per città
 //Da proteggere
 app.route('/corse') ///corse?citta=palermo
     .get(function (req, res, next) {
         if(req.query.citta){
-            res.send('Lista delle corse per città: '+ req.query.citta);
+            res.json('Lista delle corse per città: '+ req.query.citta);
         //query per prendere le corse per città
     }
         else{
-            res.send('indicare citta per vedere le corse');
+            res.json('indicare citta per vedere le corse');
         }
       })
     .post(function (req, res, next) {
@@ -147,11 +152,11 @@ app.route('/corse') ///corse?citta=palermo
 app.route('/media') ///media
     .get(function (req, res, next) {
         if(req.query.citta){
-            res.send('inserire idveicolo: '+ req.query.idveicolo);
+            res.json('inserire idveicolo: '+ req.query.idveicolo);
         //query per prendere le foro per idveicolo
     }
         else{
-            res.send('indicare idveicolo');
+            res.json('indicare idveicolo');
         }
       })
     .post(function (req, res, next) {
