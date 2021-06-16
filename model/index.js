@@ -34,17 +34,15 @@ db.Veicolo = require("../model/Veicolo.js")(sequelize, Sequelize);
 db.Immagine = require("../model/Immagine.js")(sequelize, Sequelize);
 
 
-db.role.belongsToMany(db.user, {
-  through: "user_roles",
-  foreignKey: "roleId",
-  otherKey: "userId"
-});
-db.user.belongsToMany(db.role, {
-  through: "user_roles",
-  foreignKey: "userId",
-  otherKey: "roleId"
-});
+db.Permesso.hasMany(Utente, {foreignKey: 'IDPermesso'} );
+db.Utente.hasMany(Prenotazione, {foreignKey: 'IDUtente'} );
+db.Veicolo.belongsTo(TipoVeicolo, {foreignKey: 'IDTipoVeicolo'});
+db.Veicolo.hasMany(Immagine, {foreignKey: 'IDVeicolo'} );
+db.Pagamento.hasOne(Prenotazione, {foreignKey: 'IDPrenotazione'});
+db.Parcheggio.hasMany(Veicolo, {foreignKey: 'IDParcheggio'} );
+db.Veicolo.hasMany(Prenotazione, {foreignKey: 'IDVeicolo'} );
 
-db.ROLES = ["Utente", "Autista", "AddettoParcheggio","Amministratore"];
+
+db.Ruoli = ["Utente", "Autista", "AddettoParcheggio","Amministratore"];
 
 module.exports = db;
