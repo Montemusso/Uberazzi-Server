@@ -5,7 +5,7 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true
         },
         Note:{
-
+            
         },
         Indirizzo:{
 
