@@ -1,23 +1,28 @@
 module.exports = (sequelize, Sequelize) => {
-    const Parcheggio = sequelize.define("parcheggio", {
+    const Parcheggio = sequelize.define("Parcheggio", {
         IDParcheggio:{
             type: Sequelize.INTEGER,
             primaryKey: true
         },
         Note:{
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull:true
         },
         Indirizzo:{
             type: Sequelize.STRING
         },
         CAP:{
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull:true
         },
         NumeroPosti:{
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull:true
         },
         PostiOccupati:{
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull:true
         }
     });
+    return Parcheggio;
 }
