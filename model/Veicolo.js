@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, Sequelize) => {
     const Veicolo = sequelize.define("Veicolo", {
       IDVeicolo: {
