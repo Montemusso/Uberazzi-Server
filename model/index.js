@@ -31,6 +31,7 @@ db.Parcheggio = require("../model/parcheggio.js")(sequelize, Sequelize);
 db.Prenotazioni = require("../model/Prenotazione.js")(sequelize, Sequelize);
 db.TipoVeicolo = require("../model/TipoVeicolo.js")(sequelize, Sequelize);
 db.Veicolo = require("../model/Veicolo.js")(sequelize, Sequelize);
+db.Immagine = require("../model/Immagine.js")(sequelize, Sequelize);
 
 
 db.role.belongsToMany(db.user, {
@@ -44,6 +45,6 @@ db.user.belongsToMany(db.role, {
   otherKey: "roleId"
 });
 
-db.ROLES = ["user", "admin", "moderator"];
+db.ROLES = ["Utente", "Autista", "AddettoParcheggio","Amministratore"];
 
 module.exports = db;
