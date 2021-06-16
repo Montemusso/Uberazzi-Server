@@ -1,89 +1,104 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
-const db = require("../models");
-const User = db.user;
+const db = require("../model");
+const Utente = db.Utente;
 
 verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
   if (!token) {
     return res.status(403).send({
-      message: "No token provided!"
+      message: "Nessun token fornito!"
     });
   }
 
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
       return res.status(401).send({
-        message: "Unauthorized!"
+        message: "Non Autorizzato!"
       });
     }
-    req.userId = decoded.id;
+    req.IDUtente = decoded.id;
     next();
   });
 };
 
 isAdmin = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "admin") {
+  Utente.findByPk(req.IDUtente).then(utente => {
+    utente.getPermesso().then(permesso => {
+      for (let i = 0; i < Permesso.length; i++) {
+        if (Permesso[i].name === "Amministratore") {
           next();
           return;
         }
       }
 
       res.status(403).send({
-        message: "Require Admin Role!"
+        message: "Bisogna essere amministratori!"
       });
       return;
     });
   });
 };
 
-isModerator = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
+isAutista = (req, res, next) => {
+  Utente.findByPk(req.IDUtente).then(utente => {
+    utente.getPermesso().then(permesso => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
+        if (permesso[i].name === "Autista") {
           next();
           return;
         }
       }
 
       res.status(403).send({
-        message: "Require Moderator Role!"
+        message: "Bisogna essere Autisti!"
       });
     });
   });
 };
 
-isModeratorOrAdmin = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
+isAddettoParcheggio = (req, res, next) => {
+  Utente.findByPk(req.IDUtente).then(utente => {
+    utente.getPermesso().then(permesso => {
       for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "moderator") {
-          next();
-          return;
-        }
-
-        if (roles[i].name === "admin") {
+        if (permesso[i].name === "Autista") {
           next();
           return;
         }
       }
 
       res.status(403).send({
-        message: "Require Moderator or Admin Role!"
+        message: "Bisogna essere Addetti al parcheggio!"
       });
     });
   });
 };
+
+isUtente = (req, res, next) => {
+  Utente.findByPk(req.IDUtente).then(utente => {
+    utente.getPermesso().then(permesso => {
+      for (let i = 0; i < roles.length; i++) {
+        if (permesso[i].name === "Utente") {
+          next();
+          return;
+        }
+      }
+
+      res.status(403).send({
+        message: "Bisogna essere utenti registrati!"
+      });
+    });
+  });
+};
+
 
 const authJwt = {
   verifyToken: verifyToken,
   isAdmin: isAdmin,
-  isModerator: isModerator,
-  isModeratorOrAdmin: isModeratorOrAdmin
+  isAutista: isAutista,
+  isAddettoParcheggio: isAddettoParcheggio,
+  isUtente: isUtente
 };
+
 module.exports = authJwt;
