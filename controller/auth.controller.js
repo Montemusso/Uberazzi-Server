@@ -8,6 +8,9 @@ const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+//Da sistemare get e set in base a come impostare il sistema for ex.(Ruoli or Permesso)
+//Verificare scrittura di Utente e Ruoli
+
 //Funzione di registrazione che crea nella tabella utente un record che rappresenta l'utente tramite i campi del form di registrazione
 exports.signup = (req, res) => {
   // Crea utente nel database

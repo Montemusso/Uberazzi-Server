@@ -2,6 +2,7 @@ const db = require("../model");
 const ROLES = db.ROLES;
 const User = db.user;
 
+//verifica di univocità della Email
 controllaMail = (req, res, next) => {
     // Email
     Utenti.findOne({
