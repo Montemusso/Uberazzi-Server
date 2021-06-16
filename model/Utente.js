@@ -31,7 +31,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       password: {
         type: Sequelize.STRING
-      }
+      },
       NumeroPatente: {
         type: Sequelize.STRING,
         allowNull:true
