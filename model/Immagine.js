@@ -10,6 +10,9 @@ module.exports = (sequelize, Sequelize) => {
         Path:{
             type: Sequelize.STRING
         },
+        IDVeicolo:{
+            type: Sequelize.STRING
+        },
     });
     return Immagine;
 }
