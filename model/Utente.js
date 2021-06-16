@@ -23,9 +23,6 @@ module.exports = (sequelize, Sequelize) => {
       CAP: {
         type: Sequelize.INTEGER
       },
-      Sesso: {
-        type: Sequelize.STRING
-      },
       Email: {
         type: Sequelize.STRING
       },

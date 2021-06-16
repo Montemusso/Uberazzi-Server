@@ -1,7 +1,7 @@
 const db = require("../model");
 const config = require("../config/auth.config");
-const User = db.user;
-const Role = db.role;
+const Utente = db.Utente;
+const Ruoli = db.Ruoli;
 
 const Op = db.Sequelize.Op;
 
@@ -10,30 +10,25 @@ var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
   // Save User to Database
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
-  })
-    .then(user => {
-      if (req.body.roles) {
-        Role.findAll({
-          where: {
-            name: {
-              [Op.or]: req.body.roles
-            }
-          }
-        }).then(roles => {
-          user.setRoles(roles).then(() => {
-            res.send({ message: "User was registered successfully!" });
-          });
-        });
-      } else {
+  Utente.create({
+    Nome: req.body.Nome,
+    Cognome: req.body.Cognome,
+    DataDiNascita: req.body.DataDiNascita,
+    CodiceFiscale: req.body.CodiceFiscale,
+    Indirizzo: req.body.Indirizzo,
+    CAP: req.body.CAP,
+    Email: req.body.Email,
+    password: bcrypt.hashSync(req.body.password, 8),
+    NumeroPatente: req.body.NumeroPatente,
+    TipoPatente: req.body.TipoPatente,
+    IDPermesso: req.body.IDPermesso,
+
+  })//da controllare
+    .then(Utente => {
         // user role = 1
         user.setRoles([1]).then(() => {
           res.send({ message: "User was registered successfully!" });
         });
-      }
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -41,19 +36,19 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-  User.findOne({
+  Utente.findOne({
     where: {
-      username: req.body.username
+      Email: req.body.Email
     }
   })
-    .then(user => {
-      if (!user) {
+    .then(Utente => {
+      if (!Utente) {
         return res.status(404).send({ message: "User Not found." });
       }
 
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
-        user.password
+        Utente.password
       );
 
       if (!passwordIsValid) {
@@ -63,20 +58,19 @@ exports.signin = (req, res) => {
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      var token = jwt.sign({ id: Utente.IDUtente }, config.secret, {
         expiresIn: 86400 // 24 hours
       });
 
       var authorities = [];
-      user.getRoles().then(roles => {
+      user.getRoles().then(Ruoli => {
         for (let i = 0; i < roles.length; i++) {
-          authorities.push("ROLE_" + roles[i].name.toUpperCase());
+          authorities.push("ROLE_" + Ruoli[i].name.toUpperCase());
         }
         res.status(200).send({
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          roles: authorities,
+          id: Utente.IDUtente,
+          email: Utente.Email,
+          Ruoli: Utente.IDPermesso,
           accessToken: token
         });
       });
