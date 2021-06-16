@@ -23,6 +23,9 @@ module.exports = (sequelize, Sequelize) => {
       IDImmagine: {
         type: Sequelize.STRING
       },
+      IDParcheggio: {
+        type: Sequelize.INTEGER
+      }
     });
   
     return Veicolo;
