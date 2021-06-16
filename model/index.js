@@ -24,8 +24,14 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.user = require("../models/user.model.js")(sequelize, Sequelize);
-db.role = require("../models/role.model.js")(sequelize, Sequelize);
+db.Utente = require("../model/Utente.js")(sequelize, Sequelize);
+db.Permesso = require("../model/Permessi.js")(sequelize, Sequelize);
+db.Pagamento = require("../model/Pagamento.js")(sequelize, Sequelize);
+db.Parcheggio = require("../model/parcheggio.js")(sequelize, Sequelize);
+db.Prenotazioni = require("../model/Prenotazione.js")(sequelize, Sequelize);
+db.TipoVeicolo = require("../model/TipoVeicolo.js")(sequelize, Sequelize);
+db.Veicolo = require("../model/Veicolo.js")(sequelize, Sequelize);
+
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
