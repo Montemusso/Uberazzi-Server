@@ -1,7 +1,7 @@
 //import dei componenti utili alla connessione e alla configurazione della connessione verso il db
 
 const mysql = require('mysql2/promise');
-const config = require('./config');
+const config = require('./config/config');
 
 //funzione per effettuare le query, prende come parametri sql e params
 //con sql la query sql con i punti interrogativi al posto delle variabili e params come parametri della stessa

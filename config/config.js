@@ -9,6 +9,12 @@ const config = {
     user: env.DB_USER,
     password: env.DB_PASSWORD,
     database: env.DB_NAME,
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   },
 };
 

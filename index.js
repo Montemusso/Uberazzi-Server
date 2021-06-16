@@ -10,6 +10,9 @@ const dbquery = require ('./query.js');
 //oggetto per l'upload dei file e relativa configurazione
 //https://www.npmjs.com/package/multer
 var multer  = require('multer');
+//cors
+const cors = require("cors"); //https://www.npmjs.com/package/cors
+
 
 //configurazione dei moduli e delle variabili di ambiente
 
@@ -24,6 +27,12 @@ var storage = multer.diskStorage({
   }
   })
 var upload = multer({ storage: storage }).array('file');
+
+var corsOptions = {
+  origin: "http://localhost"
+};
+app.use(cors(corsOptions));
+
 
 //aggiunta delle rotte degli elementi statici all'app
 app.use(express.static(path.resolve(__dirname, 'build')));
