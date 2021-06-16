@@ -40,8 +40,9 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull:true
       },
-      Permessi: {
-        type: Sequelize.INTEGER
+      IDPermesso: {
+        type: Sequelize.INTEGER,
+        
       },
     });
   
