@@ -1,16 +1,21 @@
+//import moduli
 const express = require('express');
 const app = express();
 //https://www.npmjs.com/package/dotenv
 const dotenv = require('dotenv');
 dotenv.config();
-//Configurazione per la porta del server
-const port = process.env.PORT;
 var path = require('path');
 //oggetto per le query al db
 const dbquery = require ('./query.js');
 //oggetto per l'upload dei file e relativa configurazione
 //https://www.npmjs.com/package/multer
 var multer  = require('multer');
+
+//configurazione dei moduli e delle variabili di ambiente
+
+//Configurazione per la porta del server
+const port = process.env.PORT;
+
 //configurazione per la posizione ed il nome del file
 var storage = multer.diskStorage({
   destination: "./Public/upload",
@@ -20,14 +25,11 @@ var storage = multer.diskStorage({
   })
 var upload = multer({ storage: storage }).array('file');
 
-
-
-
 //aggiunta delle rotte degli elementi statici all'app
 app.use(express.static(path.resolve(__dirname, 'build')));
 app.use(express.static(path.resolve(__dirname, '/Public/upload')));
 
-
+//Router 
 //Home
 //Non deve essere protetta
 app.route('/home')
@@ -37,7 +39,6 @@ app.route('/home')
 
 //Registrazione
 //Non deve essere protetta
-
 app.route('/registrazione')
     .get(function (req, res, next) {
         res.json(await dbquery.getEmail(req.query.email));
@@ -49,7 +50,6 @@ app.route('/registrazione')
 
 //Profilo
 //Da proteggere e da collegare alle info del frontend
-
 app.route('/profilo')
     .get(function (req, res, next) {
         if(req.query.user_id){
@@ -146,7 +146,6 @@ app.route('/corse') ///corse?citta=palermo
         // qui ci vanno le query di invio della gestione corse
       });
 
-
 //Upload di media
 //Da proteggere
 app.route('/media') ///media
@@ -163,27 +162,22 @@ app.route('/media') ///media
         // qui ci vanno le query di upload delle foto nel db e nella cartella public
       });
 
-
 //handle 404
 app.use(function(req, res, next) {
     res.status(404);
-  
     // risposta con html
     if (req.accepts('html')) {
       res.send('404, pagina non trovata');
       return;
     }
-  
     // risposta con json
     if (req.accepts('json')) {
       res.json({ error: '404, pagina non trovata' });
       return;
     }
-  
     // default con txt
     res.type('txt').send('404, pagina non trovata');
   });  
-
 
   app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
