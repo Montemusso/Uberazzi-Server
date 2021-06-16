@@ -20,9 +20,6 @@ module.exports = (sequelize, Sequelize) => {
       Targa: {
         type: Sequelize.STRING
       },
-      IDImmagine: {
-        type: Sequelize.STRING
-      },
       IDParcheggio: {
         type: Sequelize.INTEGER
       }
