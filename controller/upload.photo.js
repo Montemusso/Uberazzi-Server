@@ -11,5 +11,5 @@ exports.uploadPhoto = (Nome, path, IDVeicolo) => {
       .catch(err => {
         return({ message: err.message });
       });
-      return();
+      return;
   };
