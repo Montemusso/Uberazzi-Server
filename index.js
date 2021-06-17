@@ -21,24 +21,28 @@ const Permesso = db.Permesso;
 //configurazione dei moduli e delle variabili di ambiente
 
 //Cofig iniziale del db
+//ATTENZIONE, SOLO PER VERSIONE DI SVILUPPO
+//IN VERSIONE DI RILASCIO BISOGNERÀ TOGLIERE IL FORCE TRUE E LA CHIAMATA A INITIAL
+//db.sequelize.sync(); è l'unica funzione che ci serve dopo
+
 db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync Db');
   initial();
 });
 function initial() {
   Permesso.create({
-    name: "utente"
+    DettagioPermesso: "utente"
   });
  
   Permesso.create({
-    name: "Autista"
+    DettagioPermesso: "Autista"
   });
  
   Permesso.create({
-    name: "AddettoParcheggio"
+    DettagioPermesso: "AddettoParcheggio"
   });
   Permesso.create({
-    name: "Amministratore"
+    DettagioPermesso: "Amministratore"
   });
 
 }
