@@ -24,6 +24,7 @@ verifyToken = (req, res, next) => {
     next();
   });
 };
+
 //Confronto tra il campo permesso dell'utente e l'array contentente i ruoli
 //^^Capire come gestire il sistema di matching con la tabella^^
 isAdmin = (req, res, next) => {
