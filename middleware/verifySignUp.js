@@ -16,7 +16,6 @@ controllaMail = (req, res, next) => {
         });
         return;
       }
-
       next();
     });
   };
