@@ -1,6 +1,6 @@
 const { verifySignUp } = require("../middleware");
-const controller = require("../controllers/auth.controller");
-
+const controller = require("../controller/auth.controller");
+//Modulo per il registrazione e autenticazione degli utenti
 module.exports = function(app) {
   app.use(function(req, res, next) {
     res.header(
@@ -9,13 +9,10 @@ module.exports = function(app) {
     );
     next();
   });
-
+//se viene chiamata la rotta /api/auth/signup viene 
   app.post(
     "/api/auth/signup",
-    [
-      verifySignUp.checkDuplicateUsernameOrEmail,
-      verifySignUp.checkRolesExisted
-    ],
+    [verifySignUp.controllaMail],
     controller.signup
   );
 
