@@ -13,9 +13,6 @@ const cors = require("cors"); //https://www.npmjs.com/package/cors
 //Utile per creare il body delle req
 const bodyParser = require("body-parser");
 
-const addToDb = require("./controller/upload.photo");
-
-let ts = Date.now();
 
 //import modelli
 const db = require("./model");
@@ -46,7 +43,6 @@ function initial() {
   Permesso.create({
     DettagioPermesso: "Amministratore"
   });
-
 }
 
 //Configurazione per la porta del server
@@ -73,46 +69,6 @@ app.use(express.static(path.resolve(__dirname, '/Public/upload')));
 require('./app/routes/auth.route')(app);
 require('./app/routes/user.route')(app);
 
-
-app.post('/api/upload', function(req, res) {
-  let sampleFile;
-  let uploadPath;
-
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send('No files were uploaded.');
-  }
-
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  sampleFile = req.files.sampleFile;
-  uploadPath = __dirname + './Public/upload/' + ts +sampleFile.name;
-
-  // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(uploadPath, function(err) {
-    if (err)
-      return res.status(500).send(err);
-
-    addToDb(sampleFile.name, uploadPath, req.query.IDVeicolo);
-    res.send('File uploaded!');
-  });
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
 });
-
-//handle 404
-app.use(function(req, res, next) {
-    res.status(404);
-    // risposta con html
-    if (req.accepts('html')) {
-      res.send('404, pagina non trovata');
-      return;
-    }
-    // risposta con json
-    if (req.accepts('json')) {
-      res.json({ error: '404, pagina non trovata' });
-      return;
-    }
-    // default con txt
-    res.type('txt').send('404, pagina non trovata');
-  });  
-
-  app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-  });
