@@ -25,16 +25,8 @@ exports.signup = (req, res) => {
     password: bcrypt.hashSync(req.body.password, 8),
     NumeroPatente: req.body.NumeroPatente,
     TipoPatente: req.body.TipoPatente,
-    IDPermesso: 0,
-
-  })//da controllare
-  //Assegna di default ad ogni account registrato il ruolo di Utente
-    .then(Utente => {
-        // user role = 0
-        user.setRuoli([0]).then(() => {
-          res.send({ message: "User was registered successfully!" });
-        });
-    })
+    IDPermesso: 0
+  })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
@@ -49,7 +41,7 @@ exports.signin = (req, res) => {
     //check dell'esistenza di un profilo Utente
     .then(Utente => {
       if (!Utente) {
-        return res.status(404).send({ message: "User Not found." });
+        return res.status(404).send({ message: "Utente non trovato." });
       }
       //Assegna ad una variabile il risultato del confronto con la password criptata generata tramite la funziona hash
       var passwordIsValid = bcrypt.compareSync(
@@ -60,26 +52,18 @@ exports.signin = (req, res) => {
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
-          message: "Invalid Password!"
+          message: "Password sbagliata!"
         });
       }
       //crea token di login
       var token = jwt.sign({ id: Utente.IDUtente }, config.secret, {
-        expiresIn: 86400 // 24 hours
+        expiresIn: 86400 // 24 ore
       });
-
-      //Da verificarne l'utilità
-      var authorities = [];
-      Utente.getRoles().then(Ruoli => {
-        for (let i = 0; i < Ruoli.length; i++) {
-          authorities.push("ROLE_" + Ruoli[i].name.toUpperCase());
-        }
-        res.status(200).send({
-          id: Utente.IDUtente,
-          email: Utente.Email,
-          Ruoli: Utente.IDPermesso,
-          accessToken: token
-        });
+      res.status(200).send({
+        id: Utente.IDUtente,
+        email: Utente.Email,
+        IDPermesso: Utente.IDPermesso,
+        accessToken: token
       });
     })
     //catch di errore generico tipo 500
