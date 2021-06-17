@@ -77,52 +77,6 @@ isAddettoParcheggio = (req, res, next) => {
   });
 };
 
-isUtente = (req, res, next) => {
-  Utente.findByPk(req.IDUtente).then(utente => {
-    utente.getPermesso().then(permesso => {
-      for (let i = 0; i < roles.length; i++) {
-        if (permesso[i].DettagioPermesso === "Utente") {
-          next();
-          return;
-        }
-      }
-
-      res.status(403).send({
-        message: "Bisogna essere utenti registrati!"
-      });
-    });
-  });
-};
-
-//Funzione per verificare se l'utente è autenticato
-isAutenticato = (req, res, next) => {
-  Utente.findByPk(req.IDUtente).then(utente => {
-    utente.getPermesso().then(permesso => {
-      for (let i = 0; i < roles.length; i++) {
-        if (permesso[i].DettagioPermesso === "Utente") {
-          next();
-          return;
-        }
-        if (permesso[i].DettagioPermesso === "Autista") {
-          next();
-          return;
-        }
-        if (permesso[i].DettagioPermesso === "AddettoParcheggio") {
-          next();
-          return;
-        }
-        if (permesso[i].DettagioPermesso === "Amministratore") {
-          next();
-          return;
-        }
-      }
-      res.status(403).send({
-        message: "Bisogna essere utenti autenticati!"
-      });
-    });
-  });
-};
-
 
 //variabili per gestione permessi
 const authJwt = {
