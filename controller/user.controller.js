@@ -1,28 +1,128 @@
-//Questo file serve solo a verificare che la protezione delle rotte funzioni  
-//Diventerà il controller che servirà i dati  
-  
-var path = require('path');
+//query varie
+const path = require('path');
 
   exports.Homepage = (req, res) => {
     res.status(200).sendFile(path.join(__dirname+'/build/index.html'));
   };
   
+
   exports.listaVeicoli = (req, res) => {
-    res.status(200).sendJson("query sequelizy per prendere tutti i veicoli disponibili.");
+    Veicolo.findAll({
+      where: {
+        Prenotabile: true
+      }
+    })
+      .then(veicolo => {
+        if (!veicolo) {
+          return res.status(404).send({ message: "nessun veicolo disponibile." });
+        }
+        tipoVeicolo = await veicolo.getTipoVeicolo();
+      
+      res.status(200).send({
+        id: Veicolo.IDVeicolo,
+        tipoVeicolo: tipoVeicolo.TipoMezzo,
+        numeroPosti: Veicolo.NumeroPosti,
+      }
+          )})
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
   };
   
   exports.listaPrenotazioni = (req, res) => {
-    res.status(200).sendJson("query sequelize per prendere le prenotazioni della persona");
+    Prenotazione.findAll({
+      where: {
+        IDUtente: req.params.IDUtente
+      }
+    })
+      .then(prenotazione => {
+        if (!prenotazione) {
+          return res.status(404).send({ message: "nessuna prenotazione effettuata." });
+        }
+        tipoVeicolo = await veicolo.getTipoVeicolo();
+      
+      res.status(200).send({
+        id : prenotazione.IDPrenotazione,
+        dataOra: prenotazione.DataOra,
+        partenza: prenotazione.Partenza,
+        arrivo:prenotazione.Arrivo,
+        tipoVeicolo:tipoVeicolo.TipoMezzo
+        }
+      )})
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
   };
   
-  exports.listaPosteggi = (req, res) => {
-    res.status(200).sendJson("query sequelize per prendere la lista dei posteggi");
+  exports.listaParcheggi = (req, res) => {
+    Parcheggio.findAll({
+      where: {
+        IDParcheggio: req.params.IDParcheggio
+      }
+    })
+      .then(parcheggio => {
+        if (!parcheggio) {
+          return res.status(404).send({ message: "nessuna Parcheggio disponibile." });
+        }
+      
+      res.status(200).send({
+        id:parcheggio.IDParcheggio,
+        note:parcheggio.Note,
+        indirizzo:parcheggio.Indirizzo,
+        CAP:parcheggio.CAP,
+        numeroPosti:parcheggio.NumeroPosti,
+        postiOccupati:parcheggio.PostiOccupati
+      })})
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
   };
   
   exports.listaUtenti = (req, res) => {
-    res.status(200).sendJson("query sequelize per prendere la lista degli utenti");
+    Utente.findAll()
+    .then(utente => {
+      if (!utente) {
+        return res.status(404).send({ message: "nessun utente disponibile." });
+      }
+    res.status(200).send({
+      id : Utente.IDUtente,
+      Nome : Utente.Nome,
+      Cognome : Utente.Cognome,
+      DataDiNascita : Utente.DataDiNascita,
+      CodiceFiscale : Utente.CodiceFiscale,
+      Indirizzo : Utente.Indirizzo,
+      CAP : Utente.CAP,
+      NumeroPatente : Utente.NumeroPatente,
+      TipoPatente : Utente.TipoPatente,
+      email : Utente.Email,
+      IDPermesso : Utente.IDPermesso
+    }
+      ) })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
   };
 
   exports.listaCorse = (req, res) => {
-    res.status(200).sendJson("query sequelize per prendere la lista delle corse");
+    Prenotazione.findAll({
+      where: {
+        Autista: true,
+        IDAutista: null
+      }
+    })
+      .then(corsa => {
+        if (!corsa) {
+          return res.status(404).send({ message: "nessuna corsa disponibile." });
+        }
+        
+      res.status(200).send({
+        id : prenotazione.IDPrenotazione,
+        dataOra: prenotazione.DataOra,
+        partenza: prenotazione.Partenza,
+        arrivo:prenotazione.Arrivo,
+        tipoVeicolo:tipoVeicolo.TipoMezzo
+      }) })
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
   };

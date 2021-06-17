@@ -65,7 +65,7 @@ module.exports = function(app) {
     let uploadPath;
   
     if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).send('No files were uploaded.');
+      return res.status(400).send('Nessun file caricato.');
     }
   
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
@@ -79,7 +79,7 @@ module.exports = function(app) {
   
       const dbres = addToDb(sampleFile.name, uploadPath, req.query.IDVeicolo);
       console.log(dbres);
-      res.send('File uploaded!');
+      res.send({message:'File caricato!'});
     });
   });
 

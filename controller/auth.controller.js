@@ -2,9 +2,6 @@ const db = require("../model");
 const config = require("../config/auth.config");
 const Utente = db.Utente;
 const Ruoli = db.Ruoli;
-
-const Op = db.Sequelize.Op;
-
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 

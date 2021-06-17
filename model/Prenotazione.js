@@ -18,7 +18,11 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATA
       },
       IDAutista: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull:true
+      },
+      Autista: {
+        type: Sequelize.BOOLEAN
       },
       IDVeicolo: {
         type: Sequelize.INTEGER
