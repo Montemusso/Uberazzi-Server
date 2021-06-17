@@ -11,23 +11,52 @@ module.exports = function(app) {
     next();
   });
 
-  app.get("/api/test/all", controller.allAccess);
-
   app.get(
-    "/api/test/user",
+    "/api/listaVeicoli",
     [authJwt.verifyToken],
-    controller.userBoard
+    controller.listaVeicoli
   );
 
   app.get(
-    "/api/test/mod",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.moderatorBoard
+    "/api/listaPrenotazioni",
+    [authJwt.verifyToken],
+    controller.listaPrenotazioni
   );
 
   app.get(
-    "/api/test/admin",
+    "/api/listaPosteggi",
+    [authJwt.verifyToken, authJwt.isAddettoParcheggio],
+    controller.adminBoard
+  );
+
+  app.get(
+    "/api/listaUtenti",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
   );
+
+  app.get(
+    "/api/listaCorse",
+    [authJwt.verifyToken, authJwt.isAutista],
+    controller.adminBoard
+  )
+
+  app.get("/", controller.Homepage);
+
+  app.post(
+    "/api/upload",
+    [authJwt.verifyToken, authJwt.isAddettoParcheggio],
+    
+    );
+
 };
+
+
+/*
+funzioni per verifica dei permessi:
+isAdmin
+isAutenticato
+isAddettoParcheggio
+isUtente
+isAutista
+*/
