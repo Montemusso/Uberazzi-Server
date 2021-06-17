@@ -3,7 +3,8 @@ module.exports = (sequelize, Sequelize) => {
     const Immagine = sequelize.define("Immagine", {
         IDImmagine:{
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true,
         },
         Filename:{
             type: Sequelize.STRING

@@ -2,7 +2,9 @@ module.exports = (sequelize, Sequelize) => {
     const Parcheggio = sequelize.define("Parcheggio", {
         IDParcheggio:{
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true,
+
         },
         Note:{
             type: Sequelize.STRING,
