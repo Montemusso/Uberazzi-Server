@@ -31,7 +31,7 @@ db.sequelize.sync({force: true}).then(() => {
 });
 function initial() {
   Permesso.create({
-    DettagioPermesso: "utente"
+    DettagioPermesso: "Utente"
   });
  
   Permesso.create({
