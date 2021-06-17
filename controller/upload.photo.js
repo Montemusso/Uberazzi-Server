@@ -9,6 +9,7 @@ exports.uploadPhoto = (Nome, path, IDVeicolo) => {
       IDVeicolo: IDVeicolo,
     })
       .catch(err => {
-        res.status(500).send({ message: err.message });
+        return({ message: err.message });
       });
+      return();
   };
