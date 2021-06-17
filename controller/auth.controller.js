@@ -61,6 +61,14 @@ exports.signin = (req, res) => {
       });
       res.status(200).send({
         id: Utente.IDUtente,
+        Nome: Utente.Nome,
+        Cognome: Utente.Cognome,
+        DataDiNascita: Utente.DataDiNascita,
+        CodiceFiscale: Utente.CodiceFiscale,
+        Indirizzo: Utente.Indirizzo,
+        CAP: Utente.CAP,
+        NumeroPatente: Utente.NumeroPatente,
+        TipoPatente: Utente.TipoPatente,
         email: Utente.Email,
         IDPermesso: Utente.IDPermesso,
         accessToken: token
