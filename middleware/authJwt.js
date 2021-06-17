@@ -12,7 +12,6 @@ verifyToken = (req, res, next) => {
       message: "Nessun token fornito!"
     });
   }
-
   //verifica validità del token
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
@@ -25,13 +24,12 @@ verifyToken = (req, res, next) => {
   });
 };
 
-//Confronto tra il campo permesso dell'utente e l'array contentente i ruoli
-//^^Capire come gestire il sistema di matching con la tabella^^
+//In queste funzioni viene caricato il permesso dell'utente e scansionato per verificare il suo ruolo
 isAdmin = (req, res, next) => {
   Utente.findByPk(req.IDUtente).then(utente => {
     utente.getIDPermesso().then(permesso => {
       for (let i = 0; i < Permesso.length; i++) {
-        if (Permesso[i].name === "Amministratore") {
+        if (Permesso[i].DettagioPermesso === "Amministratore") {
           next();
           return;
         }
@@ -49,7 +47,7 @@ isAutista = (req, res, next) => {
   Utente.findByPk(req.IDUtente).then(utente => {
     utente.getPermesso().then(permesso => {
       for (let i = 0; i < roles.length; i++) {
-        if (permesso[i].name === "Autista") {
+        if (permesso[i].DettagioPermesso === "Autista") {
           next();
           return;
         }
@@ -66,7 +64,7 @@ isAddettoParcheggio = (req, res, next) => {
   Utente.findByPk(req.IDUtente).then(utente => {
     utente.getPermesso().then(permesso => {
       for (let i = 0; i < roles.length; i++) {
-        if (permesso[i].name === "Autista") {
+        if (permesso[i].DettagioPermesso === "AddettoParcheggio") {
           next();
           return;
         }
@@ -83,7 +81,7 @@ isUtente = (req, res, next) => {
   Utente.findByPk(req.IDUtente).then(utente => {
     utente.getPermesso().then(permesso => {
       for (let i = 0; i < roles.length; i++) {
-        if (permesso[i].name === "Utente") {
+        if (permesso[i].DettagioPermesso === "Utente") {
           next();
           return;
         }
@@ -96,6 +94,35 @@ isUtente = (req, res, next) => {
   });
 };
 
+//Funzione per verificare se l'utente è autenticato
+isAutenticato = (req, res, next) => {
+  Utente.findByPk(req.IDUtente).then(utente => {
+    utente.getPermesso().then(permesso => {
+      for (let i = 0; i < roles.length; i++) {
+        if (permesso[i].DettagioPermesso === "Utente") {
+          next();
+          return;
+        }
+        if (permesso[i].DettagioPermesso === "Autista") {
+          next();
+          return;
+        }
+        if (permesso[i].DettagioPermesso === "AddettoParcheggio") {
+          next();
+          return;
+        }
+        if (permesso[i].DettagioPermesso === "Amministratore") {
+          next();
+          return;
+        }
+      }
+      res.status(403).send({
+        message: "Bisogna essere utenti autenticati!"
+      });
+    });
+  });
+};
+
 
 //variabili per gestione permessi
 const authJwt = {
@@ -103,7 +130,8 @@ const authJwt = {
   isAdmin: isAdmin,
   isAutista: isAutista,
   isAddettoParcheggio: isAddettoParcheggio,
-  isUtente: isUtente
+  isUtente: isUtente,
+  isAutenticato: isAutenticato
 };
 
 module.exports = authJwt;
