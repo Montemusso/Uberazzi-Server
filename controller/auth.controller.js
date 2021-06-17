@@ -25,13 +25,13 @@ exports.signup = (req, res) => {
     password: bcrypt.hashSync(req.body.password, 8),
     NumeroPatente: req.body.NumeroPatente,
     TipoPatente: req.body.TipoPatente,
-    IDPermesso: req.body.IDPermesso,
+    IDPermesso: 0,
 
   })//da controllare
   //Assegna di default ad ogni account registrato il ruolo di Utente
     .then(Utente => {
-        // user role = 1
-        user.setRoles([0]).then(() => {
+        // user role = 0
+        user.setRuoli([0]).then(() => {
           res.send({ message: "User was registered successfully!" });
         });
     })
