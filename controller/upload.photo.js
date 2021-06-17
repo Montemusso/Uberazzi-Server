@@ -2,7 +2,7 @@ const db = require("../model");
 const Immagine = db.Immagine;
 
 exports.uploadPhoto = (req, res) => {
-    // Crea utente nel database
+    // Crea l'immagine nel database
     Immagine.create({
       Filename: req.body.Nome,
       Path: req.body.Cognome,
