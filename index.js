@@ -12,8 +12,36 @@ const dbquery = require ('./query.js');
 var multer  = require('multer');
 //cors
 const cors = require("cors"); //https://www.npmjs.com/package/cors
+//Utile per creare il body delle req
+const bodyParser = require("body-parser");
 
+//import modelli
+const db = require("./model");
+const Permesso = db.Permesso;
 //configurazione dei moduli e delle variabili di ambiente
+
+//Cofig iniziale del db
+db.sequelize.sync({force: true}).then(() => {
+  console.log('Drop and Resync Db');
+  initial();
+});
+function initial() {
+  Permesso.create({
+    name: "utente"
+  });
+ 
+  Permesso.create({
+    name: "Autista"
+  });
+ 
+  Permesso.create({
+    name: "AddettoParcheggio"
+  });
+  Permesso.create({
+    name: "Amministratore"
+  });
+
+}
 
 //Configurazione per la porta del server
 const port = process.env.PORT;
@@ -31,6 +59,20 @@ var corsOptions = {
   origin: "http://localhost"
 };
 app.use(cors(corsOptions));
+
+//bodyparser per contenuto di tipo application/json
+app.use(bodyParser.json());
+// bodyparser per contenuto di tipo application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+
+
+
+
+
+
 
 
 //aggiunta delle rotte degli elementi statici all'app
