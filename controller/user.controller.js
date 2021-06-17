@@ -1,22 +1,28 @@
 //Questo file serve solo a verificare che la protezione delle rotte funzioni  
+//Diventerà il controller che servirà i dati  
   
-  
-  exports.allAccess = (req, res) => {
-    res.status(200).send("Utente non registrato.");
+var path = require('path');
+
+  exports.Homepage = (req, res) => {
+    res.status(200).sendFile(path.join(__dirname+'/build/index.html'));
   };
   
-  exports.userBoard = (req, res) => {
-    res.status(200).send("Utente.");
+  exports.listaVeicoli = (req, res) => {
+    res.status(200).sendJson("query sequelizy per prendere tutti i veicoli disponibili.");
   };
   
-  exports.adminBoard = (req, res) => {
-    res.status(200).send("Autista.");
+  exports.listaPrenotazioni = (req, res) => {
+    res.status(200).sendJson("query sequelize per prendere le prenotazioni della persona");
   };
   
-  exports.moderatorBoard = (req, res) => {
-    res.status(200).send("addetto parcheggio.");
+  exports.listaPosteggi = (req, res) => {
+    res.status(200).sendJson("query sequelize per prendere la lista dei posteggi");
   };
   
-  exports.moderatorBoard = (req, res) => {
-    res.status(200).send("admin.");
+  exports.listaUtenti = (req, res) => {
+    res.status(200).sendJson("query sequelize per prendere la lista degli utenti");
+  };
+
+  exports.listaCorse = (req, res) => {
+    res.status(200).sendJson("query sequelize per prendere la lista delle corse");
   };
