@@ -6,10 +6,10 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true
       },
       DettaglioTipologia: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       TipoMezzo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
     });
   

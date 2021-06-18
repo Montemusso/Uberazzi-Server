@@ -9,10 +9,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER
       },
       Partenza: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       Arrivo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       DataOra: {
         type: Sequelize.DATE

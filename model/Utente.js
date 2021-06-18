@@ -6,35 +6,35 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true
       },
       Nome: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       Cognome: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       DataDiNascita: {
         type: Sequelize.DATE
       },
       CodiceFiscale: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(16)
       },
       Indirizzo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200)
       },
       CAP: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(5)
       },
       Email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200)
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('medium')
       },
       NumeroPatente: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(10),
         allowNull:true
       },
       TipoPatente: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(7),
         allowNull:true
       },
       IDPermesso: {

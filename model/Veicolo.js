@@ -10,16 +10,16 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       Condizioni: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       Prenotabile: {
         type: Sequelize.BOOLEAN
       },
       NumeroPosti: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(2)
       },
       Targa: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(10)
       },
       IDParcheggio: {
         type: Sequelize.INTEGER

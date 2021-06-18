@@ -7,22 +7,22 @@ module.exports = (sequelize, Sequelize) => {
 
         },
         Note:{
-            type: Sequelize.STRING,
+            type: Sequelize.STRING(1000),
             allowNull:true
         },
         Indirizzo:{
-            type: Sequelize.STRING
+            type: Sequelize.STRING(1000)
         },
         CAP:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER(5),
             allowNull:true
         },
         NumeroPosti:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER(10),
             allowNull:true
         },
         PostiOccupati:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER(10),
             allowNull:true
         }
     });

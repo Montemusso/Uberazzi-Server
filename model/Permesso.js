@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true
       },
       DettagioPermesso: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       }
     });
   
