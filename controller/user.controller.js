@@ -16,7 +16,7 @@ const path = require('path');
         if (!veicolo) {
           return res.status(404).send({ message: "nessun veicolo disponibile." });
         }
-        tipoVeicolo = await veicolo.getTipoVeicolo();
+        tipoVeicolo = veicolo.getTipoVeicolo();
       
       res.status(200).send({
         id: Veicolo.IDVeicolo,
@@ -39,7 +39,7 @@ const path = require('path');
         if (!prenotazione) {
           return res.status(404).send({ message: "nessuna prenotazione effettuata." });
         }
-        tipoVeicolo = await veicolo.getTipoVeicolo();
+        tipoVeicolo = veicolo.getTipoVeicolo();
       
       res.status(200).send({
         id : prenotazione.IDPrenotazione,

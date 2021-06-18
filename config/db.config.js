@@ -9,7 +9,7 @@ const config = {
     user: env.DB_USER,
     password: env.DB_PASSWORD,
     database: env.DB_NAME,
-    dialect: mysql,
+    dialect: 'mysql',
     pool: {
       max: 5,
       min: 0,

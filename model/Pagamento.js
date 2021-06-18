@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
 
         },
         Importo:{
-            type: STRING           
+            type: Sequelize.STRING           
         }
     });
 

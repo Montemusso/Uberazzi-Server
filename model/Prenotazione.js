@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       DataOra: {
-        type: Sequelize.DATA
+        type: Sequelize.DATE
       },
       IDAutista: {
         type: Sequelize.INTEGER,

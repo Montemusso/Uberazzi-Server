@@ -6,8 +6,6 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 var path = require('path');
-//oggetto per le query al db
-const dbquery = require ('./query.js');
 //cors
 const cors = require("cors"); //https://www.npmjs.com/package/cors
 //Utile per creare il body delle req
@@ -66,8 +64,8 @@ app.use(express.static(path.resolve(__dirname, 'build')));
 app.use(express.static(path.resolve(__dirname, '/Public/upload')));
 
 //Rotte
-require('./app/routes/auth.route')(app);
-require('./app/routes/user.route')(app);
+require('./routes/auth.route')(app);
+require('./routes/user.route')(app);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

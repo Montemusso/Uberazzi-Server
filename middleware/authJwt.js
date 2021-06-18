@@ -83,9 +83,7 @@ const authJwt = {
   verifyToken: verifyToken,
   isAdmin: isAdmin,
   isAutista: isAutista,
-  isAddettoParcheggio: isAddettoParcheggio,
-  isUtente: isUtente,
-  isAutenticato: isAutenticato
+  isAddettoParcheggio: isAddettoParcheggio
 };
 
 module.exports = authJwt;

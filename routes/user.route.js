@@ -1,5 +1,5 @@
 const { authJwt } = require("../middleware");
-const controller = require("../controllers/user.controller");
+const controller = require("../controller/user.controller");
 
 
 const addToDb = require("../controller/upload.photo");
@@ -35,21 +35,24 @@ module.exports = function(app) {
   );
 
   app.get(
-    "/api/listaPosteggi",
-    [authJwt.verifyToken, authJwt.isAddettoParcheggio],
-    controller.adminBoard
+    "/api/listaParcheggi",
+    [
+      authJwt.verifyToken, 
+      authJwt.isAddettoParcheggio
+    ],
+    controller.listaParcheggi
   );
 
   app.get(
     "/api/listaUtenti",
     [authJwt.verifyToken, authJwt.isAdmin],
-    controller.adminBoard
+    controller.listaUtenti
   );
 
   app.get(
     "/api/listaCorse",
     [authJwt.verifyToken, authJwt.isAutista],
-    controller.adminBoard
+    controller.listaCorse
   )
 
   app.get("/", controller.Homepage);
