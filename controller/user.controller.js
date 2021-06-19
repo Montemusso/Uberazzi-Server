@@ -19,9 +19,9 @@ const path = require('path');
         tipoVeicolo = veicolo.getTipoVeicolo();
       
       res.status(200).send({
-        id: Veicolo.IDVeicolo,
+        id: veicolo.IDVeicolo,
         tipoVeicolo: tipoVeicolo.TipoMezzo,
-        numeroPosti: Veicolo.NumeroPosti,
+        numeroPosti: veicolo.NumeroPosti,
       }
           )})
       .catch(err => {

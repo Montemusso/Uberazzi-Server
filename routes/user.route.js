@@ -1,10 +1,8 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controller/user.controller");
-
-
 const addToDb = require("../controller/upload.photo");
-
 let ts = Date.now();
+
 //In questo modulo vengono definite le rotte verso i controller che dovranno poi servire effettivamente i file
 //qui si verifica se si è un utente autenticato o no ed in caso quale permesso si ha
 module.exports = function(app) {
@@ -45,13 +43,19 @@ module.exports = function(app) {
 
   app.get(
     "/api/listaUtenti",
-    [authJwt.verifyToken, authJwt.isAdmin],
+    [
+      authJwt.verifyToken,
+       authJwt.isAdmin
+      ],
     controller.listaUtenti
   );
 
   app.get(
     "/api/listaCorse",
-    [authJwt.verifyToken, authJwt.isAutista],
+    [
+      authJwt.verifyToken
+      , authJwt.isAutista
+    ],
     controller.listaCorse
   )
 
@@ -73,7 +77,7 @@ module.exports = function(app) {
   
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = req.files.sampleFile;
-    uploadPath = __dirname + './Public/upload/' + ts +sampleFile.name;
+    uploadPath = __dirname + '../Public/upload/' + ts +sampleFile.name;
   
     // Use the mv() method to place the file somewhere on your server
     sampleFile.mv(uploadPath, function(err) {

@@ -68,5 +68,5 @@ require('./routes/auth.route')(app);
 require('./routes/user.route')(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Uberazzi server ti ascolta al link http://localhost:${port}`)
 });
