@@ -4,6 +4,7 @@
   "description": "Server del progetto universitario creato per le materie Programmazione web e mobile e Ingegneria del software",
   "main": "index.js",
   "scripts": {
+    "start" : "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
