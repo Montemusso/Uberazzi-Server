@@ -4,7 +4,7 @@ Server del progetto universitario creato per le materie Programmazione web e mob
 
 ## Getting Started
 
-Download della repo ed avvio tramite il comando node index.js
+Download della repo ed avvio tramite il comando npm run install && npm start
 
 ## Authors
 
