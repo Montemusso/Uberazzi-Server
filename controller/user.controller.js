@@ -1,10 +1,77 @@
 //query varie
 const path = require('path');
 
+//Homepage
   exports.Homepage = (req, res) => {
     res.status(200).sendFile(path.join(__dirname+'/build/index.html'));
   };
   
+//Pagina Profilo:
+//Query: ultime tre prenotazioni con ritorno id, data e stato
+//aggiornare dati utente
+//lista prenotazioni ritorna i dati delle ultime 3 prenotazioni effettuate
+exports.ultimePrenotazioni = (req, res) => {
+  Prenotazione.findAll({
+    where: {
+      IDUtente: req.params.IDUtente
+    },
+    order:[['DataOra', 'DESC']],
+  })
+    .then(prenotazione => {
+      if (!prenotazione) {
+        return res.status(404).send({ message: "nessuna prenotazione effettuata." });
+      }
+      tipoVeicolo = veicolo.getTipoVeicolo();
+    
+    res.status(200).send({
+      id : prenotazione.IDPrenotazione,
+      dataOra: prenotazione.DataOra,
+      partenza: prenotazione.Partenza,
+      arrivo:prenotazione.Arrivo,
+      tipoVeicolo:tipoVeicolo.TipoMezzo,
+      stato: tipoVeicolo.Stato
+      }
+    )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+//Aggiorna dati utente:
+//Da fare con post
+
+
+//Pagina prenotazioni
+//Selezionare tutte le prenotazioni 
+exports.listaPrenotazioni = (req, res) => {
+  Prenotazione.findAll({
+    where: {
+      IDUtente: req.params.IDUtente
+    },
+    order:[['DataOra', 'DESC']],
+    limit:3,
+  })
+    .then(prenotazione => {
+      if (!prenotazione) {
+        return res.status(404).send({ message: "nessuna prenotazione effettuata." });
+      }
+      tipoVeicolo = veicolo.getTipoVeicolo();
+    
+    res.status(200).send({
+      id : prenotazione.IDPrenotazione,
+      dataOra: prenotazione.DataOra,
+      partenza: prenotazione.Partenza,
+      arrivo:prenotazione.Arrivo,
+      tipoVeicolo:tipoVeicolo.TipoMezzo,
+      stato: tipoVeicolo.Stato
+      }
+    )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+
+
 
   exports.listaVeicoli = (req, res) => {
     Veicolo.findAll({
@@ -29,30 +96,7 @@ const path = require('path');
       });
   };
   
-  exports.listaPrenotazioni = (req, res) => {
-    Prenotazione.findAll({
-      where: {
-        IDUtente: req.params.IDUtente
-      }
-    })
-      .then(prenotazione => {
-        if (!prenotazione) {
-          return res.status(404).send({ message: "nessuna prenotazione effettuata." });
-        }
-        tipoVeicolo = veicolo.getTipoVeicolo();
-      
-      res.status(200).send({
-        id : prenotazione.IDPrenotazione,
-        dataOra: prenotazione.DataOra,
-        partenza: prenotazione.Partenza,
-        arrivo:prenotazione.Arrivo,
-        tipoVeicolo:tipoVeicolo.TipoMezzo
-        }
-      )})
-      .catch(err => {
-        res.status(500).send({ message: err.message });
-      });
-  };
+  
   
   exports.listaParcheggi = (req, res) => {
     Parcheggio.findAll({
