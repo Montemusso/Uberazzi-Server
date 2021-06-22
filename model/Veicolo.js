@@ -19,7 +19,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER(2)
       },
       Prezzo: {
-        type: Sequelize.FLOAT
+        type: Sequelize.STRING(10)
       },
       Targa: {
         type: Sequelize.STRING(10)

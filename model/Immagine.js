@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, Sequelize) => {
     const Immagine = sequelize.define("Immagine", {
         IDImmagine:{

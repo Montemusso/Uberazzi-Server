@@ -35,6 +35,7 @@ db.Prenotazione = require("../model/Prenotazione.js")(sequelize, Sequelize);
 db.TipoVeicolo = require("../model/TipoVeicolo.js")(sequelize, Sequelize);
 db.Veicolo = require("../model/Veicolo.js")(sequelize, Sequelize);
 db.Immagine = require("../model/Immagine.js")(sequelize, Sequelize);
+db.NotificheRitardo = require("../model/NotificheRitardo.js")(sequelize, Sequelize);
 
 
 db.Permesso.hasMany(db.Utente, {foreignKey: 'IDPermesso'} );
@@ -44,6 +45,7 @@ db.Veicolo.hasMany(db.Immagine, {foreignKey: 'IDVeicolo'} );
 db.Pagamento.hasOne(db.Prenotazione, {foreignKey: 'IDPrenotazione'});
 db.Parcheggio.hasMany(db.Veicolo, {foreignKey: 'IDParcheggio'} );
 db.Veicolo.hasMany(db.Prenotazione, {foreignKey: 'IDVeicolo'} );
+db.NotificheRitardo.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione'});
 
 
 db.Ruoli = ["Utente", "Autista", "AddettoParcheggio","Amministratore"];
