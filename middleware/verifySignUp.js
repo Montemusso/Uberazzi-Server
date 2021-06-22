@@ -16,6 +16,11 @@ controllaMail = (req, res, next) => {
         });
         return;
       }
+      else{
+        res.status(200).send({
+          message: "email disponibile!"
+        })
+      }
       next();
     });
   };
