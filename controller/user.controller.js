@@ -21,6 +21,8 @@ exports.ultimePrenotazioni = (req, res) => {
       if (!prenotazione) {
         return res.status(404).send({ message: "nessuna prenotazione effettuata." });
       }
+      //Cosi va bene
+      //Come chiamare la funzione in await
       tipoVeicolo = veicolo.getTipoVeicolo();
     
     res.status(200).send({
@@ -171,101 +173,19 @@ exports.daConsegnare = (req, res) => {
 
 
 //Veicoli
-//selezionare i veicoli di cui verificare le condizioni, prendnendo gli id delle prenotazioni con stato non concluso
+//selezionare i veicoli di cui verificare le condizioni, prendnendo gli id delle prenotazioni con stato non concluso da scrivere in raw sql
 //aggiorna tabella prenotazioni con lo stato in corso
-  exports.listaVeicoli = (req, res) => {
-    Veicolo.findAll({
-      where: {
-        Prenotabile: true
-      }
-    })
-      .then(veicolo => {
-        if (!veicolo) {
-          return res.status(404).send({ message: "nessun veicolo disponibile." });
-        }
-        tipoVeicolo = veicolo.getTipoVeicolo();
-      
-      res.status(200).send({
-        id: veicolo.IDVeicolo,
-        tipoVeicolo: tipoVeicolo.TipoMezzo,
-        numeroPosti: veicolo.NumeroPosti,
-      }
-          )})
-      .catch(err => {
-        res.status(500).send({ message: err.message });
-      });
-  };
+
+
+//Corse
+//Prendere tutte le prenotazioni con flag autista vero e che non abbiano idautista
+//inserire id autista in prenotazione con id fornito
+
+//Permessi utenti
+//selezionare tutti gli utenti meno se stessi
+//aggiornare i permessi dell'utente
+
+//Gestione prenotazioni
+//Selezionare tutte le prenotazioni modificate non complete
+
   
-  
-  
-  exports.listaParcheggi = (req, res) => {
-    Parcheggio.findAll({
-      where: {
-        IDParcheggio: req.params.IDParcheggio
-      }
-    })
-      .then(parcheggio => {
-        if (!parcheggio) {
-          return res.status(404).send({ message: "nessuna Parcheggio disponibile." });
-        }
-      
-      res.status(200).send({
-        id:parcheggio.IDParcheggio,
-        note:parcheggio.Note,
-        indirizzo:parcheggio.Indirizzo,
-        CAP:parcheggio.CAP,
-        numeroPosti:parcheggio.NumeroPosti,
-        postiOccupati:parcheggio.PostiOccupati
-      })})
-      .catch(err => {
-        res.status(500).send({ message: err.message });
-      });
-  };
-  
-  exports.listaUtenti = (req, res) => {
-    Utente.findAll()
-    .then(utente => {
-      if (!utente) {
-        return res.status(404).send({ message: "nessun utente disponibile." });
-      }
-    res.status(200).send({
-      id : Utente.IDUtente,
-      Nome : Utente.Nome,
-      Cognome : Utente.Cognome,
-      DataDiNascita : Utente.DataDiNascita,
-      CodiceFiscale : Utente.CodiceFiscale,
-      Indirizzo : Utente.Indirizzo,
-      CAP : Utente.CAP,
-      NumeroPatente : Utente.NumeroPatente,
-      TipoPatente : Utente.TipoPatente,
-      email : Utente.Email,
-      IDPermesso : Utente.IDPermesso
-    }
-      ) })
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
-  };
-  exports.listaCorse = (req, res) => {
-    Prenotazione.findAll({
-      where: {
-        Autista: true,
-        IDAutista: null
-      }
-    })
-      .then(corsa => {
-        if (!corsa) {
-          return res.status(404).send({ message: "nessuna corsa disponibile." });
-        }
-        
-      res.status(200).send({
-        id : prenotazione.IDPrenotazione,
-        dataOra: prenotazione.DataOra,
-        partenza: prenotazione.Partenza,
-        arrivo:prenotazione.Arrivo,
-        tipoVeicolo:tipoVeicolo.TipoMezzo
-      }) })
-      .catch(err => {
-        res.status(500).send({ message: err.message });
-      });
-  };
