@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
       Arrivo: {
         type: Sequelize.STRING(1000)
       },
+      Stato: {
+        type: Sequelize.STRING(100)
+      },
       DataOra: {
         type: Sequelize.DATE
       },
