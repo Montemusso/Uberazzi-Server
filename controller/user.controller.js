@@ -157,6 +157,8 @@ exports.daConsegnare = (req, res) => {
 //query per aggiornare lo stato dei veicoli 
 
 
+//consegna veicoli cliente
+//query per cambiare lo stato in conclusa tramite id prenotazione
 
 
 
