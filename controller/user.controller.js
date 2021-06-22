@@ -125,6 +125,43 @@ exports.signin = (req, res) => {
     });
 };
 
+//notifica ritardo
+//creare nuova riga nella notifica ritardo
+
+
+
+//consegna veicoli addetto 
+//lista delle prenotazioni con macchina non consegnata
+exports.daConsegnare = (req, res) => {
+  Prenotazione.findAll({
+    where: {
+      Consegnato: false,
+      Stato:"attiva"
+    }
+  })
+    .then(prenotazione => {
+      if (!prenotazione) {
+        return res.status(404).send({ message: "nessun veicolo disponibile." });
+      }
+      let veicolo = prenotazione.getVeicolo();
+
+    res.status(200).send({
+      id: veicolo.IDVeicolo,
+      targa: veicolo.Targa,
+    }
+        )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+//query per aggiornare lo stato dei veicoli 
+
+
+
+
+
+
+
   exports.listaVeicoli = (req, res) => {
     Veicolo.findAll({
       where: {
