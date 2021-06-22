@@ -161,6 +161,18 @@ exports.daConsegnare = (req, res) => {
 //query per cambiare lo stato in conclusa tramite id prenotazione
 
 
+
+//Ritiro veicoli
+//Selezionare i veicoli ritirabili dal cliente, prendo idVeicolo dalle prenotazioni attive e con il 
+//flag consegnato a 1 così so che per quelle prenotazioni devo ritirare;
+//Aggiornare prenotazione con stato "in corso"
+
+
+
+
+//Veicoli
+//selezionare i veicoli di cui verificare le condizioni, prendnendo gli id delle prenotazioni con stato non concluso
+//aggiorna tabella prenotazioni con lo stato in corso
   exports.listaVeicoli = (req, res) => {
     Veicolo.findAll({
       where: {
