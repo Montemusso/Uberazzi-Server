@@ -90,11 +90,11 @@ exports.prenotazione = (req, res) => {
       idveicolo:prenotazione.IDVeicolo,
       consegnato:prenotazione.Consegnato,
       autista:prenotazione.Autista,
-    )})
+    })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
-};
+})};
 //modifica prenotazione
 //post da fare :C
 
@@ -159,9 +159,6 @@ exports.daConsegnare = (req, res) => {
 
 //consegna veicoli cliente
 //query per cambiare lo stato in conclusa tramite id prenotazione
-
-
-
 
 
   exports.listaVeicoli = (req, res) => {
@@ -237,7 +234,6 @@ exports.daConsegnare = (req, res) => {
       res.status(500).send({ message: err.message });
     });
   };
-
   exports.listaCorse = (req, res) => {
     Prenotazione.findAll({
       where: {
