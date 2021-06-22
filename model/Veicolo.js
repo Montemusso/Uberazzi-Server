@@ -18,6 +18,9 @@ module.exports = (sequelize, Sequelize) => {
       NumeroPosti: {
         type: Sequelize.INTEGER(2)
       },
+      Prezzo: {
+        type: Sequelize.FLOAT
+      },
       Targa: {
         type: Sequelize.STRING(10)
       },

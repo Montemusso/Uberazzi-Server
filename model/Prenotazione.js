@@ -24,6 +24,9 @@ module.exports = (sequelize, Sequelize) => {
       Autista: {
         type: Sequelize.BOOLEAN
       },
+      Consegnato: {
+        type: Sequelize.BOOLEAN
+      },
       IDVeicolo: {
         type: Sequelize.INTEGER
       },
