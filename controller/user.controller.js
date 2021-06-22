@@ -48,7 +48,6 @@ exports.listaPrenotazioni = (req, res) => {
       IDUtente: req.params.IDUtente
     },
     order:[['DataOra', 'DESC']],
-    limit:3,
   })
     .then(prenotazione => {
       if (!prenotazione) {
@@ -70,6 +69,34 @@ exports.listaPrenotazioni = (req, res) => {
     });
 };
 
+//modifica prenotazioni
+//seleziona la prenotazione singola e ritornane i dati
+
+exports.prenotazione = (req, res) => {
+  Prenotazione.findByPk (req.params.IDPrenotazione)
+    .then(prenotazione => {
+      if (!prenotazione) {
+        return res.status(404).send({ message: "nessuna prenotazione trovata." });
+      }
+      tipoVeicolo = veicolo.getTipoVeicolo();
+    
+    res.status(200).send({
+      id : prenotazione.IDPrenotazione,
+      dataOra: prenotazione.DataOra,
+      partenza: prenotazione.Partenza,
+      arrivo:prenotazione.Arrivo,
+      tipoVeicolo:tipoVeicolo.TipoMezzo,
+      stato: tipoVeicolo.Stato,
+      idveicolo:prenotazione.IDVeicolo,
+      consegnato:prenotazione.Consegnato,
+      autista:prenotazione.Autista,
+    )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+//modifica prenotazione
+//post da fare :C
 
 
 
