@@ -99,6 +99,31 @@ exports.prenotazione = (req, res) => {
 //post da fare :C
 
 
+//nuova prenotazione
+//creazione nuova riga nelle prenotazioni
+//query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
+//se un veicolo non è prenotato allora si rende disponibile
+
+//recupero password
+
+exports.signin = (req, res) => {
+  Utente.findOne({
+    where: {
+      Email: req.body.Email
+    }
+  })
+    //controllo dell'esistenza di un profilo Utente
+    .then(Utente => {
+      if (!Utente) {
+        return res.status(404).send({ message: "Utente non trovato." });
+      }
+      return res.status(200).send({ message: "Mail inviata." });
+    })
+    //catch di errore generico tipo 500
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
 
   exports.listaVeicoli = (req, res) => {
     Veicolo.findAll({

@@ -35,7 +35,7 @@ exports.signin = (req, res) => {
       Email: req.body.Email
     }
   })
-    //check dell'esistenza di un profilo Utente
+    //controllo dell'esistenza di un profilo Utente
     .then(Utente => {
       if (!Utente) {
         return res.status(404).send({ message: "Utente non trovato." });
@@ -45,7 +45,7 @@ exports.signin = (req, res) => {
         req.body.password,
         Utente.password
       );
-      //Gestisce l'errore in caso di match negativo della password
+      //Gestisce il caso in cui la password non sia valida
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
