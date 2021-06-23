@@ -26,55 +26,72 @@ verifyToken = (req, res, next) => {
 
 //In queste funzioni viene caricato il permesso dell'utente e scansionato per verificare il suo ruolo
 isAdmin = (req, res, next) => {
-  Utente.findByPk(req.IDUtente).then(utente => {
-    utente.getIDPermesso().then(permesso => {
-      for (let i = 0; i < Permesso.length; i++) {
-        if (Permesso[i].DettagioPermesso === "Amministratore") {
-          next();
-          return;
-        }
-      }
-
+  Utente.findOne({
+    where: {
+      IDUtente: req.params.IDUtente
+    },
+    include:Permessi,
+  }
+    )
+    .then(utente => {
+    if (utente.Permessi.DettaglioPermesso=== "Amministratore") {
+      res.status(200).send({
+        message: "Autorizzato!"
+      });
+      next();
+      return;
+    }
       res.status(403).send({
-        message: "Bisogna essere amministratori!"
+       message: "Bisogna essere amministratori!"
       });
       return;
     });
-  });
-};
+  };
 
 isAutista = (req, res, next) => {
-  Utente.findByPk(req.IDUtente).then(utente => {
-    utente.getPermesso().then(permesso => {
-      for (let i = 0; i < roles.length; i++) {
-        if (permesso[i].DettagioPermesso === "Autista") {
-          next();
-          return;
-        }
-      }
-
-      res.status(403).send({
-        message: "Bisogna essere Autisti!"
+  Utente.findOne({
+    where: {
+      IDUtente: req.params.IDUtente
+    },
+    include:Permessi,
+  }
+    )
+    .then(utente => {
+    if (utente.Permessi.DettaglioPermesso=== "Autista") {
+      res.status(200).send({
+        message: "Autorizzato!"
       });
+      next();
+      return;
+    }
+      res.status(403).send({
+       message: "Bisogna essere autisti!"
+      });
+      return;
     });
-  });
 };
 
 isAddettoParcheggio = (req, res, next) => {
-  Utente.findByPk(req.IDUtente).then(utente => {
-    utente.getPermesso().then(permesso => {
-      for (let i = 0; i < roles.length; i++) {
-        if (permesso[i].DettagioPermesso === "AddettoParcheggio") {
-          next();
-          return;
-        }
-      }
-
-      res.status(403).send({
-        message: "Bisogna essere Addetti al parcheggio!"
+  Utente.findOne({
+    where: {
+      IDUtente: req.params.IDUtente
+    },
+    include:Permessi,
+  }
+    )
+    .then(utente => {
+    if (utente.Permessi.DettaglioPermesso=== "AddettoParcheggio") {
+      res.status(200).send({
+        message: "Autorizzato!"
       });
+      next();
+      return;
+    }
+      res.status(403).send({
+       message: "Bisogna essere un addetto al parcheggio!"
+      });
+      return;
     });
-  });
 };
 
 

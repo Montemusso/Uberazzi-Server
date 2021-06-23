@@ -10,27 +10,29 @@ const path = require('path');
 //Query: ultime tre prenotazioni con ritorno id, data e stato
 //aggiornare dati utente
 //lista prenotazioni ritorna i dati delle ultime 3 prenotazioni effettuate
-exports.ultimePrenotazioni = (req, res) => {
+exports.ultime_prenotazioni = (req, res) => {
   Prenotazione.findAll({
     where: {
       IDUtente: req.params.IDUtente
     },
     order:[['DataOra', 'DESC']],
+    include:[{
+      model: Veicolo
+    },{
+      model: TipoVeicolo
+    }],
+    limit:3
   })
     .then(prenotazione => {
       if (!prenotazione) {
         return res.status(404).send({ message: "nessuna prenotazione effettuata." });
-      }
-      //Cosi va bene
-      //Come chiamare la funzione in await
-      tipoVeicolo = veicolo.getTipoVeicolo();
-    
+      }    
     res.status(200).send({
       id : prenotazione.IDPrenotazione,
       dataOra: prenotazione.DataOra,
       partenza: prenotazione.Partenza,
       arrivo:prenotazione.Arrivo,
-      tipoVeicolo:tipoVeicolo.TipoMezzo,
+      tipoVeicolo:prenotazione.tipoVeicolo.TipoMezzo,
       stato: tipoVeicolo.Stato
       }
     )})
@@ -44,26 +46,30 @@ exports.ultimePrenotazioni = (req, res) => {
 
 //Pagina prenotazioni
 //Selezionare tutte le prenotazioni 
-exports.listaPrenotazioni = (req, res) => {
+exports.prenotazioni = (req, res) => {
   Prenotazione.findAll({
     where: {
       IDUtente: req.params.IDUtente
     },
     order:[['DataOra', 'DESC']],
+    include:[{
+      model: Veicolo
+    },{
+      model: TipoVeicolo
+    }]
   })
     .then(prenotazione => {
       if (!prenotazione) {
         return res.status(404).send({ message: "nessuna prenotazione effettuata." });
       }
-      tipoVeicolo = veicolo.getTipoVeicolo();
     
     res.status(200).send({
       id : prenotazione.IDPrenotazione,
       dataOra: prenotazione.DataOra,
       partenza: prenotazione.Partenza,
       arrivo:prenotazione.Arrivo,
-      tipoVeicolo:tipoVeicolo.TipoMezzo,
-      stato: tipoVeicolo.Stato
+      tipoVeicolo:prenotazione.TipoVeicolo.TipoMezzo,
+      stato: prenotazione.TipoVeicolo.Stato
       }
     )})
     .catch(err => {
@@ -73,42 +79,65 @@ exports.listaPrenotazioni = (req, res) => {
 
 //modifica prenotazioni
 //seleziona la prenotazione singola e ritornane i dati
-
 exports.prenotazione = (req, res) => {
-  Prenotazione.findByPk (req.params.IDPrenotazione)
+  Prenotazione.findOne({
+    where: {
+      IDPrenotazione: req.params.IDPrenotazione
+    },
+    order:[['DataOra', 'DESC']],
+    include:[{
+      model: Veicolo
+    },{
+      model: TipoVeicolo
+    }]
+  })
     .then(prenotazione => {
       if (!prenotazione) {
-        return res.status(404).send({ message: "nessuna prenotazione trovata." });
+        return res.status(404).send({ message: "nessuna prenotazione effettuata." });
       }
-      tipoVeicolo = veicolo.getTipoVeicolo();
     
     res.status(200).send({
       id : prenotazione.IDPrenotazione,
       dataOra: prenotazione.DataOra,
       partenza: prenotazione.Partenza,
       arrivo:prenotazione.Arrivo,
-      tipoVeicolo:tipoVeicolo.TipoMezzo,
-      stato: tipoVeicolo.Stato,
-      idveicolo:prenotazione.IDVeicolo,
-      consegnato:prenotazione.Consegnato,
-      autista:prenotazione.Autista,
-    })
+      tipoVeicolo:prenotazione.TipoVeicolo.TipoMezzo,
+      stato: prenotazione.TipoVeicolo.Stato
+      }
+    )})
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
-})};
+};
 //modifica prenotazione
 //post da fare :C
 
 
 //nuova prenotazione
 //creazione nuova riga nelle prenotazioni
+exports.nuova_prenotazione = (req, res) => {
+  // Crea prenotazione nel database
+  Prenotazione.create({
+    IDUtente: req.body.IDUtente,
+    Partenza:req.body.Partenza,
+    Arrivo:req.body.Arrivo,
+    Stato: "In corso",
+    DataOra:req.body.DataOra,
+    Autista:req.body.Autista,
+    IDVeicolo:req.body.IDVeicolo,
+    Consegnato:false
+  })
+  .then( res.status(200).send({ message:"Prenotazione creata" }))
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
 //query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
 //se un veicolo non è prenotato allora si rende disponibile
 
 //recupero password
 
-exports.signin = (req, res) => {
+exports.esistenza_email = (req, res) => {
   Utente.findOne({
     where: {
       Email: req.body.Email
@@ -129,27 +158,39 @@ exports.signin = (req, res) => {
 
 //notifica ritardo
 //creare nuova riga nella notifica ritardo
-
+exports.notifica_ritardo = (req, res) => {
+  // Crea notifica ritardo nel database
+  NotificheRitardo.create({
+    IDPrenotazione: req.body.IDPrenotazione,
+    Note: req.body.note,
+  })
+  .then( res.status(200).send({ message:"notifica creata" }))
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
 
 
 //consegna veicoli addetto 
 //lista delle prenotazioni con macchina non consegnata
-exports.daConsegnare = (req, res) => {
+exports.consegne_veicoli = (req, res) => {
   Prenotazione.findAll({
     where: {
       Consegnato: false,
       Stato:"attiva"
-    }
+    },
+    include:[{
+      model: Veicolo
+    }]
   })
     .then(prenotazione => {
       if (!prenotazione) {
         return res.status(404).send({ message: "nessun veicolo disponibile." });
       }
-      let veicolo = prenotazione.getVeicolo();
 
     res.status(200).send({
-      id: veicolo.IDVeicolo,
-      targa: veicolo.Targa,
+      id: prenotazione.Veicolo.IDVeicolo,
+      targa: prenotazione.Veicolo.Targa,
     }
         )})
     .catch(err => {
@@ -179,6 +220,35 @@ exports.daConsegnare = (req, res) => {
 
 //Corse
 //Prendere tutte le prenotazioni con flag autista vero e che non abbiano idautista
+exports.corse = (req, res) => {
+  Prenotazione.findAll({
+    where: {
+      Autista: true,
+      IDAutista:null
+    },
+    include:[{
+      model: Veicolo
+    }]
+  })
+    .then(prenotazione => {
+      if (!prenotazione) {
+        return res.status(404).send({ message: "nessuna corsa disponibile." });
+      }
+
+    res.status(200).send({
+      id : prenotazione.IDPrenotazione,
+      dataOra: prenotazione.DataOra,
+      partenza: prenotazione.Partenza,
+      arrivo:prenotazione.Arrivo,
+      tipoVeicolo:prenotazione.TipoVeicolo.TipoMezzo,
+      stato: prenotazione.TipoVeicolo.Stato
+    }
+        )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 //inserire id autista in prenotazione con id fornito
 
 //Permessi utenti
