@@ -9,12 +9,12 @@ module.exports = function(app) {
     );
     next();
   });
-//se viene chiamata la rotta /api/auth/signup viene 
-  app.post(
-    "/api/auth/signup",
-    [verifySignUp.controllaMail],
-    controller.signup
-  );
+//se viene chiamata la rotta /api/signup viene 
+app.post(
+  "/api/registrazione_utente",
+  [verifySignUp.controllaMail],
+  controller.signup
+);
 
-  app.post("/api/auth/signin", controller.signin);
+  app.post("/api/login", controller.signin);
 };

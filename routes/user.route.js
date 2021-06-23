@@ -20,6 +20,11 @@ module.exports = function(app) {
    *                //*
    */               //*
 
+
+  app.get(
+    "/api/esistenza_email",
+    controller.esistenza_email
+  );
   app.get(
     "/api/listaVeicoli",
     [authJwt.verifyToken],
@@ -27,37 +32,128 @@ module.exports = function(app) {
   );
 
   app.get(
-    "/api/listaPrenotazioni",
+    "/api/prenotazioni",
     [authJwt.verifyToken],
-    controller.listaPrenotazioni
+    controller.prenotazioni
   );
 
   app.get(
-    "/api/listaParcheggi",
+    "/api/dettagli_prenotazione",
+    [authJwt.verifyToken],
+    controller.dettagli_prenotazione
+  );
+
+  app.get(
+    "/api/ultime_prenotazioni",
+    [authJwt.verifyToken],
+    controller.ultime_prenotazioni
+  );
+
+  app.get(
+    "/api/veicoli_disponibili",
+    [authJwt.verifyToken],
+    controller.veicoli_disponibili
+  );
+
+  app.get(
+    "/api/notifica_ritardo",
     [
       authJwt.verifyToken, 
-      authJwt.isAddettoParcheggio
     ],
-    controller.listaParcheggi
+    controller.notifica_ritardo
   );
 
   app.get(
-    "/api/listaUtenti",
+    "/api/consegne_veicoli",
     [
       authJwt.verifyToken,
-       authJwt.isAdmin
+       authJwt.isAddettoParcheggio
       ],
-    controller.listaUtenti
+    controller.consegne_veicoli
   );
 
   app.get(
-    "/api/listaCorse",
+    "/api/aggiorna_stato_veicolo",
+    [
+      authJwt.verifyToken,
+       authJwt.isAddettoParcheggio
+      ],
+    controller.aggiorna_stato_veicolo
+  );
+
+  app.get(
+    "/api/aggiorna_stato_prenotazione",
+    [
+      authJwt.verifyToken,
+       authJwt.isAddettoParcheggio
+      ],
+    controller.aggiorna_stato_prenotazione
+  );
+
+  app.get(
+    "/api/veicoli_ritirabili",
+    [
+      authJwt.verifyToken,
+       authJwt.isAddettoParcheggio
+      ],
+    controller.veicoli_ritirabili
+  );
+
+  app.get(
+    "/api/condizioni_veicoli",
+    [
+      authJwt.verifyToken,
+       authJwt.isAddettoParcheggio
+      ],
+    controller.condizioni_veicoli
+  );
+
+  app.get(
+    "/api/aggiorna_disponibilita_veicolo",
+    [
+      authJwt.verifyToken,
+       authJwt.isAddettoParcheggio
+      ],
+    controller.aggiorna_disponibilita_veicolo
+  );
+
+  app.get(
+    "/api/corse",
     [
       authJwt.verifyToken
       , authJwt.isAutista
     ],
-    controller.listaCorse
+    controller.corse
   )
+
+  app.get(
+    "/api/utenti",
+    [
+      authJwt.verifyToken
+      , authJwt.isAdmin
+    ],
+    controller.utenti
+  )
+
+  app.get(
+    "/api/aggiorna_permesso",
+    [
+      authJwt.verifyToken
+      , authJwt.isAdmin
+    ],
+    controller.aggiorna_permesso
+  )
+
+  app.get(
+    "/api/prenotazioni_attive",
+    [
+      authJwt.verifyToken
+      , authJwt.isAdmin
+    ],
+    controller.prenotazioni_attive
+  )
+
+  
 
   app.get("/", controller.Homepage);
 
