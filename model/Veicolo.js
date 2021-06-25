@@ -6,10 +6,9 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true
       },
-      /*
       IDTipoVeicolo: {
         type: Sequelize.STRING,
-      },*/
+      },
       Condizioni: {
         type: Sequelize.STRING(1000)
       },
@@ -25,10 +24,6 @@ module.exports = (sequelize, Sequelize) => {
       Targa: {
         type: Sequelize.STRING(10)
       }
-      /*
-      IDParcheggio: {
-        type: Sequelize.INTEGER
-      }*/
     });
   
     return Veicolo;
