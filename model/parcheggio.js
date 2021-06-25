@@ -4,7 +4,6 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-
         },
         Note:{
             type: Sequelize.STRING(1000),

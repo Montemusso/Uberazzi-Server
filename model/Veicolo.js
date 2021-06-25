@@ -6,9 +6,10 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true
       },
+      /*
       IDTipoVeicolo: {
-        type: Sequelize.STRING
-      },
+        type: Sequelize.STRING,
+      },*/
       Condizioni: {
         type: Sequelize.STRING(1000)
       },
