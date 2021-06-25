@@ -108,6 +108,30 @@ exports.dettagli_prenotazione = (req, res) => {
     });
 };
 //modifica prenotazione
+exports.aggiorna_prenotazione = (req, res) => {
+  Prenotazione.update({
+    where: {
+      IDPrenotazione: req.query.IDPrenotazione
+    },
+    order:[['DataOra', 'DESC']],
+    include:[{
+      model: Veicolo
+    },{
+      model: TipoVeicolo
+    }]
+  })
+    .then(prenotazione => {
+      if (!prenotazione) {
+        return res.status(404).send({ message: "nessuna prenotazione effettuata." });
+      }
+    
+    res.status(200).send(
+      prenotazione
+    )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
 //post da fare :C
 
 

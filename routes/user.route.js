@@ -25,12 +25,13 @@ module.exports = function(app) {
     "/api/esistenza_email",
     controller.esistenza_email
   );
- /* app.get(
+
+  app.get(
     "/api/listaVeicoli",
     [authJwt.verifyToken],
     controller.listaVeicoli
   );
-*/
+
   app.get(
     "/api/prenotazioni",
     [authJwt.verifyToken],
@@ -57,10 +58,20 @@ module.exports = function(app) {
 
   app.get(
     "/api/notifica_ritardo",
-    [
-      authJwt.verifyToken, 
-    ],
+    [authJwt.verifyToken],
     controller.notifica_ritardo
+  );
+
+  app.get(
+    "/api/aggiorna_utente",
+    [authJwt.verifyToken],
+    controller.aggiorna_utente
+  );
+
+  app.get(
+    "/api/aggiorna_prenotazione",
+    [authJwt.verifyToken],
+    controller.aggiorna_prenotazione
   );
 
   app.get("/", controller.Homepage);
@@ -94,26 +105,7 @@ module.exports = function(app) {
     });
   });
 
-  /*                //*
-   *                //*
-   * handle 404     //*
-   *                //*
-   */               //*
-  app.use(function(req, res, next) {
-    res.status(404);
-    // risposta con html
-    if (req.accepts('html')) {
-      res.send('404, pagina non trovata');
-      return;
-    }
-    // risposta con json
-    if (req.accepts('json')) {
-      res.json({ error: '404, pagina non trovata' });
-      return;
-    }
-    // default con txt
-    res.type('txt').send('404, pagina non trovata');
-  });  
+  
 };
 
 

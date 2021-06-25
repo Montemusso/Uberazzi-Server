@@ -1,7 +1,6 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controller/admin.controller");
-const addToDb = require("../controller/upload.photo");
-let ts = Date.now();
+
 
 module.exports = function(app) {
     app.use(function(req, res, next) {
