@@ -25,36 +25,36 @@ module.exports = function(app) {
     "/api/esistenza_email",
     controller.esistenza_email
   );
-  app.get(
+ /* app.get(
     "/api/listaVeicoli",
     [authJwt.verifyToken],
     controller.listaVeicoli
   );
-
+*/
   app.get(
     "/api/prenotazioni",
     [authJwt.verifyToken],
     controller.prenotazioni
   );
 
-  app.get(
+/*  app.get(
     "/api/dettagli_prenotazione",
     [authJwt.verifyToken],
     controller.dettagli_prenotazione
   );
-
+*/
   app.get(
     "/api/ultime_prenotazioni",
     [authJwt.verifyToken],
     controller.ultime_prenotazioni
   );
 
-  app.get(
+ /*  app.get(
     "/api/veicoli_disponibili",
     [authJwt.verifyToken],
     controller.veicoli_disponibili
   );
-
+*/
   app.get(
     "/api/notifica_ritardo",
     [
@@ -72,7 +72,7 @@ module.exports = function(app) {
     controller.consegne_veicoli
   );
 
-  app.get(
+ /* app.get(
     "/api/aggiorna_stato_veicolo",
     [
       authJwt.verifyToken,
@@ -107,7 +107,7 @@ module.exports = function(app) {
       ],
     controller.condizioni_veicoli
   );
-
+ 
   app.get(
     "/api/aggiorna_disponibilita_veicolo",
     [
@@ -116,7 +116,7 @@ module.exports = function(app) {
       ],
     controller.aggiorna_disponibilita_veicolo
   );
-
+ */
   app.get(
     "/api/corse",
     [
@@ -125,7 +125,7 @@ module.exports = function(app) {
     ],
     controller.corse
   )
-
+/*
   app.get(
     "/api/utenti",
     [
@@ -152,7 +152,7 @@ module.exports = function(app) {
     ],
     controller.prenotazioni_attive
   )
-
+*/
   
 
   app.get("/", controller.Homepage);
