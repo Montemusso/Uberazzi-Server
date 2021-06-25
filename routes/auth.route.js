@@ -13,8 +13,8 @@ module.exports = function(app) {
 app.post(
   "/api/registrazione_utente",
   [verifySignUp.controllaMail],
-  controller.signup
+  controller.registrazione_utente
 );
 
-  app.post("/api/login", controller.signin);
+  app.post("/api/login", controller.login);
 };
