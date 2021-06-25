@@ -27,7 +27,6 @@ db.sequelize.sync({
    alter : true
   }).then(() => {
   console.log('Drop and Resync Db');
-  initial();
 });
 
 //Configurazione per la porta del server
