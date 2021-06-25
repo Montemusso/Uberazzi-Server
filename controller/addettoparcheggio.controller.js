@@ -43,15 +43,78 @@ exports.consegne_veicoli = (req, res) => {
   };
   //query per aggiornare lo stato dei veicoli 
 
+  exports.aggiorna_stato_veicolo = (req, res) => {
+    Veicolo.Update({
+      Stato:req.body.Stato
+    },{
+      where: {
+        IDVeicolo:req.query.IDVeicolo
+      }
+    })
+      .then(
+        res.status(200).send({ message: "Veicolo aggiornato" })
+        )
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };
+
+  exports.veicoli_ritirabili = (req, res) => {
+    Prenotazione.findAll({
+      where: {
+        Consegnato: true,
+      },
+      include:[{
+        model: Veicolo
+      }]
+    })
+      .then(prenotazione => {
+        if (!prenotazione) {
+          return res.status(404).send({ message: "nessun veicolo disponibile." });
+        }
   
-//Ritiro veicoli
-//Selezionare i veicoli ritirabili dal cliente, prendo idVeicolo dalle prenotazioni attive e con il 
-//flag consegnato a 1 così so che per quelle prenotazioni devo ritirare;
-//Aggiornare prenotazione con stato "in corso"
+      res.status(200).send(
+        prenotazione
+        )})
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };
+
+  exports.condizioni_veicoli = (req, res) => {
+    Veicolo.findAll({
+      where: {
+        Consegnato: true,
+      },
+      include:[{
+        model: Veicolo
+      }]
+    })
+      .then(condizioni => {
+        if (!condizioni) {
+          return res.status(404).send({ message: "nessuna condizione disponibile." });
+        };
+      res.status(200).send(
+        condizioni
+        )})
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };
 
 
-
-
-//Veicoli
-//selezionare i veicoli di cui verificare le condizioni, prendnendo gli id delle prenotazioni con stato non concluso da scrivere in raw sql
-//aggiorna tabella prenotazioni con lo stato in corso
+  exports.aggiorna_disponibilita_veicolo = (req, res) => {
+    Veicolo.Update({
+      Prenotabile:req.body.Prenotabile
+    },{
+      where: {
+        IDVeicolo:req.query.IDVeicolo
+      }
+    })
+      .then(
+        res.status(200).send({ message: "Veicolo aggiornato" })
+        )
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };

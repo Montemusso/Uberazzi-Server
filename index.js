@@ -14,7 +14,6 @@ const bodyParser = require("body-parser");
 
 //import modelli
 const db = require("./model");
-const Permesso = db.Permesso;
 //configurazione dei moduli e delle variabili di ambiente
 
 //Cofig iniziale del db
@@ -35,7 +34,7 @@ const port = process.env.PORT;
 app.use(fileUpload());
 
 var corsOptions = {
-  origin: "http://localhost:3001"
+  origin: "http://localhost:3000"
 };
 app.use(cors(corsOptions));
 
