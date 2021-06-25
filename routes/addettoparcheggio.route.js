@@ -1,7 +1,5 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controller/addettoparcheggio.controller");
-const addToDb = require("../controller/upload.photo");
-let ts = Date.now();
 
 //In questo modulo vengono definite le rotte verso i controller che dovranno poi servire effettivamente i file
 //qui si verifica se si è un utente autenticato o no ed in caso quale permesso si ha

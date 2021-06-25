@@ -55,6 +55,7 @@ require('./routes/admin.route')(app);
 require('./routes/autista.route')(app);
 require('./routes/auth.route')(app);
 require('./routes/user.route')(app);
+require('./routes/404.route')(app);
 
 
 app.listen(port, () => {
