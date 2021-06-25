@@ -24,10 +24,6 @@ module.exports = (sequelize, Sequelize) => {
       Targa: {
         type: Sequelize.STRING(10)
       }
-      /*
-      IDParcheggio: {
-        type: Sequelize.INTEGER
-      }*/
     });
   
     return Veicolo;

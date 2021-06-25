@@ -5,10 +5,9 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        /*
         IDPrenotazione:{
             type: Sequelize.INTEGER
-        },*/
+        },
         DataOra:{
             type: Sequelize.DATE
 
