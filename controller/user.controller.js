@@ -204,31 +204,7 @@ exports.notifica_ritardo = (req, res) => {
 };
 
 
-//consegna veicoli addetto 
-//lista delle prenotazioni con macchina non consegnata
-exports.consegne_veicoli = (req, res) => {
-  Prenotazione.findAll({
-    where: {
-      Consegnato: false,
-      Stato:"attiva"
-    },
-    include:[{
-      model: Veicolo
-    }]
-  })
-    .then(prenotazione => {
-      if (!prenotazione) {
-        return res.status(404).send({ message: "nessun veicolo disponibile." });
-      }
 
-    res.status(200).send(
-      prenotazione
-      )})
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
-};
-//query per aggiornare lo stato dei veicoli 
 
 
 //consegna veicoli cliente
@@ -236,89 +212,6 @@ exports.consegne_veicoli = (req, res) => {
 
 
 
-//Ritiro veicoli
-//Selezionare i veicoli ritirabili dal cliente, prendo idVeicolo dalle prenotazioni attive e con il 
-//flag consegnato a 1 così so che per quelle prenotazioni devo ritirare;
-//Aggiornare prenotazione con stato "in corso"
 
 
 
-
-//Veicoli
-//selezionare i veicoli di cui verificare le condizioni, prendnendo gli id delle prenotazioni con stato non concluso da scrivere in raw sql
-//aggiorna tabella prenotazioni con lo stato in corso
-
-
-//Corse
-//Prendere tutte le prenotazioni con flag autista vero e che non abbiano idautista
-exports.corse = (req, res) => {
-  Prenotazione.findAll({
-    where: {
-      Autista: true,
-      IDAutista:null
-    },
-    include:[{
-      model: Veicolo
-    }]
-  })
-    .then(prenotazione => {
-      if (!prenotazione) {
-        return res.status(404).send({ message: "nessuna corsa disponibile." });
-      }
-
-    res.status(200).send({
-      prenotazione
-    }
-        )})
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
-};
-
-//inserire id autista in prenotazione con id fornito
-
-//Permessi utenti
-//selezionare tutti gli utenti 
-exports.utenti = (req, res) => {
-  Utenti.findAll()
-    .then(utenti => {
-      if (!utenti) {
-        return res.status(404).send({ message: "nessun utente disponibile." });
-      }
-
-    res.status(200).send({
-      utenti
-    }
-        )})
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
-};
-//aggiornare i permessi dell'utente
-
-//Gestione prenotazioni
-//Selezionare tutte le prenotazioni attive non complete
-exports.prenotazioni_attive = (req, res) => {
-  Prenotazione.findAll({
-    where: {
-      IDUtente: req.query.IDUtente,
-      Stato: {[Op.ne]:"completata"}
-    },
-    order:[['DataOra', 'DESC']],
-    include:[{
-      model: Veicolo
-    },{
-      model: TipoVeicolo
-    }]
-  })
-    .then(prenotazione => {
-      if (!prenotazione) {
-        return res.status(404).send({ message: "nessuna prenotazione effettuata." });
-      }    
-    res.status(200).send(
-      prenotazione
-    )})
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
-};
