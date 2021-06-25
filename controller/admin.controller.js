@@ -62,3 +62,19 @@ exports.utenti = (req, res) => {
         res.status(500).send({ message: err.message });
       });
   };
+
+  exports.aggiorna_permesso = (req, res) => {
+    Utente.Update({
+      Permesso:req.body.Permesso
+    },{
+      where: {
+        IDUtente:req.query.IDUtente
+      }
+    })
+      .then(
+        res.status(200).send({ message: "permesso aggiornato" })
+        )
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };

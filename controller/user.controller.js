@@ -160,7 +160,6 @@ exports.aggiorna_prenotazione = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
-//post da fare :C
 
 
 //nuova prenotazione
@@ -252,6 +251,29 @@ exports.notifica_ritardo = (req, res) => {
     Note: req.query.note,
   })
   .then( res.status(200).send({ message:"notifica creata" }))
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+
+
+
+
+exports.aggiorna_stato_prenotazione = (req, res) => {
+  Prenotazione.update({
+    Stato: req.query.Stato,
+  },{
+    where: {
+      IDPrenotazione: req.query.IDPrenotazione
+    }
+  })
+    .then(prenotazione => {
+      if (!prenotazione) {
+        return res.status(404).send({ message: "modifica non riuscita" });
+      }
+    
+    res.status(200).send({ message:"Prenotazione modificata" })})
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
