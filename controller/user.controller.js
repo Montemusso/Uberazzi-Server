@@ -51,7 +51,33 @@ exports.ultime_prenotazioni = (req, res) => {
     });
 };
 //Aggiorna dati utente:
-//Da fare con post
+exports.aggiorna_utente = (req, res) => {
+  Utente.update({
+    Nome: req.body.Nome,
+    Cognome: req.body.Cognome,
+    DataDiNascita: req.body.DataDiNascita,
+    CodiceFiscale: req.body.CodiceFiscale,
+    Indirizzo: req.body.Indirizzo,
+    CAP: req.body.CAP,
+    Email: req.body.Email,
+    NumeroPatente: req.body.NumeroPatente,
+    TipoPatente: req.body.TipoPatente,
+  },
+    {
+    where: {
+      IDUtente: req.query.IDUtente
+    },
+  })
+  .then(utente => {
+    if (!utente) {
+      return res.status(404).send({ message: "modifica non riuscita" });
+    }
+  
+  res.status(200).send({ message:"Prenotazione modificata" })})
+  .catch(err => {
+    res.status(500).send({ message: err.message });
+  });
+};
 
 
 //Pagina prenotazioni
@@ -110,24 +136,26 @@ exports.dettagli_prenotazione = (req, res) => {
 //modifica prenotazione
 exports.aggiorna_prenotazione = (req, res) => {
   Prenotazione.update({
+    IDUtente: req.body.IDUtente,
+    Partenza:req.body.Partenza,
+    Arrivo:req.body.Arrivo,
+    Stato: "modificata",
+    DataOra:req.body.DataOra,
+    DataOraArrivo:req.body.DataOraArrivo,
+    Autista:req.body.Autista,
+    IDVeicolo:req.body.IDVeicolo,
+    Consegnato:false
+  },{
     where: {
       IDPrenotazione: req.query.IDPrenotazione
-    },
-    order:[['DataOra', 'DESC']],
-    include:[{
-      model: Veicolo
-    },{
-      model: TipoVeicolo
-    }]
+    }
   })
     .then(prenotazione => {
       if (!prenotazione) {
-        return res.status(404).send({ message: "nessuna prenotazione effettuata." });
+        return res.status(404).send({ message: "modifica non riuscita" });
       }
     
-    res.status(200).send(
-      prenotazione
-    )})
+    res.status(200).send({ message:"Prenotazione modificata" })})
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
@@ -145,6 +173,7 @@ exports.nuova_prenotazione = (req, res) => {
     Arrivo:req.body.Arrivo,
     Stato: "In corso",
     DataOra:req.body.DataOra,
+    DataOraArrivo:req.body.DataOraArrivo,
     Autista:req.body.Autista,
     IDVeicolo:req.body.IDVeicolo,
     Consegnato:false
@@ -154,6 +183,7 @@ exports.nuova_prenotazione = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
 //query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
 exports.veicoli_disponibili = (req, res) => {
   Prenotaizone.findAll({
