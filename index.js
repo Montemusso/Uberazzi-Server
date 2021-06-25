@@ -52,6 +52,9 @@ app.use(express.static(path.resolve(__dirname, '/Public/upload')));
 //Rotte
 require('./routes/auth.route')(app);
 require('./routes/user.route')(app);
+require('./routes/addettoparcheggio.route')(app);
+require('./routes/admin.route')(app);
+require('./routes/autista.route')(app);
 
 app.listen(port, () => {
   console.log(`Uberazzi server ti ascolta al link http://localhost:${port}`)
