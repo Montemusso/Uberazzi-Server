@@ -77,6 +77,7 @@ exports.consegne_veicoli = (req, res) => {
   exports.veicoli_ritirabili = (req, res) => {
     Prenotazione.findAll({
       where: {
+        Stato: "conclusa",
         Consegnato: true,
       },
       include:[{
@@ -99,11 +100,8 @@ exports.consegne_veicoli = (req, res) => {
   exports.condizioni_veicoli = (req, res) => {
     Veicolo.findAll({
       where: {
-        Consegnato: true,
-      },
-      include:[{
-        model: Veicolo
-      }]
+        Prenotabile: false,
+      }
     })
       .then(condizioni_veicoli => {
         if (!condizioni_veicoli) {
