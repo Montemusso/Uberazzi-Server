@@ -309,8 +309,7 @@ exports.prenotazioni_attive = (req, res) => {
       model: Veicolo
     },{
       model: TipoVeicolo
-    }],
-    limit:3
+    }]
   })
     .then(prenotazione => {
       if (!prenotazione) {
