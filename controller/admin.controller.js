@@ -2,7 +2,7 @@ const { Op } = require("sequelize");
 const path = require('path');
 const db = require("../model");
 
-const Utente = db.Utente;
+const Utenti = db.Utente;
 const Permesso = db.Permesso;
 const Pagamento = db.Pagamento;
 const Parcheggio = db.Parcheggio;
@@ -41,7 +41,7 @@ exports.utenti = (req, res) => {
     Prenotazione.findAll({
       where: {
         IDUtente: req.query.IDUtente,
-        Stato: {[Op.ne]:"completata"}
+        Stato: {[Op.ne]:"conclusa"}
       },
       order:[['DataOra', 'DESC']],
       include:[{
