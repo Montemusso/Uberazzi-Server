@@ -204,9 +204,6 @@ exports.notifica_ritardo = (req, res) => {
 };
 
 
-
-
-
 //consegna veicoli cliente
 //query per cambiare lo stato in conclusa tramite id prenotazione
 
