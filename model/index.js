@@ -56,7 +56,7 @@ db.Prenotazione.hasOne(db.Pagamento,{foreignKey: 'IDPrenotazione', foreignKeyCon
 db.Parcheggio.hasMany(db.Veicolo, {foreignKey: 'IDParcheggio', foreignKeyConstraint: true});
 db.Veicolo.hasOne(db.Parcheggio, {foreignKey: 'IDParcheggio', foreignKeyConstraint: true});
 
-db.Veicolo.hasMany(db.Prenotazione, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});
+/*db.Veicolo.hasMany(db.Prenotazione, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});*/
 db.Prenotazione.hasOne(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});
 
 db.NotificheRitardo.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
