@@ -25,7 +25,7 @@ db.sequelize.sync({
   force : false,
    alter : true
   }).then(() => {
-  console.log('Drop and Resync Db');
+  console.log('Sincronizzazione con il database conclusa');
 });
 
 //Configurazione per la porta del server
