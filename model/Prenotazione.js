@@ -5,10 +5,10 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true
       },
-      /*
+      
       IDUtente: {
         type: Sequelize.INTEGER
-      },*/
+      },
       Partenza: {
         type: Sequelize.STRING(1000)
       },
