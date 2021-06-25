@@ -79,7 +79,7 @@ exports.aggiorna_utente = (req, res) => {
 exports.prenotazioni = (req, res) => {
   Prenotazione.findAll({
     where: {
-      IDUtente: req.params.IDUtente
+      IDUtente: req.query.IDUtente
     },
     order:[['DataOra', 'DESC']],
     include:[{
