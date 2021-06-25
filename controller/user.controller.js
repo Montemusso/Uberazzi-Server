@@ -39,12 +39,12 @@ exports.ultime_prenotazioni = (req, res) => {
     }],
     limit:3
   })
-    .then(prenotazione => {
-      if (!prenotazione) {
+    .then(ultime_prenotazioni => {
+      if (!ultime_prenotazioni) {
         return res.status(404).send({ message: "nessuna prenotazione effettuata." });
       }    
     res.status(200).send(
-      prenotazione
+      ultime_prenotazioni
     )})
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -68,12 +68,9 @@ exports.aggiorna_utente = (req, res) => {
       IDUtente: req.query.IDUtente
     },
   })
-  .then(utente => {
-    if (!utente) {
-      return res.status(404).send({ message: "modifica non riuscita" });
-    }
-  
-  res.status(200).send({ message:"Prenotazione modificata" })})
+  .then(
+    res.status(200).send({ message:"Prenotazione modificata" })
+    )
   .catch(err => {
     res.status(500).send({ message: err.message });
   });
@@ -94,13 +91,13 @@ exports.prenotazioni = (req, res) => {
       model: TipoVeicolo
     }]
   })
-    .then(prenotazione => {
-      if (!prenotazione) {
+    .then(prenotazioni => {
+      if (!prenotazioni) {
         return res.status(404).send({ message: "nessuna prenotazione effettuata." });
       }
     
     res.status(200).send(
-      prenotazione
+      prenotazioni
     )})
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -121,13 +118,13 @@ exports.dettagli_prenotazione = (req, res) => {
       model: TipoVeicolo
     }]
   })
-    .then(prenotazione => {
-      if (!prenotazione) {
+    .then(dettagli_prenotazione => {
+      if (!dettagli_prenotazione) {
         return res.status(404).send({ message: "nessuna prenotazione effettuata." });
       }
     
     res.status(200).send(
-      prenotazione
+      dettagli_prenotazione
     )})
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -150,12 +147,9 @@ exports.aggiorna_prenotazione = (req, res) => {
       IDPrenotazione: req.query.IDPrenotazione
     }
   })
-    .then(prenotazione => {
-      if (!prenotazione) {
-        return res.status(404).send({ message: "modifica non riuscita" });
-      }
-    
-    res.status(200).send({ message:"Prenotazione modificata" })})
+    .then(    
+    res.status(200).send({ message:"Prenotazione modificata" })
+    )
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
@@ -206,13 +200,13 @@ exports.veicoli_disponibili = (req, res) => {
       model: TipoVeicolo
     }]
   }))
-    .then(prenotazione => {
-      if (!prenotazione) {
+    .then(veicoli_disponibili => {
+      if (!veicoli_disponibili) {
         return res.status(404).send({ message: "nessun veicolo effettuata." });
       }
 
     res.status(200).send(
-      prenotazione
+      veicoli_disponibili
     )})
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -230,8 +224,8 @@ exports.esistenza_email = (req, res) => {
     }
   })
     //controllo dell'esistenza di un profilo Utente
-    .then(Utente => {
-      if (!Utente) {
+    .then(esistenza_email => {
+      if (!esistenza_email) {
         return res.status(404).send({ message: "Utente non trovato." });
       }
       return res.status(200).send({ message: "Mail inviata." });
@@ -268,12 +262,9 @@ exports.aggiorna_stato_prenotazione = (req, res) => {
       IDPrenotazione: req.query.IDPrenotazione
     }
   })
-    .then(prenotazione => {
-      if (!prenotazione) {
-        return res.status(404).send({ message: "modifica non riuscita" });
-      }
-    
-    res.status(200).send({ message:"Prenotazione modificata" })})
+    .then(
+    res.status(200).send({ message:"Prenotazione modificata" })
+    )
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
@@ -282,9 +273,3 @@ exports.aggiorna_stato_prenotazione = (req, res) => {
 
 //consegna veicoli cliente
 //query per cambiare lo stato in conclusa tramite id prenotazione
-
-
-
-
-
-

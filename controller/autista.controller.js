@@ -29,13 +29,13 @@ exports.corse = (req, res) => {
         model: Veicolo
       }]
     })
-      .then(prenotazione => {
-        if (!prenotazione) {
+      .then(corse => {
+        if (!corse) {
           return res.status(404).send({ message: "nessuna corsa disponibile." });
         }
   
       res.status(200).send({
-        prenotazione
+        corse
       }
           )})
       .catch(err => {

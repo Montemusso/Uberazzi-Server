@@ -51,12 +51,12 @@ exports.utenti = (req, res) => {
         model: TipoVeicolo
       }]
     })
-      .then(prenotazione => {
-        if (!prenotazione) {
+      .then(prenotazioni_attive => {
+        if (!prenotazioni_attive) {
           return res.status(404).send({ message: "nessuna prenotazione effettuata." });
         }    
       res.status(200).send(
-        prenotazione
+        prenotazioni_attive
       )})
       .catch(err => {
         res.status(500).send({ message: err.message });

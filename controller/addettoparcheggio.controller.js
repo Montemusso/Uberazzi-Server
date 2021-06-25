@@ -29,13 +29,13 @@ exports.consegne_veicoli = (req, res) => {
         model: Veicolo
       }]
     })
-      .then(prenotazione => {
-        if (!prenotazione) {
+      .then(consegne_veicoli => {
+        if (!consegne_veicoli) {
           return res.status(404).send({ message: "nessun veicolo disponibile." });
         }
   
       res.status(200).send(
-        prenotazione
+        consegne_veicoli
         )})
       .catch(err => {
         res.status(500).send({ message: err.message });
@@ -83,13 +83,13 @@ exports.consegne_veicoli = (req, res) => {
         model: Veicolo
       }]
     })
-      .then(prenotazione => {
-        if (!prenotazione) {
+      .then(veicoli_ritirabili => {
+        if (!veicoli_ritirabili) {
           return res.status(404).send({ message: "nessun veicolo disponibile." });
         }
   
       res.status(200).send(
-        prenotazione
+        veicoli_ritirabili
         )})
       .catch(err => {
         res.status(500).send({ message: err.message });
@@ -105,12 +105,12 @@ exports.consegne_veicoli = (req, res) => {
         model: Veicolo
       }]
     })
-      .then(condizioni => {
-        if (!condizioni) {
+      .then(condizioni_veicoli => {
+        if (!condizioni_veicoli) {
           return res.status(404).send({ message: "nessuna condizione disponibile." });
         };
       res.status(200).send(
-        condizioni
+        condizioni_veicoli
         )})
       .catch(err => {
         res.status(500).send({ message: err.message });
