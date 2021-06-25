@@ -38,7 +38,7 @@ db.Immagine = require("../model/Immagine.js")(sequelize, Sequelize);
 db.NotificheRitardo = require("../model/NotificheRitardo.js")(sequelize, Sequelize);
 
 /*RELAZIONI*/
-db.Permesso.hasMany(db.Utente, {foreignKeyConstraint: true });
+/*db.Permesso.hasMany(db.Utente, {foreignKeyConstraint: true });*/
 db.Utente.hasOne(db.Permesso, {foreignKey: 'IDPermesso', foreignKeyConstraint: true});
 
 /*db.Utente.hasMany(db.Prenotazione, {foreignKey: 'IDUtente', foreignKeyConstraint: true});*/
