@@ -7,7 +7,6 @@ const Permesso = db.Permesso;
 const Pagamento = db.Pagamento;
 const Parcheggio = db.Parcheggio;
 const Prenotazione = db.Prenotazione;
-const TipoVeicolo = db.TipoVeicolo;
 const Veicolo = db.Veicolo;
 const Immagine = db.Immagine;
 const NotificheRitardo = db.NotificheRitardo;

@@ -8,7 +8,6 @@ const Permesso = db.Permesso;
 const Pagamento = db.Pagamento;
 const Parcheggio = db.Parcheggio;
 const Prenotazione = db.Prenotazione;
-const TipoVeicolo = db.TipoVeicolo;
 const Veicolo = db.Veicolo;
 const Immagine = db.Immagine;
 const NotificheRitardo = db.NotificheRitardo;
@@ -34,8 +33,6 @@ exports.ultime_prenotazioni = (req, res) => {
     order:[['DataOra', 'DESC']],
     include:[{
       model: Veicolo
-    },{
-      model: TipoVeicolo
     }],
     limit:3
   })
@@ -112,8 +109,6 @@ exports.dettagli_prenotazione = (req, res) => {
     order:[['DataOra', 'DESC']],
     include:[{
       model: Veicolo
-    },{
-      model: TipoVeicolo
     }]
   })
     .then(dettagli_prenotazione => {
@@ -194,8 +189,6 @@ exports.veicoli_disponibili = (req, res) => {
     order:[['DataOra', 'DESC']],
     include:[{
       model: Veicolo
-    },{
-      model: TipoVeicolo
     }]
   }))
     .then(veicoli_disponibili => {
