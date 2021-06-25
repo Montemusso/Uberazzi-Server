@@ -53,7 +53,7 @@ db.Veicolo.hasMany(db.Immagine, {foreignKey: 'IDVeicolo', foreignKeyConstraint: 
 /*db.Pagamento.hasOne(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
 db.Prenotazione.hasOne(db.Pagamento,{foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});*/
 
-db.Parcheggio.hasMany(db.Veicolo, {foreignKey: 'IDParcheggio', foreignKeyConstraint: true});
+/*db.Parcheggio.hasMany(db.Veicolo, {foreignKey: 'IDParcheggio', foreignKeyConstraint: true});*/
 db.Veicolo.hasOne(db.Parcheggio, {foreignKey: 'IDParcheggio', foreignKeyConstraint: true});
 
 /*db.Veicolo.hasMany(db.Prenotazione, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});*/
