@@ -41,9 +41,9 @@ db.Permesso.hasMany(db.Utente, {foreignKey: 'IDPermesso'} );
 db.Utente.hasMany(db.Prenotazione, {foreignKey: 'IDUtente'} );
 db.Veicolo.belongsTo(db.TipoVeicolo, {foreignKey: 'IDTipoVeicolo'});
 db.Veicolo.hasMany(db.Immagine, {foreignKey: 'IDVeicolo'} );
-db.Pagamento.hasOne(db.Prenotazione, {foreignKey: 'IDPrenotazione'});
+db.Pagamento.hasOne(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
 db.Parcheggio.hasMany(db.Veicolo, {foreignKey: 'IDParcheggio'} );
-db.Veicolo.hasMany(db.Prenotazione, {foreignKey: 'IDVeicolo'} );
+db.Veicolo.hasMany(db.Prenotazione, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true} );
 db.NotificheRitardo.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione'});
 
 module.exports = db;
