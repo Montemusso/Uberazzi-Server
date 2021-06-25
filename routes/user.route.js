@@ -26,11 +26,6 @@ module.exports = function(app) {
     controller.esistenza_email
   );
 
-  app.get(
-    "/api/listaVeicoli",
-    [authJwt.verifyToken],
-    controller.listaVeicoli
-  );
 
   app.get(
     "/api/prenotazioni",
