@@ -11,10 +11,6 @@ module.exports = (sequelize, Sequelize) => {
         Path:{
             type: Sequelize.STRING(1000)
         },
-        /*
-        IDVeicolo:{
-            type: Sequelize.STRING(1000)
-        },*/
     });
     return Immagine;
 }
