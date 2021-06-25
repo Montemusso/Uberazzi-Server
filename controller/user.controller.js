@@ -1,11 +1,33 @@
 //query varie
 const path = require('path');
+const db = require("../model");
+const Utente = db.Utente;
+const Permesso = db.Permesso;
+const Pagamento = db.Pagamento;
+const Parcheggio = db.Parcheggio;
+const Prenotazione = db.Prenotazione;
+const TipoVeicolo = db.TipoVeicolo;
+const Veicolo = db.Veicolo;
+const Immagine = db.Immagine;
+const NotificheRitardo = db.NotificheRitardo;
+
 
 //Homepage
   exports.Homepage = (req, res) => {
     res.status(200).sendFile(path.join(__dirname+'/build/index.html'));
   };
   
+
+/* 
+#######
+##      Per gli update la query funziona cosi:
+##      Controllo che esiste quello che voglio aggiornare
+##      dopo ciò prendo gli elementi passati nella richiesta, li metto in una variabile e li inserisco
+##
+#######
+*/
+
+
 //Pagina Profilo:
 //Query: ultime tre prenotazioni con ritorno id, data e stato
 //aggiornare dati utente
