@@ -37,13 +37,29 @@ db.Veicolo = require("../model/Veicolo.js")(sequelize, Sequelize);
 db.Immagine = require("../model/Immagine.js")(sequelize, Sequelize);
 db.NotificheRitardo = require("../model/NotificheRitardo.js")(sequelize, Sequelize);
 
-db.Permesso.hasMany(db.Utente, {foreignKey: 'IDPermesso'} );
-db.Utente.hasMany(db.Prenotazione, {foreignKey: 'IDUtente'} );
-db.Veicolo.belongsTo(db.TipoVeicolo, {foreignKey: 'IDTipoVeicolo'});
-db.Veicolo.hasMany(db.Immagine, {foreignKey: 'IDVeicolo'} );
+/*RELAZIONI*/
+db.Permesso.hasMany(db.Utente, {foreignKey: 'IDPermesso', foreignKeyConstraint: true });
+db.Utente.hasOne(db.Permesso, {foreignKey: 'IDPermesso', foreignKeyConstraint: true });
+
+db.Utente.hasMany(db.Prenotazione, {foreignKey: 'IDUtente', foreignKeyConstraint: true });
+db.Prenotazione.hasMany(db.Utente, {foreignKey: 'IDUtente', foreignKeyConstraint: true });
+
+db.Veicolo.belongsTo(db.TipoVeicolo, {foreignKey: 'IDTipoVeicolo', foreignKeyConstraint: true});
+db.TipoVeicolo.hasMany(db.Veicolo, {foreignKey: 'IDTipoVeicolo', foreignKeyConstraint: true});
+
+db.Veicolo.hasMany(db.Immagine, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true });
+db.Immagine.hasOne(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true });
+
 db.Pagamento.hasOne(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
-db.Parcheggio.hasMany(db.Veicolo, {foreignKey: 'IDParcheggio'} );
+db.Prenotazione.hasOne(db.Pagamento,{foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
+
+db.Parcheggio.hasMany(db.Veicolo, {foreignKey: 'IDParcheggio', foreignKeyConstraint: true });
+db.Veicolo.hasOne(db.Parcheggio, {foreignKey: 'IDParcheggio', foreignKeyConstraint: true });
+
 db.Veicolo.hasMany(db.Prenotazione, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true} );
-db.NotificheRitardo.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione'});
+db.Prenotazione.hasOne(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true} );
+
+db.NotificheRitardo.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
+db.Prenotazione.hasMany(db.NotificheRitardo, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
 
 module.exports = db;
