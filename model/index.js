@@ -48,7 +48,7 @@ db.Veicolo.belongsTo(db.TipoVeicolo, {foreignKey: 'IDTipoVeicolo', foreignKeyCon
 db.TipoVeicolo.hasMany(db.Veicolo, {foreignKey: 'IDTipoVeicolo', foreignKeyConstraint: true});
 
 db.Veicolo.hasMany(db.Immagine, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});
-db.Immagine.hasOne(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});
+/*db.Immagine.hasOne(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});*/
 
 /*db.Pagamento.hasOne(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
 db.Prenotazione.hasOne(db.Pagamento,{foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});*/
