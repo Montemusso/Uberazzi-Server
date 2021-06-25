@@ -87,8 +87,6 @@ exports.prenotazioni = (req, res) => {
     order:[['DataOra', 'DESC']],
     include:[{
       model: Veicolo
-    },{
-      model: TipoVeicolo
     }]
   })
     .then(prenotazioni => {
