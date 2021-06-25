@@ -20,6 +20,9 @@ module.exports = (sequelize, Sequelize) => {
       DataOra: {
         type: Sequelize.DATE
       },
+      DataOraArrivo: {
+        type: Sequelize.DATE
+      },
       IDAutista: {
         type: Sequelize.INTEGER,
         allowNull:true

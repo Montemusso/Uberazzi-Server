@@ -11,23 +11,15 @@ const Veicolo = db.Veicolo;
 const Immagine = db.Immagine;
 const NotificheRitardo = db.NotificheRitardo;
 
+//req.query per get
+//req.body per post
+//req.params per roba con parametri nell'url
 
 //Homepage
   exports.Homepage = (req, res) => {
     res.status(200).sendFile(path.join(__dirname+'/build/index.html'));
   };
   
-
-/* 
-#######
-##      Per gli update la query funziona cosi:
-##      Controllo che esiste quello che voglio aggiornare
-##      dopo ciò prendo gli elementi passati nella richiesta, li metto in una variabile e li inserisco
-##
-#######
-*/
-
-
 //Pagina Profilo:
 //Query: ultime tre prenotazioni con ritorno id, data e stato
 //aggiornare dati utente
@@ -35,7 +27,7 @@ const NotificheRitardo = db.NotificheRitardo;
 exports.ultime_prenotazioni = (req, res) => {
   Prenotazione.findAll({
     where: {
-      IDUtente: req.params.IDUtente
+      IDUtente: req.query.IDUtente
     },
     order:[['DataOra', 'DESC']],
     include:[{
@@ -49,14 +41,8 @@ exports.ultime_prenotazioni = (req, res) => {
       if (!prenotazione) {
         return res.status(404).send({ message: "nessuna prenotazione effettuata." });
       }    
-    res.status(200).send({
-      id : prenotazione.IDPrenotazione,
-      dataOra: prenotazione.DataOra,
-      partenza: prenotazione.Partenza,
-      arrivo:prenotazione.Arrivo,
-      tipoVeicolo:prenotazione.tipoVeicolo.TipoMezzo,
-      stato: tipoVeicolo.Stato
-      }
+    res.status(200).send(
+      prenotazione
     )})
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -85,14 +71,8 @@ exports.prenotazioni = (req, res) => {
         return res.status(404).send({ message: "nessuna prenotazione effettuata." });
       }
     
-    res.status(200).send({
-      id : prenotazione.IDPrenotazione,
-      dataOra: prenotazione.DataOra,
-      partenza: prenotazione.Partenza,
-      arrivo:prenotazione.Arrivo,
-      tipoVeicolo:prenotazione.TipoVeicolo.TipoMezzo,
-      stato: prenotazione.TipoVeicolo.Stato
-      }
+    res.status(200).send(
+      prenotazione
     )})
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -101,10 +81,10 @@ exports.prenotazioni = (req, res) => {
 
 //modifica prenotazioni
 //seleziona la prenotazione singola e ritornane i dati
-exports.prenotazione = (req, res) => {
+exports.dettagli_prenotazione = (req, res) => {
   Prenotazione.findOne({
     where: {
-      IDPrenotazione: req.params.IDPrenotazione
+      IDPrenotazione: req.query.IDPrenotazione
     },
     order:[['DataOra', 'DESC']],
     include:[{
@@ -118,14 +98,8 @@ exports.prenotazione = (req, res) => {
         return res.status(404).send({ message: "nessuna prenotazione effettuata." });
       }
     
-    res.status(200).send({
-      id : prenotazione.IDPrenotazione,
-      dataOra: prenotazione.DataOra,
-      partenza: prenotazione.Partenza,
-      arrivo:prenotazione.Arrivo,
-      tipoVeicolo:prenotazione.TipoVeicolo.TipoMezzo,
-      stato: prenotazione.TipoVeicolo.Stato
-      }
+    res.status(200).send(
+      prenotazione
     )})
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -155,6 +129,41 @@ exports.nuova_prenotazione = (req, res) => {
     });
 };
 //query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
+exports.veicoli_disponibili = (req, res) => {
+  Prenotaizone.findAll({
+    attributes : IDVeicolo //prendo solo la colonna degli id
+    where:{
+      [Op.or]: [ //faccio gli or tra le condizioni
+        { DataOra: {[Op.lt]: req.query.Partenza} }, //arrivo prima di dover far usare il mezzo al prossimo utente
+        { DataOraArrivo: {[Op.gt]: req.query.Arrivo} } //la mia partenza è dopo che un altro utente ha usato il mezzo
+      ]
+    }
+  })
+  .then(idveicoli => Veicolo.findAll({
+    where: {
+      Prenotabile: true,
+      IDVeicolo:[...idveicoli]
+    },
+    order:[['DataOra', 'DESC']],
+    include:[{
+      model: Veicolo
+    },{
+      model: TipoVeicolo
+    }]
+  }))
+    .then(prenotazione => {
+      if (!prenotazione) {
+        return res.status(404).send({ message: "nessun veicolo effettuata." });
+      }
+
+    res.status(200).send(
+      prenotazione
+    )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 //se un veicolo non è prenotato allora si rende disponibile
 
 //recupero password
@@ -162,7 +171,7 @@ exports.nuova_prenotazione = (req, res) => {
 exports.esistenza_email = (req, res) => {
   Utente.findOne({
     where: {
-      Email: req.body.Email
+      Email: req.query.Email
     }
   })
     //controllo dell'esistenza di un profilo Utente
@@ -183,8 +192,8 @@ exports.esistenza_email = (req, res) => {
 exports.notifica_ritardo = (req, res) => {
   // Crea notifica ritardo nel database
   NotificheRitardo.create({
-    IDPrenotazione: req.body.IDPrenotazione,
-    Note: req.body.note,
+    IDPrenotazione: req.query.IDPrenotazione,
+    Note: req.query.note,
   })
   .then( res.status(200).send({ message:"notifica creata" }))
     .catch(err => {
@@ -210,11 +219,9 @@ exports.consegne_veicoli = (req, res) => {
         return res.status(404).send({ message: "nessun veicolo disponibile." });
       }
 
-    res.status(200).send({
-      id: prenotazione.Veicolo.IDVeicolo,
-      targa: prenotazione.Veicolo.Targa,
-    }
-        )})
+    res.status(200).send(
+      prenotazione
+      )})
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
@@ -258,12 +265,7 @@ exports.corse = (req, res) => {
       }
 
     res.status(200).send({
-      id : prenotazione.IDPrenotazione,
-      dataOra: prenotazione.DataOra,
-      partenza: prenotazione.Partenza,
-      arrivo:prenotazione.Arrivo,
-      tipoVeicolo:prenotazione.TipoVeicolo.TipoMezzo,
-      stato: prenotazione.TipoVeicolo.Stato
+      prenotazione
     }
         )})
     .catch(err => {

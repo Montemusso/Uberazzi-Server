@@ -37,24 +37,24 @@ module.exports = function(app) {
     controller.prenotazioni
   );
 
-/*  app.get(
+ app.get(
     "/api/dettagli_prenotazione",
     [authJwt.verifyToken],
     controller.dettagli_prenotazione
   );
-*/
+
   app.get(
     "/api/ultime_prenotazioni",
     [authJwt.verifyToken],
     controller.ultime_prenotazioni
   );
 
- /*  app.get(
+   app.get(
     "/api/veicoli_disponibili",
     [authJwt.verifyToken],
     controller.veicoli_disponibili
   );
-*/
+
   app.get(
     "/api/notifica_ritardo",
     [
