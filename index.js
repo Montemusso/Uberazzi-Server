@@ -20,28 +20,15 @@ const Permesso = db.Permesso;
 //Cofig iniziale del db
 //ATTENZIONE, SOLO PER VERSIONE DI SVILUPPO
 //IN VERSIONE DI RILASCIO BISOGNERÀ TOGLIERE IL FORCE TRUE E LA CHIAMATA A INITIAL
-//db.sequelize.sync(); è l'unica funzione che ci serve dopo
+//db.sequelize.sync({force : false, alter : true }); è l'unica funzione che ci serve dopo, force false evita di creare il db, alter modifica le cose esistenti
 
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync({
+  force : false,
+   alter : true
+  }).then(() => {
   console.log('Drop and Resync Db');
   initial();
 });
-function initial() {
-  Permesso.create({
-    DettagioPermesso: "Utente"
-  });
- 
-  Permesso.create({
-    DettagioPermesso: "Autista"
-  });
- 
-  Permesso.create({
-    DettagioPermesso: "AddettoParcheggio"
-  });
-  Permesso.create({
-    DettagioPermesso: "Amministratore"
-  });
-}
 
 //Configurazione per la porta del server
 const port = process.env.PORT;
