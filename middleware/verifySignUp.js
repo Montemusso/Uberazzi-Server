@@ -1,10 +1,10 @@
 const db = require("../model");
-const User = db.user;
+const Utente = db.Utente;
 
 //verifica di univocità della Email
 controllaMail = (req, res, next) => {
     // Email
-    Utenti.findOne({
+    Utente.findOne({
       where: {
         email: req.body.email
       }
