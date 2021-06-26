@@ -8,6 +8,7 @@ verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
   //errore in caso di token assente
   if (!token) {
+    console.log("Inviato stato 403, token non fornito");
     return res.status(403).send({
       message: "Nessun token fornito!"
     });
@@ -15,6 +16,8 @@ verifyToken = (req, res, next) => {
   //verifica validità del token
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
+      console.log("Inviato stato 401, Non autorizzato");
+
       return res.status(401).send({
         message: "Non Autorizzato!"
       });
@@ -35,12 +38,15 @@ isAdmin = (req, res, next) => {
     )
     .then(utente => {
     if (utente.Permessi.DettaglioPermesso=== "Amministratore") {
+      console.log("Inviato stato 200, Admin autorizzato");
+
       res.status(200).send({
         message: "Autorizzato!"
       });
       next();
       return;
     }
+    console.log("Inviato stato 403, bisogna essere admin");
       res.status(403).send({
        message: "Bisogna essere amministratori!"
       });
@@ -58,12 +64,14 @@ isAutista = (req, res, next) => {
     )
     .then(utente => {
     if (utente.Permessi.DettaglioPermesso=== "Autista") {
+      console.log("Inviato stato 200, autista autorizzato");
       res.status(200).send({
         message: "Autorizzato!"
       });
       next();
       return;
     }
+    console.log("Inviato stato 403, bisogna essere autisti");
       res.status(403).send({
        message: "Bisogna essere autisti!"
       });
@@ -81,12 +89,14 @@ isAddettoParcheggio = (req, res, next) => {
     )
     .then(utente => {
     if (utente.Permessi.DettaglioPermesso=== "AddettoParcheggio") {
+      console.log("Inviato stato 200, addetto parcheggio autorizzato");
       res.status(200).send({
         message: "Autorizzato!"
       });
       next();
       return;
     }
+    console.log("Inviato stato 403, bisogna essere addetti al parcheggio");
       res.status(403).send({
        message: "Bisogna essere un addetto al parcheggio!"
       });
