@@ -31,7 +31,7 @@ verifyToken = (req, res, next) => {
 isAdmin = (req, res, next) => {
   Utente.findOne({
     where: {
-      IDUtente: req.headers["IDUtente"]
+      IDUtente: req.headers["idutente"]
     },
     include:Permessi,
   }
@@ -57,7 +57,7 @@ isAdmin = (req, res, next) => {
 isAutista = (req, res, next) => {
   Utente.findOne({
     where: {
-      IDUtente: req.headers["IDUtente"]
+      IDUtente: req.headers["idutente"]
     },
     include:Permessi,
   }
@@ -82,7 +82,7 @@ isAutista = (req, res, next) => {
 isAddettoParcheggio = (req, res, next) => {
   Utente.findOne({
     where: {
-      IDUtente: req.headers["IDUtente"]
+      IDUtente: req.headers["idutente"]
     },
     include:Permessi,
   }
