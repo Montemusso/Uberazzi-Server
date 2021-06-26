@@ -53,7 +53,7 @@ exports.aggiorna_utente = (req, res) => {
     Nome: req.body.Nome,
     Cognome: req.body.Cognome,
     DataDiNascita: req.body.DataDiNascita,
-    CodiceFiscale: req.body.CodiceFiscale,
+    CartaIdentita: req.body.CartaIdentita,
     Indirizzo: req.body.Indirizzo,
     CAP: req.body.CAP,
     Email: req.body.Email,
