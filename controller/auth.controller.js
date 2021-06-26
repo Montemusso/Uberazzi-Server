@@ -15,7 +15,7 @@ exports.registrazione_utente = (req, res) => {
     Nome: req.body.Nome,
     Cognome: req.body.Cognome,
     DataDiNascita: req.body.DataDiNascita,
-    CodiceFiscale: req.body.CodiceFiscale,
+    CartaIdentita: req.body.CartaIdentita,
     Indirizzo: req.body.Indirizzo,
     CAP: req.body.CAP,
     Email: req.body.Email,
@@ -24,6 +24,11 @@ exports.registrazione_utente = (req, res) => {
     TipoPatente: req.body.TipoPatente,
     IDPermesso: 0
   })
+  .then(
+    res.status(200).json({
+      success:true,
+      redirectUrl: '/login'
+  }))
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
@@ -61,7 +66,7 @@ exports.login = (req, res) => {
         Nome: Utente.Nome,
         Cognome: Utente.Cognome,
         DataDiNascita: Utente.DataDiNascita,
-        CodiceFiscale: Utente.CodiceFiscale,
+        CartaIdentita: Utente.CartaIdentita,
         Indirizzo: Utente.Indirizzo,
         CAP: Utente.CAP,
         NumeroPatente: Utente.NumeroPatente,

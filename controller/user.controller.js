@@ -20,7 +20,13 @@ const NotificheRitardo = db.NotificheRitardo;
   exports.Homepage = (req, res) => {
     res.status(200).sendFile(path.join(__dirname+'/build/index.html'));
   };
-  
+
+
+  exports.body = (req, res) => {
+    console.log(req.body)
+    console.log(req.query)
+    res.status(200).send({message : req.body});
+  };
 //Pagina Profilo:
 //Query: ultime tre prenotazioni con ritorno id, data e stato
 //aggiornare dati utente
@@ -53,7 +59,7 @@ exports.aggiorna_utente = (req, res) => {
     Nome: req.body.Nome,
     Cognome: req.body.Cognome,
     DataDiNascita: req.body.DataDiNascita,
-    CodiceFiscale: req.body.CodiceFiscale,
+    CartaIdentita: req.body.CartaIdentita,
     Indirizzo: req.body.Indirizzo,
     CAP: req.body.CAP,
     Email: req.body.Email,
