@@ -6,7 +6,7 @@ controllaMail = (req, res, next) => {
     // Email
     Utente.findOne({
       where: {
-        email: req.body.email
+        Email: req.body.Email
       }
     }).then(user => {
       if (user) {
