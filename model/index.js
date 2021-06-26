@@ -60,6 +60,6 @@ db.Veicolo.hasOne(db.Parcheggio, {foreignKey: 'IDParcheggio', foreignKeyConstrai
 db.Prenotazione.hasOne(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});
 
 db.NotificheRitardo.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
-db.Prenotazione.hasMany(db.NotificheRitardo, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});
+/*db.Prenotazione.hasMany(db.NotificheRitardo, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});*/
 
 module.exports = db;
