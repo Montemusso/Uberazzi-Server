@@ -32,7 +32,6 @@ db.Permesso = require("../model/Permesso.js")(sequelize, Sequelize);
 db.Pagamento = require("../model/Pagamento.js")(sequelize, Sequelize);
 db.Parcheggio = require("./Parcheggio.js")(sequelize, Sequelize);
 db.Prenotazione = require("../model/Prenotazione.js")(sequelize, Sequelize);
-//db.TipoVeicolo = require("../old/TipoVeicolo.js")(sequelize, Sequelize);
 db.Veicolo = require("../model/Veicolo.js")(sequelize, Sequelize);
 db.Immagine = require("../model/Immagine.js")(sequelize, Sequelize);
 db.NotificheRitardo = require("../model/NotificheRitardo.js")(sequelize, Sequelize);
@@ -43,9 +42,6 @@ db.Utente.hasOne(db.Permesso, {foreignKey: 'IDPermesso', foreignKeyConstraint: t
 
 /*db.Utente.hasMany(db.Prenotazione, {foreignKey: 'IDUtente', foreignKeyConstraint: true});*/
 db.Prenotazione.hasMany(db.Utente, {foreignKey: 'IDUtente', foreignKeyConstraint: true});
-
-/*db.Veicolo.belongsTo(db.TipoVeicolo, {foreignKey: 'IDTipoVeicolo', foreignKeyConstraint: true});
-db.TipoVeicolo.hasMany(db.Veicolo, {foreignKey: 'IDTipoVeicolo', foreignKeyConstraint: true});*/
 
 db.Veicolo.hasMany(db.Immagine, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});
 /*db.Immagine.hasOne(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});*/
