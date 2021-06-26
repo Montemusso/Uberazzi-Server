@@ -20,7 +20,12 @@ const NotificheRitardo = db.NotificheRitardo;
   exports.Homepage = (req, res) => {
     res.status(200).sendFile(path.join(__dirname+'/build/index.html'));
   };
-  
+
+
+  exports.body = (req, res) => {
+    console.log(req.body)
+    res.status(200).send({message : req.body});
+  };
 //Pagina Profilo:
 //Query: ultime tre prenotazioni con ritorno id, data e stato
 //aggiornare dati utente

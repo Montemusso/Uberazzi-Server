@@ -69,6 +69,15 @@ module.exports = function(app) {
     controller.aggiorna_prenotazione
   );
 
+//prova per body
+app.get(
+  "/api/body",
+ controller.body
+);
+
+
+
+
   app.get("/", controller.Homepage);
 
   /*                //*
