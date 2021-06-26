@@ -75,7 +75,10 @@ app.get(
  controller.body
 );
 
-
+app.post(
+  "/api/body",
+ controller.body
+);
 
 
   app.get("/", controller.Homepage);

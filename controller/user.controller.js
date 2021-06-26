@@ -24,6 +24,7 @@ const NotificheRitardo = db.NotificheRitardo;
 
   exports.body = (req, res) => {
     console.log(req.body)
+    console.log(req.query)
     res.status(200).send({message : req.body});
   };
 //Pagina Profilo:
