@@ -14,8 +14,8 @@ module.exports = (sequelize, Sequelize) => {
       DataDiNascita: {
         type: Sequelize.DATE
       },
-      CodiceFiscale: {
-        type: Sequelize.STRING(16)
+      CartaIdentita: {
+        type: Sequelize.STRING(9)
       },
       Indirizzo: {
         type: Sequelize.STRING(200)
