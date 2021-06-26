@@ -12,7 +12,6 @@ module.exports = function(app) {
 //se viene chiamata la rotta /api/registrazione_utente viene 
 app.post(
   "/api/registrazione_utente",
-  [verifySignUp.controllaMail],
   controller.registrazione_utente
 );
 
