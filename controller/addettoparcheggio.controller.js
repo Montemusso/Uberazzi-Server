@@ -23,7 +23,7 @@ exports.consegne_veicoli = (req, res) => {
     Prenotazione.findAll({
       where: {
         Consegnato: false,
-        Stato:"attiva"
+        Stato:"Attiva"
       },
       include:[{
         model: Veicolo
@@ -77,7 +77,7 @@ exports.consegne_veicoli = (req, res) => {
   exports.veicoli_ritirabili = (req, res) => {
     Prenotazione.findAll({
       where: {
-        Stato: "conclusa",
+        Stato: "Veicolo Riconsegnato",
         Consegnato: true,
       },
       include:[{
@@ -134,8 +134,8 @@ exports.consegne_veicoli = (req, res) => {
 
   exports.consegna_veicolo_AddettoParcheggio = (req, res) => {
     Prenotazione.update({
-        Stato: "conclusa",
-        consegnato: true
+        Stato: "Veicolo Consegnato",
+        Consegnato: true
     },{
       where: {
         IDPrenotazione: req.query.IDPrenotazione
@@ -150,11 +150,11 @@ exports.consegne_veicoli = (req, res) => {
   };
   
   exports.ritira_veicolo_AddettoParcheggio = (req, res) => {
-    Prenotazione.update({
-        Prenotabile: false
+    Veicolo.update({
+        Prenotabile: true
     },{
       where: {
-        IDPrenotazione: req.query.IDPrenotazione
+        IDVeicolo: req.query.IDVeicolo
       }
     })
       .then(    
