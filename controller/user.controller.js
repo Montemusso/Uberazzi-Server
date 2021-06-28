@@ -12,6 +12,18 @@ const Veicolo = db.Veicolo;
 const Immagine = db.Immagine;
 const NotificheRitardo = db.NotificheRitardo;
 
+
+//funzione per generare la password
+function generatePassword() {
+  var length = 8,
+      charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+={}[]",
+      retVal = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+      retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+}
+
 //req.query per get
 //req.body per post
 //req.params per roba con parametri nell'url
@@ -344,6 +356,24 @@ exports.ritira_veicolo_Cliente = (req, res) => {
   })
     .then(    
     res.status(200).send({ message:"veicolo ritirato" })
+    )
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+
+exports.recupera_password = (req, res) => {
+  let newpass = generatePassword();
+  Utente.update({
+      password: newpass
+  },{
+    where: {
+      Email: req.query.Email
+    }
+  })
+    .then(    
+    res.status(200).send({ message:"password resettata, verifica nel log", password: newpass })
     )
     .catch(err => {
       res.status(500).send({ message: err.message });

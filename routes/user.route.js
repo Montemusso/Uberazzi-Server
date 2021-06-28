@@ -100,6 +100,11 @@ module.exports = function(app) {
     controller.ritira_veicolo_Cliente
   );
 
+  app.get(
+    "/api/recupera_password",
+    controller.recupera_password
+  );
+
   app.get("/", controller.Homepage);
 
   /*                //*
