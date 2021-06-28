@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
 const db = require("../model");
 const Utente = db.Utente;
-const Permesso = db.Permesso
+const Permesso = db.Permesso;
 
 //funzione genera token
 verifyToken = (req, res, next) => {
@@ -38,7 +38,7 @@ isAdmin = (req, res, next) => {
   }
     )
     .then(utente => {
-    if (utente.Permessi.DettaglioPermesso=== "Amministratore") {
+    if (utente.DettaglioPermesso=== "Amministratore") {
       console.log("Inviato stato 200, Admin autorizzato");
 
       res.status(200).send({
@@ -67,7 +67,7 @@ isAutista = (req, res, next) => {
   }
     )
     .then(utente => {
-    if (utente.Permessi.DettaglioPermesso=== "Autista") {
+    if (utente.DettaglioPermesso=== "Autista") {
       console.log("Inviato stato 200, autista autorizzato");
       res.status(200).send({
         message: "Autorizzato!"
@@ -95,7 +95,7 @@ isAddettoParcheggio = (req, res, next) => {
   }
     )
     .then(utente => {
-    if (utente.Permessi.DettaglioPermesso=== "AddettoParcheggio") {
+    if (utente.DettaglioPermesso=== "AddettoParcheggio") {
       console.log("Inviato stato 200, addetto parcheggio autorizzato");
       res.status(200).send({
         message: "Autorizzato!"
