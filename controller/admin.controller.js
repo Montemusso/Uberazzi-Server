@@ -40,7 +40,6 @@ exports.utenti = (req, res) => {
   exports.prenotazioni_attive = (req, res) => {
     Prenotazione.findAll({
       where: {
-        IDUtente: req.query.IDUtente,
         Stato: {[Op.ne]:"conclusa"}
       },
       order:[['DataOra', 'DESC']],
