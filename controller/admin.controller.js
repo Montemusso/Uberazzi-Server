@@ -65,7 +65,12 @@ exports.utenti = (req, res) => {
     },{
       where: {
         IDUtente:req.query.IDUtente
-      }
+      },
+      returning: true,
+      plain: true
+    })
+    .then(prenotazione =>{
+      console.log(prenotazione)
     })
       .then(
         res.status(200).send({ message: "permesso aggiornato" })
