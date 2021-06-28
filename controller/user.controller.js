@@ -190,16 +190,16 @@ exports.DisponibilitaVeicoli = (req, res) => {
   Prenotazione.findAll({
     attributes : Prenotazione.IDVeicolo, //prendo solo la colonna degli id
     where:{
-      [Op.or]: [ //faccio gli or tra le condizioni
-        { DataOra: {[Op.gt]: req.query.Partenza} }, //arrivo prima di dover far usare il mezzo al prossimo utente
-        { DataOraArrivo: {[Op.lt]: req.query.Arrivo} } //la mia partenza è dopo che un altro utente ha usato il mezzo
-      ]
+         DataOra: {[Op.gt]: req.query.Partenza}, 
+         DataOraArrivo: {[Op.lt]: req.query.Arrivo} 
     }
   })
   .then(idveicoli => Veicolo.findAll({
     where: {
       Prenotabile: true,
-      IDVeicolo:[...idveicoli]
+      [Op.notIn]:{
+        IDVeicolo:[...idveicoli]
+      }
     },
     order:[['DataOra', 'DESC']],
     include:[{
