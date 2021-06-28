@@ -2,7 +2,7 @@ const { Op } = require("sequelize");
 const path = require('path');
 const db = require("../model");
 
-const Utenti = db.Utente;
+const Utente = db.Utente;
 const Permesso = db.Permesso;
 const Pagamento = db.Pagamento;
 const Parcheggio = db.Parcheggio;
@@ -19,7 +19,7 @@ const NotificheRitardo = db.NotificheRitardo;
 //Permessi utenti
 //selezionare tutti gli utenti 
 exports.utenti = (req, res) => {
-    Utenti.findAll()
+  Utente.findAll()
       .then(utenti => {
         if (!utenti) {
           return res.status(404).send({ message: "nessun utente disponibile." });
