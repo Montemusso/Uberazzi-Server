@@ -49,7 +49,9 @@ exports.corse = (req, res) => {
     },{
       where: {
         IDPrenotazione: req.query.IDPrenotazione
-      }
+      },
+      returning: true, 
+      plain: true
     })
       .then(    
       res.status(200).send({ message:"corsa accetttata" })
