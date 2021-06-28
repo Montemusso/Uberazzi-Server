@@ -1,6 +1,8 @@
 const db = require("../model");
 const Utente = db.Utente;
 
+
+//deprecato
 //verifica di univocità della Email
 controllaMail = (req, res, next) => {
     // Email
