@@ -56,7 +56,7 @@ exports.login = (req, res) => {
       var token = jwt.sign({ id: Utente.IDUtente }, config.secret, {
         expiresIn: 86400 // 24 ore
       });
-      console.log("utente" + Utente.IDUtente+ "ha fatto il login");
+      console.log("utente: " + Utente.IDUtente+ " ha fatto il login");
       res.status(200).send({
         id: Utente.IDUtente,
         Nome: Utente.Nome,
