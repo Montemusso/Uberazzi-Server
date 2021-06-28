@@ -200,7 +200,7 @@ exports.DisponibilitaVeicoli = (req, res) => {
   .then(idveicoli => Veicolo.findAll({
     where: {
       IDVeicolo:{
-        [sequelize.Op.notIn]:[...idveicoli]
+        [sequelize.Op.notIn]:[[...idveicoli]]
       },
       Prenotabile: true
     }
