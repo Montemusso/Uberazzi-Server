@@ -41,20 +41,17 @@ db.NotificheRitardo = require("../model/NotificheRitardo.js")(sequelize, Sequeli
 db.Permesso.hasMany(db.Utente, {foreignKey: 'IDPermesso',  foreignKeyConstraint: true});  //RELAZIONE OK
 db.Utente.belongsTo(db.Permesso, {foreignKey: 'IDPermesso',  foreignKeyConstraint: true}); //RELAZIONE OK
 
-db.Permesso.hasMany(db.Utente, {foreignKey: 'IDPermesso',  foreignKeyConstraint: true});  //RELAZIONE OK
-db.Utente.belongsTo(db.Permesso, {foreignKey: 'IDPermesso',  foreignKeyConstraint: true}); //RELAZIONE OK
-
 db.Prenotazione.belongsTo(db.Utente, {foreignKey: 'IDCliente', foreignKeyConstraint: true}); //RELAZIONE OK
 db.Prenotazione.belongsTo(db.Utente, {foreignKey: 'IDAutista', foreignKeyConstraint: true}); //RELAZIONE OK
 
 db.Veicolo.hasMany(db.Immagine, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});  //RELAZIONE OK
-db.Immagine.hasOne(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});   //RELAZIONE AGGIUNTA
+db.Immagine.belongsTo(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});   //RELAZIONE AGGIUNTA
 
 db.Pagamento.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});//RELAZIONE OK
 db.Prenotazione.hasOne(db.Pagamento,{foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});     //RELAZIONE AGGIUNTA
 
 db.Parcheggio.hasMany(db.Veicolo, {foreignKey: 'IDParcheggio', targetKey:'IDParcheggio', foreignKeyConstraint: true}); //RELAZIONE OK
-db.Veicolo.hasOne(db.Parcheggio, {foreignKey: 'IDParcheggio', foreignKeyConstraint: true}); //RELAZIONE AGGIUNTA
+db.Veicolo.belongsTo(db.Parcheggio, {foreignKey: 'IDParcheggio', foreignKeyConstraint: true}); //RELAZIONE AGGIUNTA
 
 db.Veicolo.hasMany(db.Prenotazione, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true});  //RELAZIONE AGGIUNTA
 db.Prenotazione.belongsTo(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstraint: true}); //RELAZIONE OK
