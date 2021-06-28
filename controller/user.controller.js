@@ -194,14 +194,16 @@ exports.DisponibilitaVeicoli = (req, res) => {
          DataOraArrivo: {[Op.lt]: req.query.Arrivo} 
     }
   })
+  .then(
+    idveicoli=> console.log(idveicoli)
+  )
   .then(idveicoli => Veicolo.findAll({
     where: {
-      Prenotabile: true,
       IDVeicolo:{
-        [Op.notIn]:[...idveicoli]
-      }
-    },
-    order:[['DataOra', 'DESC']],
+        [sequelize.Op.notIn]:[...idveicoli]
+      },
+      Prenotabile: true
+    }
   }))
     .then(veicoli_disponibili => {
       if (!veicoli_disponibili) {
