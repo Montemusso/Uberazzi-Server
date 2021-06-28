@@ -38,8 +38,8 @@ db.NotificheRitardo = require("../model/NotificheRitardo.js")(sequelize, Sequeli
 
 /*RELAZIONI*/
 
-db.Permesso.hasMany(db.Utente, {foreignKey: 'IDPermesso',  foreignKeyConstraint: true});     //RELAZIONE OK
-db.Utente.belongsTo(db.Permesso, {foreignKey: 'IDPermesso',  foreignKeyConstraint: true});
+db.Permesso.hasMany(db.Utente, {foreignKey: 'IDPermesso',  foreignKeyConstraint: true});  //RELAZIONE OK
+db.Utente.belongsTo(db.Permesso, {foreignKey: 'IDPermesso',  foreignKeyConstraint: true}); //RELAZIONE OK
 
 db.Prenotazione.belongsTo(db.Utente, {foreignKey: 'IDCliente', foreignKeyConstraint: true}); //RELAZIONE OK
 db.Prenotazione.belongsTo(db.Utente, {foreignKey: 'IDAutista', foreignKeyConstraint: true}); //RELAZIONE OK
@@ -59,9 +59,6 @@ db.Veicolo.hasMany(db.Prenotazione, {foreignKey: 'IDVeicolo', foreignKeyConstrai
 
 db.NotificheRitardo.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true}); //RELAZIONE OK
 db.Prenotazione.hasMany(db.NotificheRitardo, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});   //RELAZIONE AGGIUNTA
-
-
-
 
 module.exports = db;
 //hasOne hasMany--> sourceKey     belongsTo-->targetKey
