@@ -63,7 +63,7 @@ isAutista = (req, res, next) => {
   }
     )
     .then(utente => {
-    if (utente.Permesso.DettaglioPermesso=== "Autista") {
+    if (utente.Permesso.DettaglioPermesso=== "Autista" || utente.Permesso.DettaglioPermesso=== "Amministratore") {
       console.log("Inviato stato 200, autista autorizzato");
       next();
       return;
@@ -88,7 +88,7 @@ isAddettoParcheggio = (req, res, next) => {
   }
     )
     .then(utente => {
-    if (utente.Permesso.DettaglioPermesso=== "AddettoParcheggio") {
+    if (utente.Permesso.DettaglioPermesso=== "AddettoParcheggio" || utente.Permesso.DettaglioPermesso=== "Amministratore") {
       console.log("Inviato stato 200, addetto parcheggio autorizzato");
       next();
       return;
