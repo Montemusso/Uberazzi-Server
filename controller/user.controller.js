@@ -256,27 +256,6 @@ exports.inviaNotifica = (req, res) => {
     });
 };
 
-
-
-
-
-exports.aggiorna_stato_prenotazione = (req, res) => {
-  Prenotazione.update({
-    Stato: req.query.Stato,
-  },{
-    where: {
-      IDPrenotazione: req.query.IDPrenotazione
-    }
-  })
-    .then(
-    res.status(200).send({ message:"Prenotazione modificata" })
-    )
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
-};
-
-
 exports.consegne_veicoli_cliente = (req, res) => {
   Prenotazione.findAll({
     where: {
