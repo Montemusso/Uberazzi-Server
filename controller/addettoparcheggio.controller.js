@@ -60,8 +60,8 @@ exports.consegne_veicoli = (req, res) => {
   };
 
   exports.aggiorna_stato_prenotazione = (req, res) => {
-    Prenotazione.Update({
-      Stato:req.body.Stato
+    Prenotazione.update({
+      Stato:req.query.Stato
     },{
       where: {
         IDPrenotazione:req.query.IDPrenotazione
