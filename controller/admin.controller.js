@@ -61,7 +61,7 @@ exports.utenti = (req, res) => {
 
   exports.aggiorna_permesso = (req, res) => {
     Utente.Update({
-      Permesso:req.body.Permesso
+      Permesso:req.query.Permesso
     },{
       where: {
         IDUtente:req.query.IDUtente
