@@ -27,7 +27,7 @@ app.get(
       authJwt.verifyToken,
        authJwt.isAddettoParcheggio
       ],
-    controller.aggiorna_stato_veicolo
+    controller.contrassegnaDisponibile
   );
 
   app.get(
@@ -54,7 +54,7 @@ app.get(
       authJwt.verifyToken,
        authJwt.isAddettoParcheggio
       ],
-    controller.condizioni_veicoli
+    controller.richiediCondizioni
   );
  
   app.get(

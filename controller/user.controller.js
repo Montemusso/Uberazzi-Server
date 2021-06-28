@@ -14,7 +14,7 @@ const NotificheRitardo = db.NotificheRitardo;
 
 
 //funzione per generare la password
-function generatePassword() {
+function generaPassword() {
   var length = 10,
       charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+={}[]]",
       retVal = "";
@@ -66,7 +66,7 @@ exports.ultime_prenotazioni = (req, res) => {
     });
 };
 //Aggiorna dati utente:
-exports.aggiorna_utente = (req, res) => {
+exports.ModificaDati = (req, res) => {
   Utente.update({
     CartaIdentita: req.body.CartaIdentita,
     Indirizzo: req.body.Indirizzo,
@@ -139,7 +139,7 @@ exports.dettagli_prenotazione = (req, res) => {
     });
 };
 //modifica prenotazione
-exports.aggiorna_prenotazione = (req, res) => {
+exports.salvaPrenotazione = (req, res) => {
   Prenotazione.update({
     IDUtente: req.body.IDUtente,
     Partenza:req.body.Partenza,
@@ -186,7 +186,7 @@ exports.nuova_prenotazione = (req, res) => {
 };
 
 //query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
-exports.veicoli_disponibili = (req, res) => {
+exports.DisponibilitàVeicoli = (req, res) => {
   Prenotazione.findAll({
     attributes : IDVeicolo, //prendo solo la colonna degli id
     where:{
@@ -223,7 +223,7 @@ exports.veicoli_disponibili = (req, res) => {
 
 //recupero password
 
-exports.esistenza_email = (req, res) => {
+exports.VerificaEmail = (req, res) => {
   Utente.findOne({
     where: {
       Email: req.query.Email
@@ -244,7 +244,7 @@ exports.esistenza_email = (req, res) => {
 
 //notifica ritardo
 //creare nuova riga nella notifica ritardo
-exports.notifica_ritardo = (req, res) => {
+exports.inviaNotifica = (req, res) => {
   // Crea notifica ritardo nel database
   NotificheRitardo.create({
     IDPrenotazione: req.query.IDPrenotazione,
@@ -361,7 +361,7 @@ exports.ritira_veicolo_Cliente = (req, res) => {
 
 
 exports.recupera_password = (req, res) => {
-  let newpass = generatePassword();
+  let newpass = generaPassword();
   Utente.update({
       password: newpass
   },{

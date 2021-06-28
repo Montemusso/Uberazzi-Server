@@ -12,11 +12,11 @@ module.exports = function(app) {
 //se viene chiamata la rotta /api/registrazione_utente viene 
 app.post(
   "/api/registrazione_utente",
-  controller.registrazione_utente
+  controller.salvaDati
 );
 
   app.post(
     "/api/login", 
-    controller.login
+    controller.ControllaMailEPsw
     );
 };

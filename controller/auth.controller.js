@@ -9,7 +9,7 @@ var bcrypt = require("bcryptjs");
 //Verificare scrittura di Utente e Ruoli
 
 //Funzione di registrazione che crea nella tabella utente un record che rappresenta l'utente tramite i campi del form di registrazione
-exports.registrazione_utente = (req, res) => {
+exports.salvaDati = (req, res) => {
   // Crea utente nel database
   Utente.create({
     Nome: req.body.Nome,
@@ -29,7 +29,7 @@ exports.registrazione_utente = (req, res) => {
     });
 };
 //Funzione di login con ricerca per campo Email per verificare univocità
-exports.login = (req, res) => {
+exports.ControllaMailEPsw = (req, res) => {
   Utente.findOne({
     where: {
       Email: req.body.Email

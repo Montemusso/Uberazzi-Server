@@ -18,7 +18,7 @@ const NotificheRitardo = db.NotificheRitardo;
 
 //Permessi utenti
 //selezionare tutti gli utenti 
-exports.utenti = (req, res) => {
+exports.RichiestaUtenti = (req, res) => {
   Utente.findAll()
       .then(utenti => {
         if (!utenti) {
@@ -37,7 +37,7 @@ exports.utenti = (req, res) => {
   
   //Gestione prenotazioni
   //Selezionare tutte le prenotazioni attive non complete
-  exports.prenotazioni_attive = (req, res) => {
+  exports.RichiediDati = (req, res) => {
     Prenotazione.findAll({
       where: {
         Stato: {[Op.ne]:"conclusa"}
@@ -59,7 +59,7 @@ exports.utenti = (req, res) => {
       });
   };
 
-  exports.aggiorna_permesso = (req, res) => {
+  exports.ModificaPermessi = (req, res) => {
     Utente.update({
       IDPermesso:req.query.Permesso
     },{

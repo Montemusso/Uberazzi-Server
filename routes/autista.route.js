@@ -26,6 +26,6 @@ module.exports = function(app) {
         authJwt.verifyToken
         , authJwt.isAutista
       ],
-      controller.conferma_corsa
+      controller.AccettaCorsa
     )
 };

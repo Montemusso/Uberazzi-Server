@@ -17,7 +17,7 @@ module.exports = function(app) {
       authJwt.verifyToken
       , authJwt.isAdmin
     ],
-    controller.utenti
+    controller.RichiestaUtenti
   )
 
   app.get(
@@ -26,7 +26,7 @@ module.exports = function(app) {
       authJwt.verifyToken
       , authJwt.isAdmin
     ],
-    controller.aggiorna_permesso
+    controller.ModificaPermessi
   )
 
   app.get(
@@ -35,7 +35,7 @@ module.exports = function(app) {
       authJwt.verifyToken
       , authJwt.isAdmin
     ],
-    controller.prenotazioni_attive
+    controller.RichiediDati
   )
 
   app.post(

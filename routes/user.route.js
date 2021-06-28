@@ -22,7 +22,7 @@ module.exports = function(app) {
 
   app.get(
     "/api/esistenza_email",
-    controller.esistenza_email
+    controller.VerificaEmail
   );
 
 
@@ -47,25 +47,25 @@ module.exports = function(app) {
    app.get(
     "/api/veicoli_disponibili",
     [authJwt.verifyToken],
-    controller.veicoli_disponibili
+    controller.DisponibilitàVeicoli
   );
 
   app.get(
     "/api/notifica_ritardo",
     [authJwt.verifyToken],
-    controller.notifica_ritardo
+    controller.inviaNotifica
   );
 
   app.get(
     "/api/aggiorna_utente",
     [authJwt.verifyToken],
-    controller.aggiorna_utente
+    controller.ModificaDati
   );
 
   app.get(
     "/api/aggiorna_prenotazione",
     [authJwt.verifyToken],
-    controller.aggiorna_prenotazione
+    controller.salvaPrenotazione
   );
 
   app.get(

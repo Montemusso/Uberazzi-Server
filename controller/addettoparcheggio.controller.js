@@ -43,7 +43,7 @@ exports.consegne_veicoli = (req, res) => {
   };
   //query per aggiornare lo stato dei veicoli 
 
-  exports.aggiorna_stato_veicolo = (req, res) => {
+  exports.contrassegnaDisponibile = (req, res) => {
     Veicolo.Update({
       Stato:req.body.Stato
     },{
@@ -97,7 +97,7 @@ exports.consegne_veicoli = (req, res) => {
       });
   };
 
-  exports.condizioni_veicoli = (req, res) => {
+  exports.richiediCondizioni = (req, res) => {
     Veicolo.findAll({
       where: {
         Prenotabile: false,
