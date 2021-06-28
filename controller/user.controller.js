@@ -15,7 +15,7 @@ const NotificheRitardo = db.NotificheRitardo;
 
 //funzione per generare la password
 function generatePassword() {
-  var length = 8,
+  var length = 10,
       charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+={}[]]",
       retVal = "";
   for (var i = 0, n = charset.length; i < length; ++i) {
