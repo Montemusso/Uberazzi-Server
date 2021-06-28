@@ -191,8 +191,8 @@ exports.DisponibilitaVeicoli = (req, res) => {
     attributes : Prenotazione.IDVeicolo, //prendo solo la colonna degli id
     where:{
       [Op.or]: [ //faccio gli or tra le condizioni
-        { DataOra: {[Op.lt]: req.query.Partenza} }, //arrivo prima di dover far usare il mezzo al prossimo utente
-        { DataOraArrivo: {[Op.gt]: req.query.Arrivo} } //la mia partenza è dopo che un altro utente ha usato il mezzo
+        { DataOra: {[Op.gt]: req.query.Partenza} }, //arrivo prima di dover far usare il mezzo al prossimo utente
+        { DataOraArrivo: {[Op.lt]: req.query.Arrivo} } //la mia partenza è dopo che un altro utente ha usato il mezzo
       ]
     }
   })
