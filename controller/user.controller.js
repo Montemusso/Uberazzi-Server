@@ -316,5 +316,36 @@ exports.veicoli_ritirabili_cliente = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
-//consegna veicoli cliente
-//query per cambiare lo stato in conclusa tramite id prenotazione
+
+
+exports.consegna_veicolo_Cliente = (req, res) => {
+  Prenotazione.update({
+      Stato: "conclusa"
+  },{
+    where: {
+      IDPrenotazione: req.query.IDPrenotazione
+    }
+  })
+    .then(    
+    res.status(200).send({ message:"consegna effettuata" })
+    )
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.ritira_veicolo_Cliente = (req, res) => {
+  Prenotazione.update({
+      Stato: "Veicolo ritirato"
+  },{
+    where: {
+      IDPrenotazione: req.query.IDPrenotazione
+    }
+  })
+    .then(    
+    res.status(200).send({ message:"veicolo ritirato" })
+    )
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};

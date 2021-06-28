@@ -66,4 +66,22 @@ app.get(
     controller.aggiorna_disponibilita_veicolo
   );
 
+
+  app.get(
+    "/api/consegna_veicolo_AddettoParcheggio",
+    [
+      authJwt.verifyToken,
+      authJwt.isAddettoParcheggio
+      ],
+    controller.consegna_veicolo_AddettoParcheggio
+  );
+
+  app.get(
+    "/api/ritira_veicolo_AddettoParcheggio",
+    [
+      authJwt.verifyToken,
+      authJwt.isAddettoParcheggio
+      ],
+    controller.ritira_veicolo_AddettoParcheggio
+  );
     };

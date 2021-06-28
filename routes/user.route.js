@@ -84,6 +84,22 @@ module.exports = function(app) {
     controller.veicoli_ritirabili_cliente
   );
 
+  app.get(
+    "/api/consegna_veicolo_Cliente",
+    [
+      authJwt.verifyToken
+      ],
+    controller.consegna_veicolo_Cliente
+  );
+
+  app.get(
+    "/api/ritira_veicolo_Cliente",
+    [
+      authJwt.verifyToken
+      ],
+    controller.ritira_veicolo_Cliente
+  );
+
   app.get("/", controller.Homepage);
 
   /*                //*

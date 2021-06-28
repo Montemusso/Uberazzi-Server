@@ -131,3 +131,36 @@ exports.consegne_veicoli = (req, res) => {
         res.status(500).send({ message: err.message });
       });
   };
+
+  exports.consegna_veicolo_AddettoParcheggio = (req, res) => {
+    Prenotazione.update({
+        Stato: "conclusa",
+        consegnato: true
+    },{
+      where: {
+        IDPrenotazione: req.query.IDPrenotazione
+      }
+    })
+      .then(    
+      res.status(200).send({ message:"consegna effettuata" })
+      )
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };
+  
+  exports.ritira_veicolo_AddettoParcheggio = (req, res) => {
+    Prenotazione.update({
+        Prenotabile: false
+    },{
+      where: {
+        IDPrenotazione: req.query.IDPrenotazione
+      }
+    })
+      .then(    
+      res.status(200).send({ message:"veicolo ritirato" })
+      )
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };
