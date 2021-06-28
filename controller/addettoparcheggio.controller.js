@@ -43,7 +43,7 @@ exports.consegne_veicoli = (req, res) => {
   };
   //query per aggiornare lo stato dei veicoli 
 
-  exports.contrassegnaDisponibile = (req, res) => {
+  exports.aggiorna_stato_veicolo = (req, res) => {
     Veicolo.Update({
       Stato:req.body.Stato
     },{
