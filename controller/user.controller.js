@@ -68,9 +68,6 @@ exports.ultime_prenotazioni = (req, res) => {
 //Aggiorna dati utente:
 exports.aggiorna_utente = (req, res) => {
   Utente.update({
-    Nome: req.body.Nome,
-    Cognome: req.body.Cognome,
-    DataDiNascita: req.body.DataDiNascita,
     CartaIdentita: req.body.CartaIdentita,
     Indirizzo: req.body.Indirizzo,
     CAP: req.body.CAP,
