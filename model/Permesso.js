@@ -5,7 +5,7 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         autoIncrement: true
       },
-      DettagioPermesso: {
+      DettaglioPermesso: {
         type: Sequelize.STRING(100)
       }
     });

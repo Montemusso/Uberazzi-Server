@@ -22,7 +22,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(10)
       },
       Targa: {
-        type: Sequelize.STRING(10)
+        type: Sequelize.STRING(10),
+        allowNull:true
       }
     });
   
