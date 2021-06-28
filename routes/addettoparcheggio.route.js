@@ -63,7 +63,7 @@ app.get(
       authJwt.verifyToken,
        authJwt.isAddettoParcheggio
       ],
-    controller.aggiorna_disponibilita_veicolo
+    controller.contrassegnaDisponibile
   );
 
 

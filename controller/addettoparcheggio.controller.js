@@ -116,7 +116,7 @@ exports.consegne_veicoli = (req, res) => {
   };
 
 
-  exports.aggiorna_disponibilita_veicolo = (req, res) => {
+  exports.contrassegnaDisponibile = (req, res) => {
     Veicolo.Update({
       Prenotabile:req.body.Prenotabile
     },{
