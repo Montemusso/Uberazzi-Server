@@ -306,7 +306,7 @@ exports.veicoli_ritirabili_cliente = (req, res) => {
   Prenotazione.findAll({
     where: {
       IDUtente : req.headers["idutente"],
-      Stato: "consegnato",
+      Stato: "Veicolo Consegnato",
       Consegnato: true,
     },
     include:[{
@@ -329,7 +329,7 @@ exports.veicoli_ritirabili_cliente = (req, res) => {
 
 exports.consegna_veicolo_Cliente = (req, res) => {
   Prenotazione.update({
-      Stato: "conclusa"
+      Stato: "Veicolo Riconsegnato"
   },{
     where: {
       IDPrenotazione: req.query.IDPrenotazione
