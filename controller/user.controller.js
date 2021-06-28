@@ -188,7 +188,7 @@ exports.nuova_prenotazione = (req, res) => {
 //query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
 exports.DisponibilitaVeicoli = (req, res) => {
   Prenotazione.findAll({
-    attributes : Prenotazione.IDVeicolo, //prendo solo la colonna degli id
+    attributes : ['IDVeicolo'], //prendo solo la colonna degli id
     where:{
          DataOra: {[Op.gt]: req.query.Partenza}, 
          DataOraArrivo: {[Op.lt]: req.query.Arrivo} 
@@ -202,9 +202,6 @@ exports.DisponibilitaVeicoli = (req, res) => {
       }
     },
     order:[['DataOra', 'DESC']],
-    include:[{
-      model: Veicolo
-    }]
   }))
     .then(veicoli_disponibili => {
       if (!veicoli_disponibili) {
