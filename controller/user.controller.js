@@ -178,7 +178,7 @@ exports.nuova_prenotazione = (req, res) => {
 
 //query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
 exports.veicoli_disponibili = (req, res) => {
-  Prenotaizone.findAll({
+  Prenotazione.findAll({
     attributes : IDVeicolo, //prendo solo la colonna degli id
     where:{
       [Op.or]: [ //faccio gli or tra le condizioni
