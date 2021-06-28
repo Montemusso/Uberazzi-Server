@@ -99,6 +99,12 @@ module.exports = function(app) {
     controller.recupera_password
   );
 
+  app.get(
+    "/api/nuovo_pagamento",
+    [authJwt.verifyToken],
+    controller.nuovo_pagamento
+  );
+
   app.get("/", controller.Homepage);
 
   /*                //*

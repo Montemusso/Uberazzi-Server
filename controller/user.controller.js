@@ -167,17 +167,19 @@ exports.salvaPrenotazione = (req, res) => {
 //nuova prenotazione
 //creazione nuova riga nelle prenotazioni
 exports.nuova_prenotazione = (req, res) => {
+  console.log(req.body);
   // Crea prenotazione nel database
   Prenotazione.create({
-    IDUtente: req.body.IDUtente,
+    IDUtente: req.headers["idutente"],
     Partenza:req.body.Partenza,
     Arrivo:req.body.Arrivo,
-    Stato: "In corso",
+    Stato: "Sospesa",
     DataOra:req.body.DataOra,
     DataOraArrivo:req.body.DataOraArrivo,
     Autista:req.body.Autista,
     IDVeicolo:req.body.IDVeicolo,
-    Consegnato:false
+    Consegnato:false,
+    IDCliente: req.headers["idutente"],
   })
   .then( res.status(200).send({ message:"Prenotazione creata" }))
     .catch(err => {
@@ -349,6 +351,20 @@ exports.recupera_password = (req, res) => {
     .then(    
     res.status(200).send({ message:"password resettata, verifica nel log", password: newpass })
     )
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+//nuovo pagamento
+//creazione nuova riga nei pagamenti
+exports.nuovo_pagamento = (req, res) => {
+  // Crea pagamento nel database
+  Pagamento.create({
+    IDPrenotazione: req.query.IDPrenotazione,
+    Importo: req.query.Importo,
+  })
+  .then( res.status(200).send({ message:"Pagamento creato" }))
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
