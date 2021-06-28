@@ -61,7 +61,7 @@ exports.utenti = (req, res) => {
 
   exports.aggiorna_permesso = (req, res) => {
     Utente.update({
-      Permesso:req.query.Permesso
+      IDPermesso:req.query.Permesso
     },{
       where: {
         IDUtente:req.query.IDUtente
@@ -69,9 +69,9 @@ exports.utenti = (req, res) => {
       returning: true,
       plain: true
     })
-    .then(prenotazione =>{
-      console.log(prenotazione)
-    })
+      .then(update =>{
+        console.log(update)
+      })
       .then(
         res.status(200).send({ message: "permesso aggiornato" })
         )
