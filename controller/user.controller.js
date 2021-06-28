@@ -205,9 +205,10 @@ exports.DisponibilitaVeicoli = (req, res) => {
   }))
     .then(veicoli_disponibili => {
       if (!veicoli_disponibili) {
-        return res.status(404).send({ message: "nessun veicolo effettuata." });
-      }
-
+        return res.status(404).send({
+           message: "nessun veicolo effettuata." 
+          });
+        }
     res.status(200).send(
       veicoli_disponibili
     )})
