@@ -47,7 +47,7 @@ module.exports = function(app) {
    app.get(
     "/api/veicoli_disponibili",
     [authJwt.verifyToken],
-    controller.DisponibilitàVeicoli
+    controller.DisponibilitaVeicoli
   );
 
   app.get(
