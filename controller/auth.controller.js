@@ -10,6 +10,7 @@ var bcrypt = require("bcryptjs");
 
 //Funzione di registrazione che crea nella tabella utente un record che rappresenta l'utente tramite i campi del form di registrazione
 exports.salvaDati = (req, res) => {
+  console.log(req.body);
   // Crea utente nel database
   Utente.create({
     Nome: req.body.Nome,
@@ -22,7 +23,7 @@ exports.salvaDati = (req, res) => {
     password: bcrypt.hashSync(req.body.password, 8),
     NumeroPatente: req.body.NumeroPatente,
     TipoPatente: req.body.TipoPatente,
-    IDPermesso: 0
+    IDPermesso: 1
   })
     .catch(err => {
       res.status(500).send({ message: err.message });
