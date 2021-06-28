@@ -52,6 +52,9 @@ isAdmin = (req, res, next) => {
        message: "Bisogna essere amministratori!"
       });
       return;
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
     });
   };
 
@@ -77,6 +80,9 @@ isAutista = (req, res, next) => {
        message: "Bisogna essere autisti!"
       });
       return;
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
     });
 };
 
@@ -102,6 +108,9 @@ isAddettoParcheggio = (req, res, next) => {
        message: "Bisogna essere un addetto al parcheggio!"
       });
       return;
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
     });
 };
 
