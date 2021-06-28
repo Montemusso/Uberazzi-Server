@@ -46,12 +46,11 @@ exports.corse = (req, res) => {
   exports.conferma_corsa = (req, res) => {
     Prenotazione.update({
       IDAutista:req.headers["idutente"]
-    },{
-      where: {
+    },{where: {
         IDPrenotazione: req.query.IDPrenotazione
-      },
-      returning: true, 
-      plain: true
+      }
+    }).then(prenotazione =>{
+      console.log(prenotazione)
     })
       .then(    
       res.status(200).send({ message:"corsa accetttata" })
