@@ -1,7 +1,6 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controller/user.controller");
 const addToDb = require("../controller/upload.photo");
-let ts = Date.now();
 
 //In questo modulo vengono definite le rotte verso i controller che dovranno poi servire effettivamente i file
 //qui si verifica se si è un utente autenticato o no ed in caso quale permesso si ha
@@ -69,17 +68,6 @@ module.exports = function(app) {
     controller.aggiorna_prenotazione
   );
 
-//prova per body
-app.get(
-  "/api/body",
- controller.body
-);
-
-app.post(
-  "/api/body",
- controller.body
-);
-
 
   app.get("/", controller.Homepage);
 
@@ -89,28 +77,13 @@ app.post(
    *                //*
    */               //*
 
-  app.post('/api/upload', function(req, res) {
-    let sampleFile;
-    let uploadPath;
-  
-    if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).send('Nessun file caricato.');
-    }
-  
-    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-    sampleFile = req.files.sampleFile;
-    uploadPath = __dirname + '../Public/upload/' + ts +sampleFile.name;
-  
-    // Use the mv() method to place the file somewhere on your server
-    sampleFile.mv(uploadPath, function(err) {
-      if (err)
-        return res.status(500).send(err);
-  
-      const dbres = addToDb(sampleFile.name, uploadPath, req.query.IDVeicolo);
-      console.log(dbres);
-      res.send({message:'File caricato!'});
-    });
-  });
+   app.post(
+     '/api/nuova_prenotazione',
+   [authJwt.verifyToken],
+   controller.nuova_prenotazione
+   )
+
+
 
   
 };
