@@ -27,7 +27,16 @@ app.get(
       authJwt.verifyToken,
        authJwt.isAddettoParcheggio
       ],
-    controller.contrassegnaDisponibile
+    controller.aggiorna_stato_veicolo
+  );
+
+  app.post(
+    "/api/aggiorna_condizioni_veicolo",
+    [
+      authJwt.verifyToken,
+       authJwt.isAddettoParcheggio
+      ],
+    controller.aggiorna_condizioni_veicolo
   );
 
   app.get(

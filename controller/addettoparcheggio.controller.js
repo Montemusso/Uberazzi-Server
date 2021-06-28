@@ -164,3 +164,21 @@ exports.consegne_veicoli = (req, res) => {
         res.status(500).send({ message: err.message });
       });
   };
+
+  //query per aggiornare le condizioni dei veicoli 
+
+  exports.aggiorna_condizioni_veicolo = (req, res) => {
+    Veicolo.update({
+      Condizioni:req.body.CondizioniVeicolo
+    },{
+      where: {
+        IDVeicolo:req.query.IDVeicolo
+      }
+    })
+      .then(
+        res.status(200).send({ message: "Veicolo aggiornato" })
+        )
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };
