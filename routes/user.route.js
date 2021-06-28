@@ -68,6 +68,21 @@ module.exports = function(app) {
     controller.aggiorna_prenotazione
   );
 
+  app.get(
+    "/api/consegne_veicoli_cliente",
+    [
+      authJwt.verifyToken
+      ],
+    controller.consegne_veicoli_cliente
+  );
+
+  app.get(
+    "/api/veicoli_ritirabili_cliente",
+    [
+      authJwt.verifyToken
+      ],
+    controller.veicoli_ritirabili_cliente
+  );
 
   app.get("/", controller.Homepage);
 

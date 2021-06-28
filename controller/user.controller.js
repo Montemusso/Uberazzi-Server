@@ -268,5 +268,51 @@ exports.aggiorna_stato_prenotazione = (req, res) => {
 };
 
 
+exports.consegne_veicoli_cliente = (req, res) => {
+  Prenotazione.findAll({
+    where: {
+      Consegnato: false,
+      Stato:"attiva"
+    },
+    include:[{
+      model: Veicolo
+    }]
+  })
+    .then(consegne_veicoli => {
+      if (!consegne_veicoli) {
+        return res.status(404).send({ message: "nessun veicolo disponibile." });
+      }
+
+    res.status(200).send(
+      consegne_veicoli
+      )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+
+exports.veicoli_ritirabili_cliente = (req, res) => {
+  Prenotazione.findAll({
+    where: {
+      Stato: "conclusa",
+      Consegnato: true,
+    },
+    include:[{
+      model: Veicolo
+    }]
+  })
+    .then(veicoli_ritirabili => {
+      if (!veicoli_ritirabili) {
+        return res.status(404).send({ message: "nessun veicolo disponibile." });
+      }
+
+    res.status(200).send(
+      veicoli_ritirabili
+      )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
 //consegna veicoli cliente
 //query per cambiare lo stato in conclusa tramite id prenotazione
