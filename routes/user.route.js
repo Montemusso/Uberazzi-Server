@@ -105,6 +105,13 @@ module.exports = function(app) {
     controller.nuovo_pagamento
   );
 
+  app.get(
+    "/api/aggiorna_stato_prenotazione_cliente",
+    [
+      authJwt.verifyToken,
+      ],
+    controller.aggiorna_stato_prenotazione_cliente
+  );
   app.get("/", controller.Homepage);
 
   /*                //*

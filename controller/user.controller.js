@@ -168,15 +168,16 @@ exports.salvaPrenotazione = (req, res) => {
 //creazione nuova riga nelle prenotazioni
 exports.nuova_prenotazione = (req, res) => {
   console.log(req.body);
+  console.log(req.query);
   // Crea prenotazione nel database
   Prenotazione.create({
     IDUtente: req.headers["idutente"],
     Partenza:req.body.Partenza,
     Arrivo:req.body.Arrivo,
     Stato: "Sospesa",
-    DataOra:req.body.DataOra,
-    DataOraArrivo:req.body.DataOraArrivo,
-    Autista:req.body.Autista,
+    DataOra:req.query.DataOra,
+    DataOraArrivo:req.query.DataOraArrivo,
+    Autista:req.query.Autista,
     IDVeicolo:req.body.IDVeicolo,
     Consegnato:false,
     IDCliente: req.headers["idutente"],
@@ -196,13 +197,10 @@ exports.DisponibilitaVeicoli = (req, res) => {
          DataOraArrivo: {[Op.lt]: req.query.Arrivo} 
     }
   })
-  .then(
-    idveicoli=> console.log(idveicoli)
-  )
   .then(idveicoli => Veicolo.findAll({
     where: {
       IDVeicolo:{
-        [sequelize.Op.notIn]:[[...idveicoli]]
+        [sequelize.Op.notIn]:[...idveicoli]
       },
       Prenotabile: true
     }
@@ -367,6 +365,22 @@ exports.nuovo_pagamento = (req, res) => {
     Importo: req.query.Importo,
   })
   .then( res.status(200).send({ message:"Pagamento creato" }))
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.aggiorna_stato_prenotazione_cliente = (req, res) => {
+  Prenotazione.update({
+    Stato:req.query.Stato
+  },{
+    where: {
+      IDPrenotazione:req.query.IDPrenotazione
+    }
+  })
+    .then(
+      res.status(200).send({ message: "Prenotazione aggiornata" })
+      )
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
