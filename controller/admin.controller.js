@@ -83,11 +83,12 @@ exports.RichiestaUtenti = (req, res) => {
   exports.nuovo_veicolo = (req, res) => {
     Veicolo.create({
       TipoVeicolo: req.body.TipoVeicolo,
-      Condizioni:req.body.Condizioni,
-      Prenotabile:req.body.Prenotabile,
+      Condizioni:"",
+      Prenotabile:true,
       NumeroPosti:req.body.NumeroPosti,
       Prezzo:req.body.Prezzo,
-      Targa:req.body.Targa
+      Targa:req.body.Targa,
+      IDParcheggio: req.body.Parcheggio
     })
     .then( res.status(200).send({ message:"Veicolo aggiunto" }))
       .catch(err => {
