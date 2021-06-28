@@ -281,8 +281,8 @@ exports.consegne_veicoli_cliente = (req, res) => {
   Prenotazione.findAll({
     where: {
       IDUtente : req.headers["idutente"],
-      Consegnato: false,
-      Stato:"attiva"
+      Consegnato: true,
+      Stato:"Veicolo Ritirato"
     },
     include:[{
       model: Veicolo
@@ -345,14 +345,14 @@ exports.consegna_veicolo_Cliente = (req, res) => {
 
 exports.ritira_veicolo_Cliente = (req, res) => {
   Prenotazione.update({
-      Stato: "Veicolo ritirato"
+      Stato: "Veicolo Ritirato"
   },{
     where: {
       IDPrenotazione: req.query.IDPrenotazione
     }
   })
     .then(    
-    res.status(200).send({ message:"veicolo ritirato" })
+    res.status(200).send({ message:"veicolo Ritirato" })
     )
     .catch(err => {
       res.status(500).send({ message: err.message });
