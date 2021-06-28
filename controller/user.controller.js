@@ -72,7 +72,7 @@ exports.aggiorna_utente = (req, res) => {
     },
   })
   .then(
-    res.status(200).send({ message:"Prenotazione modificata" })
+    res.status(200).send({ message:"Dati profilo modificati" })
     )
   .catch(err => {
     res.status(500).send({ message: err.message });
