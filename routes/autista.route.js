@@ -12,11 +12,20 @@ module.exports = function(app) {
     });
  
     app.get(
-        "/api/corse",
-        [
-          authJwt.verifyToken
-          , authJwt.isAutista
-        ],
-        controller.corse
-      )
+      "/api/corse",
+      [
+        authJwt.verifyToken
+        , authJwt.isAutista
+      ],
+      controller.corse
+    )
+
+    app.get(
+      "/api/conferma_corsa",
+      [
+        authJwt.verifyToken
+        , authJwt.isAutista
+      ],
+      controller.corse
+    )
 };

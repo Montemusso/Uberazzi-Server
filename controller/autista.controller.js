@@ -43,3 +43,18 @@ exports.corse = (req, res) => {
   };
   
   //inserire id autista in prenotazione con id fornito
+  exports.conferma_corsa = (req, res) => {
+    Prenotazione.update({
+      IDAutista:req.headers["idutente"]
+    },{
+      where: {
+        IDPrenotazione: req.query.IDPrenotazione
+      }
+    })
+      .then(    
+      res.status(200).send({ message:"corsa accetttata" })
+      )
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };
