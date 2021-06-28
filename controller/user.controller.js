@@ -271,6 +271,7 @@ exports.aggiorna_stato_prenotazione = (req, res) => {
 exports.consegne_veicoli_cliente = (req, res) => {
   Prenotazione.findAll({
     where: {
+      IDUtente : req.headers["idutente"],
       Consegnato: false,
       Stato:"attiva"
     },
@@ -295,6 +296,7 @@ exports.consegne_veicoli_cliente = (req, res) => {
 exports.veicoli_ritirabili_cliente = (req, res) => {
   Prenotazione.findAll({
     where: {
+      IDUtente : req.headers["idutente"],
       Stato: "conclusa",
       Consegnato: true,
     },
