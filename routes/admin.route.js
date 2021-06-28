@@ -36,4 +36,13 @@ module.exports = function(app) {
     ],
     controller.prenotazioni_attive
   )
+
+  app.post(
+    "/api/nuovo_veicolo",
+    [
+      authJwt.verifyToken,
+      authJwt.isAdmin
+    ],
+    controller.nuovo_veicolo
+  )
 };

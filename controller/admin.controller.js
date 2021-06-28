@@ -79,3 +79,18 @@ exports.utenti = (req, res) => {
         res.status(500).send({ message: err.message });
       });
   };
+
+  exports.nuovo_veicolo = (req, res) => {
+    Veicolo.create({
+      TipoVeicolo: req.body.TipoVeicolo,
+      Condizioni:req.body.Condizioni,
+      Prenotabile:req.body.Prenotabile,
+      NumeroPosti:req.body.NumeroPosti,
+      Prezzo:req.body.Prezzo,
+      Targa:req.body.Targa
+    })
+    .then( res.status(200).send({ message:"Veicolo aggiunto" }))
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };
