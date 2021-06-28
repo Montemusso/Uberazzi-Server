@@ -197,8 +197,8 @@ exports.DisponibilitaVeicoli = (req, res) => {
   .then(idveicoli => Veicolo.findAll({
     where: {
       Prenotabile: true,
-      [Op.notIn]:{
-        IDVeicolo:[...idveicoli]
+      IDVeicolo:{
+        [Op.notIn]:[...idveicoli]
       }
     },
     order:[['DataOra', 'DESC']],
