@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
 const db = require("../model");
 const Utente = db.Utente;
+const Permesso = db.Permesso
 
 //funzione genera token
 verifyToken = (req, res, next) => {
@@ -33,7 +34,7 @@ isAdmin = (req, res, next) => {
     where: {
       IDUtente: req.headers["idutente"]
     },
-    include:Permessi,
+    include:Permesso,
   }
     )
     .then(utente => {
@@ -59,7 +60,7 @@ isAutista = (req, res, next) => {
     where: {
       IDUtente: req.headers["idutente"]
     },
-    include:Permessi,
+    include:Permesso,
   }
     )
     .then(utente => {
@@ -84,7 +85,7 @@ isAddettoParcheggio = (req, res, next) => {
     where: {
       IDUtente: req.headers["idutente"]
     },
-    include:Permessi,
+    include:Permesso,
   }
     )
     .then(utente => {
