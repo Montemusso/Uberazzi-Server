@@ -117,8 +117,8 @@ exports.consegne_veicoli = (req, res) => {
 
 
   exports.contrassegnaDisponibile = (req, res) => {
-    Veicolo.Update({
-      Prenotabile:req.body.Prenotabile
+    Veicolo.update({
+      Prenotabile: 1
     },{
       where: {
         IDVeicolo:req.query.IDVeicolo
