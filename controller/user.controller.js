@@ -232,7 +232,7 @@ exports.VerificaEmail = (req, res) => {
       if (!esistenza_email) {
         return res.status(404).send({ message: "Utente non trovato." });
       }
-      return res.status(200).send({ message: "Mail inviata." });
+      return res.status(200).send({ message: "Mail Esistente." });
     })
     //catch di errore generico tipo 500
     .catch(err => {
