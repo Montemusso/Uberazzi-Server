@@ -66,7 +66,7 @@ module.exports = function(app) {
   
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = req.files.immagine;
-    uploadPath = './Public/upload/' + ts +sampleFile.name;
+    uploadPath = '/home/uberazzi/codice/server/Public/upload/' + ts +sampleFile.name;
   
     // Use the mv() method to place the file somewhere on your server
     sampleFile.mv(uploadPath, function(err) {
@@ -74,7 +74,7 @@ module.exports = function(app) {
         return res.status(500).send(err);
   
       const dbres = addToDb.uploadPhoto(sampleFile.name, uploadPath, req.query.IDVeicolo);
-      console.log(dbres);
+      //console.log(dbres);
       res.send({message:'File caricato!'});
     });
   });

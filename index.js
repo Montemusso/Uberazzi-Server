@@ -34,7 +34,7 @@ const port = process.env.PORT;
 app.use(fileUpload());
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "http://91.199.223.61/"
 };
 app.use(cors(corsOptions));
 
