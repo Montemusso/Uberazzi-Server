@@ -1,7 +1,7 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controller/admin.controller");
 let ts = Date.now();
-const bodyParser = require("body-parser");
+const fileUpload = require('express-fileupload');
 
 
 
