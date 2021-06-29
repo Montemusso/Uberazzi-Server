@@ -1,8 +1,7 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controller/admin.controller");
-let ts = Date.now();
 const fileUpload = require('express-fileupload');
-
+const addToDb = require("../controller/upload.photo");
 
 
 module.exports = function(app) {
@@ -57,6 +56,7 @@ module.exports = function(app) {
     authJwt.isAdmin
   ],
   function(req, res) {
+    let ts = Date.now();
     let sampleFile;
     let uploadPath;
   
@@ -66,14 +66,14 @@ module.exports = function(app) {
   
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     sampleFile = req.files.sampleFile;
-    uploadPath = __dirname + '../Public/upload/' + ts +sampleFile.name;
+    uploadPath = './Public/upload/' + ts +sampleFile.name;
   
     // Use the mv() method to place the file somewhere on your server
     sampleFile.mv(uploadPath, function(err) {
       if (err)
         return res.status(500).send(err);
   
-      const dbres = addToDb(sampleFile.name, uploadPath, req.query.IDVeicolo);
+      const dbres = addToDb.uploadPhoto(sampleFile.name, uploadPath, req.query.IDVeicolo);
       console.log(dbres);
       res.send({message:'File caricato!'});
     });
