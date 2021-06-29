@@ -141,13 +141,12 @@ exports.dettagli_prenotazione = (req, res) => {
 //modifica prenotazione
 exports.salvaPrenotazione = (req, res) => {
   Prenotazione.update({
-    IDUtente: req.body.IDUtente,
     Partenza:req.body.Partenza,
     Arrivo:req.body.Arrivo,
-    Stato: "modificata",
-    DataOra:req.body.DataOra,
-    DataOraArrivo:req.body.DataOraArrivo,
-    Autista:req.body.Autista,
+    Stato: "Attiva",
+    DataOra:req.query.DataOra,
+    DataOraArrivo:req.query.DataOraArrivo,
+    Autista:req.query.Autista,
     IDVeicolo:req.body.IDVeicolo,
     Consegnato:false
   },{

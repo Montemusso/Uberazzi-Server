@@ -57,12 +57,6 @@ module.exports = function(app) {
   );
 
   app.get(
-    "/api/aggiorna_prenotazione",
-    [authJwt.verifyToken],
-    controller.salvaPrenotazione
-  );
-
-  app.get(
     "/api/consegne_veicoli_cliente",
     [
       authJwt.verifyToken
@@ -124,7 +118,13 @@ module.exports = function(app) {
      '/api/nuova_prenotazione',
    [authJwt.verifyToken],
    controller.nuova_prenotazione
-   )  
+   );
+   
+   app.post(
+    "/api/aggiorna_prenotazione",
+    [authJwt.verifyToken],
+    controller.salvaPrenotazione
+  );  
    
    app.post(
     "/api/aggiorna_utente",
