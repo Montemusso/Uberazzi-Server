@@ -49,7 +49,12 @@ module.exports = function(app) {
 
 
 
-  app.post('/api/upload', function(req, res) {
+  app.post('/api/upload', 
+  [
+    authJwt.verifyToken,
+    authJwt.isAdmin
+  ],
+  function(req, res) {
     let sampleFile;
     let uploadPath;
   

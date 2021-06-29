@@ -1,5 +1,6 @@
 //query varie
 const { Op } = require("sequelize");
+const { sequelize } = require("sequelize");
 const path = require('path');
 const db = require("../model");
 
