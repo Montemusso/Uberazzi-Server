@@ -83,7 +83,7 @@ exports.RichiestaUtenti = (req, res) => {
   exports.nuovo_veicolo = (req, res) => {
     Veicolo.create({
       TipoVeicolo: req.body.TipoVeicolo,
-      Condizioni:"",
+      Condizioni:"Nessun Problema",
       Prenotabile:true,
       NumeroPosti:req.body.NumeroPosti,
       Prezzo:req.body.Prezzo,
