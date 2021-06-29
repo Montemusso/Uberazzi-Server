@@ -1,0 +1,18 @@
+ const query = `SELECT 
+    Veicolo.IDVeicolo
+
+    FROM Veicolo
+
+    WHERE Veicolo.IDVeicolo NOT IN (
+    SELECT Prenotazione.IDVeicolo
+
+    FROM Prenotazione
+
+    WHERE Prenotazione.DataOra>(:dataora) AND Pranotazione.DataOraArrivo<(:dataoraarrivo)
+    )
+
+  const links = (await sequelize.query(query.trim(), { 
+    replacements: { dataora: 'js per dataoraarrivo', dataoraarrivo: 'js per dataoraarrivo' }
+    nest: true,
+    type: sequelize.QueryTypes.SELECT,
+  }));
