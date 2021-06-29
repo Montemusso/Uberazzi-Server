@@ -45,6 +45,12 @@ module.exports = function(app) {
   );
 
   app.get(
+    "/api/ultime_notifiche",
+    [authJwt.verifyToken],
+    controller.ultime_notifiche
+  );
+
+  app.get(
     "/api/veicoli_disponibili",
     [authJwt.verifyToken],
     controller.DisponibilitaVeicoli

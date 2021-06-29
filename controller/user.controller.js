@@ -402,3 +402,26 @@ exports.aggiorna_stato_prenotazione_cliente = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+exports.ultime_notifiche = (req, res) => {
+  Prenotazione.findAll({
+    where: {
+      IDCliente: req.headers["idutente"]
+    },
+    order:[['DataOra', 'DESC']],
+    include:[{
+      model: NotificheRitardo
+    }],
+    limit:3
+  })
+    .then(ultime_notifiche => {
+      if (!ultime_notifiche) {
+        return res.status(404).send({ message: "nessuna notifica." });
+      }    
+    res.status(200).send(
+      ultime_notifiche
+    )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
