@@ -193,7 +193,7 @@ exports.DisponibilitaVeicoli = (req, res) => {
 
   const query = "SELECT Veicolos.IDVeicolo, Veicolos.TipoVeicolo FROM Veicolos WHERE Veicolos.IDVeicolo NOT IN (SELECT Prenotaziones.IDVeicolo FROM Prenotaziones WHERE Prenotaziones.DataOra>:dataora AND Prenotaziones.DataOraArrivo<:dataora) AND Veicolos.Prenotabile=true;"
  
-  await sequelize.query(query.trim(), { 
+  sequelize.query(query.trim(), { 
      replacements: { dataora: req.query.Partenza, dataoraarrivo:req.query.Arrivo },
      nest: true,
      type: sequelize.QueryTypes.SELECT,
