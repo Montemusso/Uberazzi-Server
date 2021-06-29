@@ -34,9 +34,9 @@ function generaPassword() {
   exports.Homepage = (req, res) => {
     res.status(200).sendFile('C:/Users/Giuseppe/Desktop/Progetto/Uberazzi-Server/build/index.html');
   };
-  //Home
-  exports.Home = (req, res) => {
-    res.status(200).sendFile('./build/index.html');
+  //Pagamento
+  exports.Pagamento = (req, res) => {
+    res.status(200).sendFile('C:/Users/Giuseppe/Desktop/Progetto/Uberazzi-Server/build/Pagamento/invoice.html');
   };
 
 
