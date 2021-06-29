@@ -274,6 +274,26 @@ exports.consegne_veicoli_cliente = (req, res) => {
     });
 };
 
+exports.immagine = (req, res) => {
+  Immagine.findAll({
+    where: {
+      IDVeicolo : req.query.IDVeicolo
+    }
+    
+  })
+    .then(immagine => {
+      if (!immagine) {
+        return res.status(404).send({ message: "nessun immagine disponibile." });
+      }
+
+    res.status(200).send(
+      immagine
+      )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 
 exports.veicoli_ritirabili_cliente = (req, res) => {
   Prenotazione.findAll({

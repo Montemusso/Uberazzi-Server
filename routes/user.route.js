@@ -44,10 +44,16 @@ module.exports = function(app) {
     controller.ultime_prenotazioni
   );
 
-   app.get(
+  app.get(
     "/api/veicoli_disponibili",
     [authJwt.verifyToken],
     controller.DisponibilitaVeicoli
+  );
+
+  app.get(
+    "/api/immagine",
+    [authJwt.verifyToken],
+    controller.immagine
   );
 
   app.get(
