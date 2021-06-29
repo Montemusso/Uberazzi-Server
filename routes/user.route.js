@@ -112,7 +112,8 @@ module.exports = function(app) {
       ],
     controller.aggiorna_stato_prenotazione_cliente
   );
-  app.get("/", controller.Homepage);
+  
+  app.get("/:home?", controller.Homepage);
 
   /*                //*
    *                //*

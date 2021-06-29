@@ -32,7 +32,7 @@ function generaPassword() {
 
 //Homepage
   exports.Homepage = (req, res) => {
-    res.status(200).sendFile(path.join(__dirname+'/build/index.html'));
+    res.status(200).sendFile('C:/Users/Giuseppe/Desktop/Progetto/Uberazzi-Server/build/index.html');
   };
   //Home
   exports.Home = (req, res) => {
