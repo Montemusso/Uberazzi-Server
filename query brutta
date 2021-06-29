@@ -3,11 +3,11 @@
  WHERE Veicolos.IDVeicolo NOT IN 
  (SELECT Prenotaziones.IDVeicolo 
  FROM Prenotaziones 
- WHERE Prenotaziones.DataOra>'2021-07-05 12:00:00' 
- AND Prenotaziones.DataOraArrivo<'2021-07-05 12:00:00') 
+ WHERE Prenotaziones.DataOra>:dataora 
+ AND Prenotaziones.DataOraArrivo<:dataora) 
  AND Veicolos.Prenotabile=true;"
 
-  const links = (await sequelize.query(query.trim(), { 
+  const Veicoli = (await sequelize.query(query.trim(), { 
     replacements: { dataora: 'js per dataoraarrivo', dataoraarrivo: 'js per dataoraarrivo' }
     nest: true,
     type: sequelize.QueryTypes.SELECT,

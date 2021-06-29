@@ -190,23 +190,13 @@ exports.nuova_prenotazione = (req, res) => {
 //query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
 exports.DisponibilitaVeicoli = (req, res) => {
 
-  const subQuery = sequelize.dialect.QueryGenerator.selectQuery('Prenotazione',
-    {
-        attributes: ['IDVeicolo'],
-        where: {
-          DataOra: {[Op.gt]: req.query.Partenza}, 
-          DataOraArrivo: {[Op.lt]: req.query.Arrivo}
-        }
-    })
-    .slice(0,-1);
-  Veicolo.findAll({
-    where: {
-      IDVeicolo:{
-        [Op.notIn]: sequelize.literal('(' + subQuery + ')'),
-      },
-      Prenotabile: true
-    }
-  })
+  const query = "SELECT Veicolos.IDVeicolo, Veicolos.TipoVeicolo FROM Veicolos WHERE Veicolos.IDVeicolo NOT IN (SELECT Prenotaziones.IDVeicolo FROM Prenotaziones WHERE Prenotaziones.DataOra>:dataora AND Prenotaziones.DataOraArrivo<:dataora) AND Veicolos.Prenotabile=true;"
+ 
+  sequelize.query(query.trim(), { 
+     replacements: { dataora: req.query.Partenza, dataoraarrivo:req.query.Arrivo },
+     nest: true,
+     type: sequelize.QueryTypes.SELECT,
+   })
     .then(veicoli_disponibili => {
       if (!veicoli_disponibili) {
         return res.status(404).send({
