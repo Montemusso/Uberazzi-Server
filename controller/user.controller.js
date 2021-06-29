@@ -179,7 +179,6 @@ exports.nuova_prenotazione = (req, res) => {
     Autista:req.query.Autista,
     IDVeicolo:req.body.IDVeicolo,
     Consegnato:false,
-    IDCliente: req.headers["idutente"],
   })
   .then( res.status(200).send({ message:"Prenotazione creata" }))
     .catch(err => {
