@@ -34,6 +34,10 @@ function generaPassword() {
   exports.Homepage = (req, res) => {
     res.status(200).sendFile(path.join(__dirname+'/build/index.html'));
   };
+  //Home
+  exports.Home = (req, res) => {
+    res.status(200).sendFile('./build/index.html');
+  };
 
 
   exports.body = (req, res) => {
