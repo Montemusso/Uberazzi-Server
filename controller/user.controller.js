@@ -47,7 +47,7 @@ function generaPassword() {
 exports.ultime_prenotazioni = (req, res) => {
   Prenotazione.findAll({
     where: {
-      IDUtente: req.query.IDUtente
+      IDCliente: req.query.IDUtente
     },
     order:[['DataOra', 'DESC']],
     include:[{
@@ -95,7 +95,7 @@ exports.ModificaDati = (req, res) => {
 exports.prenotazioni = (req, res) => {
   Prenotazione.findAll({
     where: {
-      IDUtente: req.query.IDUtente
+      IDCliente: req.query.IDUtente
     },
     order:[['DataOra', 'DESC']],
     include:[{
@@ -171,7 +171,7 @@ exports.nuova_prenotazione = (req, res) => {
   console.log(req.query);
   // Crea prenotazione nel database
   Prenotazione.create({
-    IDUtente: req.headers["idutente"],
+    IDCliente: req.headers["idutente"],
     Partenza:req.body.Partenza,
     Arrivo:req.body.Arrivo,
     Stato: "Sospesa",
@@ -261,7 +261,7 @@ exports.inviaNotifica = (req, res) => {
 exports.consegne_veicoli_cliente = (req, res) => {
   Prenotazione.findAll({
     where: {
-      IDUtente : req.headers["idutente"],
+      IDCliente : req.headers["idutente"],
       Consegnato: true,
       Stato:"Veicolo Ritirato"
     },
@@ -286,7 +286,7 @@ exports.consegne_veicoli_cliente = (req, res) => {
 exports.veicoli_ritirabili_cliente = (req, res) => {
   Prenotazione.findAll({
     where: {
-      IDUtente : req.headers["idutente"],
+      IDCliente : req.headers["idutente"],
       Stato: "Veicolo Consegnato",
       Consegnato: true,
     },

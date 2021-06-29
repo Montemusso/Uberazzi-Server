@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true
       },
       
-      IDUtente: {
+      IDCliente: {
         type: Sequelize.INTEGER
       },
       Partenza: {
