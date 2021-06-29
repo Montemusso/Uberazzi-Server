@@ -283,7 +283,6 @@ exports.immagine = (req, res) => {
     where: {
       IDVeicolo : req.query.IDVeicolo
     }
-    
   })
     .then(immagine => {
       if (!immagine) {
