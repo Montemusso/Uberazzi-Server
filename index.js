@@ -1,6 +1,5 @@
 //import moduli
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const app = express();
 //https://www.npmjs.com/package/dotenv
 const dotenv = require('dotenv');
