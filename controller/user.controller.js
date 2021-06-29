@@ -1,6 +1,7 @@
 //query varie
 const { Op } = require("sequelize");
 const { sequelize } = require("sequelize");
+const { QueryTypes } = require('sequelize');
 const path = require('path');
 const db = require("../model");
 
@@ -192,7 +193,7 @@ exports.DisponibilitaVeicoli = (req, res) => {
 
   const query = "SELECT Veicolos.IDVeicolo, Veicolos.TipoVeicolo FROM Veicolos WHERE Veicolos.IDVeicolo NOT IN (SELECT Prenotaziones.IDVeicolo FROM Prenotaziones WHERE Prenotaziones.DataOra>:dataora AND Prenotaziones.DataOraArrivo<:dataora) AND Veicolos.Prenotabile=true;"
  
-  sequelize.query(query.trim(), { 
+  await sequelize.query(query.trim(), { 
      replacements: { dataora: req.query.Partenza, dataoraarrivo:req.query.Arrivo },
      nest: true,
      type: sequelize.QueryTypes.SELECT,
