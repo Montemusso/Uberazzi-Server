@@ -10,6 +10,7 @@ const cors = require("cors"); //https://www.npmjs.com/package/cors
 //Utile per creare il body delle req
 const bodyParser = require("body-parser");
 
+const fileUpload = require('express-fileupload');
 
 //import modelli
 const db = require("./model");
