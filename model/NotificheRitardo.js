@@ -8,6 +8,9 @@ module.exports = (sequelize, Sequelize) => {
       IDPrenotazione:{
         type: Sequelize.INTEGER
       },
+      IDUtente:{
+        type: Sequelize.INTEGER
+      },
       Note: {
         type: Sequelize.STRING(1000)
       },
