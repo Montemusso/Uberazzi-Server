@@ -282,7 +282,8 @@ exports.immagine = (req, res) => {
   Immagine.findAll({
     where: {
       IDVeicolo : req.query.IDVeicolo
-    }
+    },
+    order:[['IDImmagine', 'DESC']]
   })
     .then(immagine => {
       if (!immagine) {
@@ -421,6 +422,39 @@ exports.ultime_notifiche = (req, res) => {
     res.status(200).send(
       ultime_notifiche
     )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.info_veicolo = (req, res) => {
+  Veicolo.findAll({
+    where: {
+      IDVeicolo: req.query.IDVeicolo
+    }
+  })
+    .then(info_veicolo => {
+      if (!info_veicolo) {
+        return res.status(404).send({ message: "nessun veicolo." });
+      }    
+      res.status(200).send(info_veicolo)}
+    )
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.aggiorna_pagamento = (req, res) => {
+  Pagamento.update({
+    Importo:req.query.Importo
+  },{
+    where: {
+      IDPrenotazione:req.query.IDPrenotazione
+    }
+  })
+    .then(
+      res.status(200).send({ message: "Prenotazione aggiornata" })
+      )
     .catch(err => {
       res.status(500).send({ message: err.message });
     });

@@ -119,6 +119,22 @@ module.exports = function(app) {
     controller.aggiorna_stato_prenotazione_cliente
   );
 
+  app.get(
+    "/api/info_veicolo",
+    [
+      authJwt.verifyToken,
+      ],
+    controller.info_veicolo
+  );
+
+  app.get(
+    "/api/aggiorna_pagamento",
+    [
+      authJwt.verifyToken,
+      ],
+    controller.aggiorna_pagamento
+  );
+
   app.get("/pagamento", controller.Pagamento);
   app.get("/:home?", controller.Homepage);
 
