@@ -194,8 +194,8 @@ exports.nuova_prenotazione = (req, res) => {
 exports.DisponibilitaVeicoli = (req, res) => {
   Prenotazione.findAll({
     where: {
-      DataOra:{[Op.gt] : req.query.Partenza},
-      DataOraArrivo: {[Op.gt] : req.query.Arrivo}
+      DataOra:{[Op.gte] : req.query.Partenza},
+      DataOraArrivo: {[Op.lte] : req.query.Arrivo}
     },
     include:[{
       model: Veicolo
