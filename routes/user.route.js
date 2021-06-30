@@ -20,12 +20,10 @@ module.exports = function(app) {
    */               //*
 
 
-   app.get(
+  app.get(
     "/api/esistenza_email",
     controller.VerificaEmail
-  ); 
-  
-
+  );
 
 
   app.get(
