@@ -172,8 +172,6 @@ exports.salvaPrenotazione = (req, res) => {
 //nuova prenotazione
 //creazione nuova riga nelle prenotazioni
 exports.nuova_prenotazione = (req, res) => {
-  console.log(req.body);
-  console.log(req.query);
   // Crea prenotazione nel database
   Prenotazione.create({
     IDCliente: req.headers["idutente"],
@@ -407,13 +405,14 @@ exports.aggiorna_stato_prenotazione_cliente = (req, res) => {
 exports.ultime_notifiche = (req, res) => {
   Prenotazione.findAll({
     where: {
-      IDCliente: req.headers["idutente"]
+      IDCliente: req.headers["idutente"],
+      Stato: {[Op.ne]:"conclusa"}
     },
     order:[['DataOra', 'DESC']],
     include:[{
       model: NotificheRitardo
     }],
-    limit:3
+    limit:1
   })
     .then(ultime_notifiche => {
       if (!ultime_notifiche) {
