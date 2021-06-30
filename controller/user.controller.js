@@ -196,6 +196,8 @@ exports.DisponibilitaVeicoli = (req, res) => {
  
   sequelize.query(query.trim(), { 
      replacements: { dataora: req.query.Partenza, dataoraarrivo:req.query.Arrivo },
+     nest: true,
+     raw: false,
      type: sequelize.QueryTypes.SELECT,
    })
     .then(veicoli_disponibili => {
