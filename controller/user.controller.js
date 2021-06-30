@@ -193,6 +193,9 @@ exports.nuova_prenotazione = (req, res) => {
 //query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
 exports.DisponibilitaVeicoli = (req, res) => {
   Prenotazione.findAll({
+    attributes: ['IDVeicolo'],
+    distinct: true,
+    nested: false,
     where: {
       DataOra:{[Op.gte] : req.query.Partenza},
       DataOraArrivo: {[Op.lte] : req.query.Arrivo}
