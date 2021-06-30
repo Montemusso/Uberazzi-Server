@@ -312,6 +312,24 @@ exports.prezzo_veicolo = (req, res) => {
     });
 };
 
+exports.dettagli_prenotazione_pagamento = (req, res) => {
+  Pagamento.findOne({
+    where: {
+      IDPrenotazione : req.query.IDPrenotazione,
+    },
+  })
+    .then(dettagli_prenotazione_pagamento => {
+      if (!dettagli_prenotazione_pagamento) {
+        return res.status(404).send({ message: "nessun veicolo disponibile." });
+      }
+    res.status(200).send(
+      dettagli_prenotazione_pagamento
+      )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 exports.immagine = (req, res) => {
   Immagine.findAll({
     where: {
