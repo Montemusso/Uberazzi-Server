@@ -245,6 +245,7 @@ exports.inviaNotifica = (req, res) => {
   NotificheRitardo.create({
     IDPrenotazione: req.query.IDPrenotazione,
     Note: req.query.note,
+    RuoloUtente: req.query.Ruolo
   })
   .then( res.status(200).send({ message:"notifica creata" }))
     .catch(err => {
@@ -402,7 +403,7 @@ exports.aggiorna_stato_prenotazione_cliente = (req, res) => {
     });
 };
 
-exports.ultime_notifiche = (req, res) => {
+exports.ultime_notifiche_cliente = (req, res) => {
   Prenotazione.findAll({
     where: {
       IDCliente: req.headers["idutente"],

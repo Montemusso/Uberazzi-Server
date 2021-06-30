@@ -47,7 +47,7 @@ module.exports = function(app) {
   app.get(
     "/api/ultime_notifiche",
     [authJwt.verifyToken],
-    controller.ultime_notifiche
+    controller.ultime_notifiche_cliente
   );
 
   app.get(
