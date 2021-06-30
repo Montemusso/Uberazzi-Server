@@ -300,12 +300,12 @@ exports.prezzo_veicolo = (req, res) => {
       IDVeicolo : req.query.IDVeicolo,
     },
   })
-    .then(consegne_veicoli => {
-      if (!consegne_veicoli) {
+    .then(prezzo_veicolo => {
+      if (!prezzo_veicolo) {
         return res.status(404).send({ message: "nessun veicolo disponibile." });
       }
     res.status(200).send(
-      consegne_veicoli
+      prezzo_veicolo
       )})
     .catch(err => {
       res.status(500).send({ message: err.message });
