@@ -57,6 +57,12 @@ module.exports = function(app) {
   );
 
   app.get(
+    "/api/dettagli_prenotazione_pagamento",
+    [authJwt.verifyToken],
+    controller.dettagli_prenotazione_pagamento
+  );
+
+  app.get(
     "/api/veicoli_disponibili",
     [authJwt.verifyToken],
     controller.DisponibilitaVeicoli
