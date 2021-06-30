@@ -88,7 +88,8 @@ exports.RichiestaUtenti = (req, res) => {
       NumeroPosti:req.body.NumeroPosti,
       Prezzo:req.body.Prezzo,
       Targa:req.body.Targa,
-      IDParcheggio: req.body.Parcheggio
+      IDParcheggio: req.body.Parcheggio,
+      Nome: req.body.Nome
     })
     .then( res.status(200).send({ message:"Veicolo aggiunto" }))
       .catch(err => {
