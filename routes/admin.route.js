@@ -38,6 +38,15 @@ module.exports = function(app) {
     ],
     controller.RichiediDati
   )
+  
+  app.get(
+    "/api/lista_veicoli",
+    [
+      authJwt.verifyToken,
+      authJwt.isAdmin
+    ],
+    controller.lista_veicoli
+  )
 
   app.post(
     "/api/nuovo_veicolo",
@@ -47,7 +56,6 @@ module.exports = function(app) {
     ],
     controller.nuovo_veicolo
   )
-
 
 
   app.post('/api/upload', 
