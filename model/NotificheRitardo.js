@@ -8,8 +8,8 @@ module.exports = (sequelize, Sequelize) => {
       IDPrenotazione:{
         type: Sequelize.INTEGER
       },
-      IDUtente:{
-        type: Sequelize.INTEGER
+      RuoloUtente:{
+        type: Sequelize.STRING(1000)
       },
       Note: {
         type: Sequelize.STRING(1000)
