@@ -61,5 +61,5 @@ db.Prenotazione.hasMany(db.NotificheRitardo, {foreignKey: 'IDPrenotazione', fore
 
 module.exports = db;
 //hasOne hasMany--> sourceKey     belongsTo-->targetKey
-var perm1 = Parcheggio.build({Note:'Parcheggio su due piani', Indirizzo:'Viale dei Picciotti 12', CAP:90100, NumeroPosti: 50, PostiOccupati:12});
+var perm1 = Parcheggio.build({IDParcheggio:3, Note:'Parcheggio su due piani', Indirizzo:'Viale dei Picciotti 12', CAP:90100, NumeroPosti: 50, PostiOccupati:12});
 perm1.save();
