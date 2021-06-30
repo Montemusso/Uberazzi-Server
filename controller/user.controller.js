@@ -215,6 +215,20 @@ exports.DisponibilitaVeicoli = (req, res) => {
     });
 };
 
+
+exports.lista_veicoli = (req, res) => {
+  Veicolo.findAll({})
+    .then(veicoli => {
+      if (!veicoli) {
+        return res.status(404).send({ message: "nessun veicolo." });
+      }    
+      res.status(200).send(veicoli)
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 //se un veicolo non è prenotato allora si rende disponibile
 
 //recupero password

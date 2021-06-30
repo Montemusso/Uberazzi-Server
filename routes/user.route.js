@@ -57,6 +57,14 @@ module.exports = function(app) {
   );
 
   app.get(
+    "/api/lista_veicoli",
+    [
+      authJwt.verifyToken,
+    ],
+    controller.lista_veicoli
+  )
+
+  app.get(
     "/api/immagine",
     [authJwt.verifyToken],
     controller.immagine
