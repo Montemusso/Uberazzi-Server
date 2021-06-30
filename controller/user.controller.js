@@ -39,7 +39,6 @@ function generaPassword() {
     res.status(200).sendFile('/home/uberazzi/codice/server/build/Pagamento/invoice.html');
   };
 
-
   exports.body = (req, res) => {
     console.log(req.body)
     console.log(req.query)
@@ -275,6 +274,10 @@ exports.consegne_veicoli_cliente = (req, res) => {
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
+};
+
+exports.route66 = (req, res) => {
+  res.status(200).sendFile('/home/uberazzi/codice/server/Public/upload/route66.jpg');
 };
 
 exports.immagine = (req, res) => {
