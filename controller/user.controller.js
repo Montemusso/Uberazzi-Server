@@ -412,7 +412,6 @@ exports.ultime_notifiche = (req, res) => {
     include:[{
       model: NotificheRitardo
     }],
-    limit:1
   })
     .then(ultime_notifiche => {
       if (!ultime_notifiche) {
