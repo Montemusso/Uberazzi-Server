@@ -60,6 +60,18 @@ db.NotificheRitardo.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione', fo
 db.Prenotazione.hasMany(db.NotificheRitardo, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});                //RELAZIONE OK
 
 module.exports = db;
-//hasOne hasMany--> sourceKey     belongsTo-->targetKey
-var perm1 = db.Parcheggio.build({IDParcheggio:3, Note:'Parcheggio su due piani', Indirizzo:'Viale dei Picciotti 12', CAP:90100, NumeroPosti: 50, PostiOccupati:12});
+//Creazione dei permessi e dei parcheggi che saranno già presenti nel database all'avvio
+var parch1 = db.Parcheggio.build({IDParcheggio:1, Note:'Parcheggio1', Indirizzo:'Viale dei Picciotti 12', CAP:90100, NumeroPosti: 50, PostiOccupati:12});
+parch1.save();
+var parch2 = db.Parcheggio.build({IDParcheggio:2, Note:'Parcheggio2', Indirizzo:'Via Uditore 15', CAP:90100, NumeroPosti: 70, PostiOccupati:66});
+parch2.save();
+var parch3 = db.Parcheggio.build({IDParcheggio:3, Note:'Parcheggio3', Indirizzo:'Viale delle Scienze 8', CAP:90100, NumeroPosti: 30, PostiOccupati:22});
+parch3.save();
+var perm1 = db.Permesso.build({IDPermesso:1, DettaglioPermesso:'Cliente'});
 perm1.save();
+var perm2 = db.Permesso.build({IDPermesso:2, DettaglioPermesso:'AddettoParcheggio'});
+perm2.save();
+var perm3 = db.Permesso.build({IDPermesso:3, DettaglioPermesso:'Autista'});
+perm3.save();
+var perm4 = db.Permesso.build({IDPermesso:4, DettaglioPermesso:'Amministratore'});
+perm4.save();
