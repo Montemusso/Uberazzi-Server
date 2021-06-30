@@ -294,6 +294,24 @@ exports.consegne_veicoli_cliente = (req, res) => {
     });
 };
 
+exports.prezzo_veicolo = (req, res) => {
+  Veicolo.findOne({
+    where: {
+      IDVeicolo : req.query.IDVeicolo,
+    },
+  })
+    .then(consegne_veicoli => {
+      if (!consegne_veicoli) {
+        return res.status(404).send({ message: "nessun veicolo disponibile." });
+      }
+    res.status(200).send(
+      consegne_veicoli
+      )})
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 exports.immagine = (req, res) => {
   Immagine.findAll({
     where: {

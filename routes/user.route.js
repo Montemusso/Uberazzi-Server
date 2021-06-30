@@ -51,6 +51,12 @@ module.exports = function(app) {
   );
 
   app.get(
+    "/api/prezzo_veicolo",
+    [authJwt.verifyToken],
+    controller.prezzo_veicolo
+  );
+
+  app.get(
     "/api/veicoli_disponibili",
     [authJwt.verifyToken],
     controller.DisponibilitaVeicoli
