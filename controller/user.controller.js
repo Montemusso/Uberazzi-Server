@@ -39,6 +39,7 @@ function generaPassword() {
     res.status(200).sendFile('/home/uberazzi/codice/server/build/Pagamento/invoice.html');
   };
 
+
   exports.body = (req, res) => {
     console.log(req.body)
     console.log(req.query)
@@ -53,7 +54,7 @@ exports.ultime_prenotazioni = (req, res) => {
     where: {
       IDCliente: req.query.IDUtente
     },
-    order:[['IDPrenotazione', 'DESC']],
+    order:[['DataOra', 'DESC']],
     include:[{
       model: Veicolo
     }],
