@@ -24,6 +24,10 @@ module.exports = (sequelize, Sequelize) => {
       Targa: {
         type: Sequelize.STRING(10),
         allowNull:true
+      },
+      Nome: {
+        type: Sequelize.STRING(100),
+        allowNull:true
       }
     });
   
