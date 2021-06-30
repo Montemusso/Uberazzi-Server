@@ -193,10 +193,12 @@ exports.nuova_prenotazione = (req, res) => {
 //query enorme per cercare i veicoli disponibili incrociando i dati delle prenotazioni e dei veicoli
 exports.DisponibilitaVeicoli = (req, res) => {
 
-  sequelize.query('SELECT Veicolos.IDVeicolo, Veicolos.TipoVeicolo FROM Veicolos WHERE Veicolos.IDVeicolo NOT IN (SELECT Prenotaziones.IDVeicolo FROM Prenotaziones WHERE Prenotaziones.DataOra>:dataora AND Prenotaziones.DataOraArrivo<:dataoraarrivo) AND Veicolos.Prenotabile=true', { 
-     replacements: { dataora: req.query.Partenza, dataoraarrivo:req.query.Arrivo },
-     type: sequelize.QueryTypes.SELECT,
-   })
+  Veicolo.findAll({
+    where: {
+      DataOra:{[Op.gt] : req.query.Partenza},
+      DataOraArrivo: {[Op.gt] : req.query.Arrivo}
+    }
+  })
     .then(veicoli_disponibili => {
       if (!veicoli_disponibili) {
         return res.status(404).send({
