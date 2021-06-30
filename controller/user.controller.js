@@ -54,7 +54,7 @@ exports.ultime_prenotazioni = (req, res) => {
     where: {
       IDCliente: req.query.IDUtente
     },
-    order:[['DataOra', 'DESC']],
+    order:[['IDPrenotazione', 'DESC']],
     include:[{
       model: Veicolo
     }],
