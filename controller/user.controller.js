@@ -276,10 +276,6 @@ exports.consegne_veicoli_cliente = (req, res) => {
     });
 };
 
-exports.route66 = (req, res) => {
-  res.status(200).sendFile('/home/uberazzi/codice/server/Public/upload/route66.jpg');
-};
-
 exports.immagine = (req, res) => {
   Immagine.findAll({
     where: {

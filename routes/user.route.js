@@ -108,11 +108,6 @@ module.exports = function(app) {
   );
 
   app.get(
-    "/api/route66",
-    controller.route66
-  );
-  
-  app.get(
     "/api/nuovo_pagamento",
     [authJwt.verifyToken],
     controller.nuovo_pagamento
