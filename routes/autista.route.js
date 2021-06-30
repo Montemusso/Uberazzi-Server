@@ -28,4 +28,11 @@ module.exports = function(app) {
       ],
       controller.AccettaCorsa
     )
+
+    app.get(
+      "/api/ultime_notifiche_autista",
+      [authJwt.verifyToken
+        , authJwt.isAutista],
+      controller.ultime_notifiche_autista
+    );
 };
