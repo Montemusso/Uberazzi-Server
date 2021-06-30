@@ -182,3 +182,25 @@ exports.consegne_veicoli = (req, res) => {
         res.status(500).send({ message: err.message });
       });
   };
+
+  exports.ultime_notifiche_addettoParcheggio = (req, res) => {
+    Prenotazione.findAll({
+      where: {
+        Stato: {[Op.ne]:"conclusa"}
+      },
+      order:[['DataOra', 'DESC']],
+      include:[{
+        model: NotificheRitardo
+      }],
+    })
+      .then(ultime_notifiche => {
+        if (!ultime_notifiche) {
+          return res.status(404).send({ message: "nessuna notifica." });
+        }    
+      res.status(200).send(
+        ultime_notifiche
+      )})
+      .catch(err => {
+        res.status(500).send({ message: err.message });
+      });
+  };

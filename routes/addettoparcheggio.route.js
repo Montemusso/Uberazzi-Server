@@ -93,4 +93,11 @@ app.get(
       ],
     controller.ritira_veicolo_AddettoParcheggio
   );
-    };
+  app.get(
+    "/api/ultime_notifiche_addettoParcheggio",
+    [authJwt.verifyToken
+      , authJwt.isAddettoParcheggio],
+    controller.ultime_notifiche_addettoParcheggio
+  );
+
+};
