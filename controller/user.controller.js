@@ -4,6 +4,8 @@ const { sequelize } = require("sequelize");
 const { QueryTypes } = require('sequelize');
 const path = require('path');
 const db = require("../model");
+var bcrypt = require("bcryptjs");
+
 
 const Utente = db.Utente;
 const Permesso = db.Permesso;
@@ -412,7 +414,7 @@ exports.ritira_veicolo_Cliente = (req, res) => {
 exports.recupera_password = (req, res) => {
   let newpass = generaPassword();
   Utente.update({
-      password: newpass
+      password: bcrypt.hashSync(newpass, 8),
   },{
     where: {
       Email: req.query.Email
