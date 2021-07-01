@@ -66,10 +66,8 @@ var parch2 = db.Parcheggio.build({IDParcheggio:2, Note:'Parcheggio2', Indirizzo:
 parch2.save();
 var parch3 = db.Parcheggio.build({IDParcheggio:3, Note:'Parcheggio3', Indirizzo:'Via Emerico Amari 12', CAP:90100, NumeroPosti: 30, PostiOccupati:22});
 parch3.save();
-var parch4 = db.Parcheggio.build({IDParcheggio:3, Note:'Parcheggio3', Indirizzo:'Via Uditore 67', CAP:90100, NumeroPosti: 30, PostiOccupati:22});
+var parch4 = db.Parcheggio.build({IDParcheggio:4, Note:'Parcheggio4', Indirizzo:'Via Uditore 67', CAP:90100, NumeroPosti: 40, PostiOccupati:22});
 parch4.save();
-var parch5 = db.Parcheggio.build({IDParcheggio:4, Note:'Parcheggio4', Indirizzo:'Piazza Verdi 31', CAP:90100, NumeroPosti: 30, PostiOccupati:22});
-parch5.save();
 var perm1 = db.Permesso.build({IDPermesso:1, DettaglioPermesso:'Cliente'});
 perm1.save();
 var perm2 = db.Permesso.build({IDPermesso:2, DettaglioPermesso:'AddettoParcheggio'});
