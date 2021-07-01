@@ -59,7 +59,6 @@ db.Prenotazione.belongsTo(db.Veicolo, {foreignKey: 'IDVeicolo', foreignKeyConstr
 db.NotificheRitardo.belongsTo(db.Prenotazione, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});              //RELAZIONE OK
 db.Prenotazione.hasMany(db.NotificheRitardo, {foreignKey: 'IDPrenotazione', foreignKeyConstraint: true});                //RELAZIONE OK
 
-module.exports = db;
 //Creazione dei permessi e dei parcheggi che saranno già presenti nel database all'avvio
 var parch1 = db.Parcheggio.build({IDParcheggio:1, Note:'Parcheggio1', Indirizzo:'Viale dei Picciotti 12', CAP:90100, NumeroPosti: 50, PostiOccupati:12});
 parch1.save();
@@ -75,3 +74,6 @@ var perm3 = db.Permesso.build({IDPermesso:3, DettaglioPermesso:'Autista'});
 perm3.save();
 var perm4 = db.Permesso.build({IDPermesso:4, DettaglioPermesso:'Amministratore'});
 perm4.save();
+
+module.exports = db;
+
